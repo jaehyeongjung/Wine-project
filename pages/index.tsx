@@ -75,7 +75,7 @@ const Home: NextPage = () => {
       <Button
         type="default"
         size="width480"
-        text="113"
+        text="리뷰 남기기"
         color="purple"
         textColor="white"
       />

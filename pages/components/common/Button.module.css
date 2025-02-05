@@ -140,12 +140,6 @@
   font-weight: var(--font-bold);
 }
 
-.social {
-  width: 400px;
-  height: 52px;
-  font-size: var(--text-lg);
-  line-height: var(--line-height-lg);
-}
 
 /* 배경색 */
 .purple {

@@ -15,8 +15,7 @@ interface ButtonProps {
     | 'width294'
     | 'width113'
     | 'width156'
-    | 'width480'
-    | 'social';
+    | 'width480';
 
   radius?: number;
   color?: 'purple' | 'gray' | 'white' | 'lite_purple';
