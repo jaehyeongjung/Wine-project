@@ -14,6 +14,7 @@ interface ButtonProps {
     | 'width108'
     | 'width294'
     | 'width113'
+    | 'width156'
     | 'width480'
     | 'social';
 
@@ -46,6 +47,16 @@ const Button: React.FC<ButtonProps> = ({
       style={{ borderRadius: radius ? `${radius}px` : undefined }}
       onClick={onClick}
     >
+      {type === 'google' && (
+        <img
+          src="/images/google.svg"
+          alt="Google Logo"
+          className={styles.logo}
+        />
+      )}
+      {type === 'kakao' && (
+        <img src="/images/kakao.svg" alt="Kakao Logo" className={styles.logo} />
+      )}
       {text}
     </button>
   );

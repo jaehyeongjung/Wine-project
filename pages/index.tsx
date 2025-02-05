@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       />
       <Button
         type="default"
-        size="width96"
+        size="width96x42"
         text="초기화"
         color="lite_purple"
         textColor="purple"
@@ -80,8 +80,8 @@ const Home: NextPage = () => {
         textColor="white"
       />
 
-      <Button type="kakao" size="social" text="카카오로 시작하기" />
-      <Button type="google" size="social" text="구글로 시작하기" />
+      <Button type="kakao" size="social" text="kakao로 시작하기" />
+      <Button type="google" size="social" text="Google로 시작하기" />
     </div>
   );
 };
