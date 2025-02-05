@@ -14,29 +14,68 @@ const Home: NextPage = () => {
 
       <Button
         type="default"
-        size="large"
-        text="큰 버튼"
+        size="width400"
+        text="가입하기"
         color="purple"
         textColor="white"
       />
       <Button
         type="default"
-        size="medium"
-        text="중간 버튼"
-        color="white"
-        textColor="gray"
-      />
-      <Button
-        type="default"
-        size="small"
-        text="작은 버튼"
-        color="gray"
+        size="width279"
+        text="와인 보러가기"
+        color="purple"
         textColor="white"
       />
       <Button
         type="default"
-        size="filter"
-        text="필터 버튼"
+        size="width284"
+        text="와인 등록하기"
+        color="purple"
+        textColor="white"
+      />
+      <Button
+        type="default"
+        size="width96"
+        text="초기화"
+        color="lite_purple"
+        textColor="purple"
+      />
+      <Button
+        type="default"
+        size="width223"
+        text="필터 적용하기"
+        color="purple"
+        textColor="white"
+      />
+
+      <Button
+        type="default"
+        size="width280"
+        text="280"
+        color="purple"
+        textColor="white"
+      />
+
+      <Button
+        type="default"
+        size="width108"
+        text="확인"
+        color="purple"
+        textColor="white"
+      />
+
+      <Button
+        type="default"
+        size="width113"
+        text="113"
+        color="purple"
+        textColor="white"
+      />
+
+      <Button
+        type="default"
+        size="width480"
+        text="113"
         color="purple"
         textColor="white"
       />
