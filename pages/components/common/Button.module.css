@@ -1,0 +1,93 @@
+.button {
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 버튼 크기 */
+.large {
+  width: 400px;
+  height: 50px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.medium {
+  width: 284px;
+  height: 50px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.small {
+  width: 156px;
+  height: 54px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.filter {
+  width: 223px;
+  height: 54px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.social {
+  width: 400px;
+  height: 52px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+/* 배경색 */
+.purple {
+  background-color: var(--purple100);
+}
+
+.gray {
+  background-color: var(--gray500);
+}
+
+.white {
+  background-color: var(--white);
+}
+
+/* 글자색 */
+.text-white {
+  color: var(--white);
+}
+
+.text-gray {
+  color: var(--gray800);
+}
+
+.text-purple {
+  color: var(--purple100);
+}
+
+/* ✅ 카카오 & 구글 버튼 스타일 */
+.kakao {
+  width: 400px;
+  height: 52px;
+  background-color: #fee500;
+  color: #191919;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  border-radius: 12px;
+}
+
+.google {
+  width: 400px;
+  height: 52px;
+  background-color: var(--white);
+  color: var(--gray800);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  border: 1px solid var(--gray200);
+  border-radius: 12px;
+}
