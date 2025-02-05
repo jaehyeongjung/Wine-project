@@ -24,6 +24,15 @@
   --font-semibold: 600;
   --font-medium: 500;
   --font-regular: 400;
+
+  --black: #101318;
+  --white: #ffffff;
+  --gray100: #f2f4f8;
+  --gray200: #cfdbea;
+  --gray500: #9facbd;
+  --gray800: #2d3034;
+  --purple100: #6a42db;
+  --purple10: #f1edfc;
 }
 
 body {
