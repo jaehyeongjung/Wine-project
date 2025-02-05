@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>첫 페이지</h1>
+      <h1>첫 페이지ㅇ</h1>
     </div>
   );
 };
