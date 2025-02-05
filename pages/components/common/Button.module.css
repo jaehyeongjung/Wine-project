@@ -227,6 +227,25 @@
     line-height: var(--line-height-md);
   }
 
+  .kakao {
+    width: 303px;
+    height: 48px;
+    font-size: var(--text-md);
+    line-height: var(--line-height-md);
+  }
+
+  .logo {
+    width: 20px
+  }
+
+
+  .google {
+    width: 303px;
+    height: 48px;
+    font-size: var(--text-md);
+    line-height: var(--line-height-md);
+  }
+
   .width163 {
     width: 137px;
     height: 47px;
