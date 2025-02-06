@@ -14,6 +14,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Button Component Test</title>
       </Head>
+
       <h1>첫 페이지</h1>
       <div>
         <Button
