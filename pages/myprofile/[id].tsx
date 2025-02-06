@@ -6,11 +6,20 @@ import Header from '@/components/layout/HeaderVersion2';
 
 const dummyProfiles: Record<
   string,
-  { name: string; age: number; bio: string }
+  { name: string; photoUrl: string; email: string }
 > = {
-  '1': { name: '완다', age: 25, bio: 'wanda95@email.com' },
-  '2': { name: '김철수', age: 30, bio: '백엔드 개발자' },
-  '3': { name: '이영희', age: 28, bio: '디자이너' },
+  '1': {
+    name: '박보영',
+    photoUrl:
+      'https://search.pstatic.net/sunny/?src=http%3A%2F%2Ft1.daumcdn.net%2Fnews%2F201606%2F19%2Fnewsen%2F20160619080506602mtaq.jpg&type=a340',
+    email: 'boyoung@email.com',
+  },
+  '2': {
+    name: '최우식',
+    photoUrl:
+      'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA3MDZfMzUg%2FMDAxNzIwMjM1MDA4Njcx.UrQq1CoS1lSsTTd3YIGEgTlYdfGS1ol4TjpdMaQu2U0g.kfb6erm6Wivye27K7hF_V5TqdwxI_8nZ-DgZxeTnWkMg.JPEG%2FInternet%25A3%25DF20240706%25A3%25DF120305%25A3%25DF8.jpeg&type=a340',
+    email: 'ooosick@email.com',
+  },
 };
 
 const MyProfile: React.FC = () => {
@@ -26,12 +35,12 @@ const MyProfile: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <Header imageUrl={profile.photoUrl} />
       <div className={styles.profileContainer}>
         <ProfileSection
           name={profile.name}
-          age={profile.age}
-          bio={profile.bio}
+          photoUrl={profile.photoUrl}
+          email={profile.email}
         />
         <MyUploadSection />
       </div>

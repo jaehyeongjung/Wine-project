@@ -5,21 +5,27 @@ import Input from '@/pages/components/common/Input';
 
 interface ProfileSectionProps {
   name: string;
-  age: number;
-  bio: string;
+  photoUrl: string;
+  email: string;
 }
 
-const ProfileSection: React.FC<ProfileSectionProps> = ({ name, age, bio }) => (
+const ProfileSection: React.FC<ProfileSectionProps> = ({
+  name,
+  photoUrl,
+  email,
+}) => (
   <div className={styles.profileSection}>
     <div className={styles.profileInner}>
       <div className={styles.profileData}>
-        <div className={styles.profileImage}></div>
+        <div className={styles.profileImage}>
+          <img src={photoUrl}></img>
+        </div>
         <div className={styles.profileNameAndEmail}>
           <div className={styles.profileName}>
             <p className="text-2xl-bold">{name}</p>
           </div>
           <div className={styles.profileEmail}>
-            <p className="text-lg-regular">{bio}</p>
+            <p className="text-lg-regular">{email}</p>
           </div>
         </div>
       </div>

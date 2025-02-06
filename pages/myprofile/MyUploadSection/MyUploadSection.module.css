@@ -1,6 +1,9 @@
 .myUploadSection {
   width: 800px;
   height: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .myUploadBar {
@@ -42,5 +45,17 @@
 }
 
 .active {
-  color: black; /* 선택된 탭의 글자 색 */
+  color: black; 
+}
+
+.myComment {
+  width: 800px;
+  height: 202px;
+  background-color: aqua;
+}
+
+.Registerwine {
+  width: 800px;
+  height: 202px;
+  background-color: aqua;
 }

@@ -42,7 +42,7 @@
   width: 164px;
   height: 164px;
   border-radius: 999px;
-  background-color: blueviolet;
+  overflow: hidden;  
 }
 
 .profileNameAndEmail {
@@ -80,3 +80,8 @@
     gap: 10px;
 }
 
+.profileImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+  }

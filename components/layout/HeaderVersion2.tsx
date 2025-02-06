@@ -2,7 +2,11 @@ import styles from './Header.module.css';
 import useDevice from '../../hooks/useDevice';
 import { useRouter } from 'next/router';
 
-const Header = () => {
+interface HeaderProps {
+  imageUrl: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ imageUrl }) => {
   const { mode } = useDevice();
   const router = useRouter();
 
@@ -27,7 +31,9 @@ const Header = () => {
         >
           WINE
         </button>
-        <div className={styles.header_img}></div>
+        <div className={styles.header_img}>
+          <img src={imageUrl}></img>
+        </div>
       </nav>
     </header>
   );
