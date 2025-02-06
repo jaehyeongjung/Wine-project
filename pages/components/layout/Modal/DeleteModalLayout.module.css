@@ -1,0 +1,12 @@
+.deletTitle {
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xl);
+  line-height: var(--line-height-xl);
+  margin-bottom: 40px;
+}
+
+.btnBox {
+  display: flex;
+  gap: 10px;
+}
