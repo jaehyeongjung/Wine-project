@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Button from '@/pages/components/common/Button';
 import indexStyles from './index.module.css';
+import homeStyles from '@/styles/Home.module.css';
 import Header from '../components/layout/Header';
 import Image from 'next/image';
 import useDevice from '../hooks/useDevice';
@@ -11,14 +12,12 @@ const Home: NextPage = () => {
   const { mode } = useDevice();
   const router = useRouter();
 
-
   return (
     <div className={indexStyles.container}>
       <Head>
         <title>Wine Project</title>
         <meta name="description" content="와인 추천 서비스" />
       </Head>
-
 
       <Header />
 
