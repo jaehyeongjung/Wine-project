@@ -1,8 +1,8 @@
-// pages/myprofile/[id].tsx
-
 import { useRouter } from 'next/router';
+import styles from './[id].module.css';
+import ProfileSection from './ProfileSection/ProfileSection';
+import MyUploadSection from './MyUploadSection/MyUploadSection';
 
-// dummyProfiles 객체의 타입을 명시적으로 정의
 const dummyProfiles: Record<
   string,
   { name: string; age: number; bio: string }
@@ -24,10 +24,9 @@ const MyProfile: React.FC = () => {
   const profile = dummyProfiles[id as string]; // 임시 데이터에서 해당 프로필 가져오기
 
   return (
-    <div>
-      <h1>{profile.name}의 프로필</h1>
-      <p>나이: {profile.age}</p>
-      <p>소개: {profile.bio}</p>
+    <div className={styles.profileContainer}>
+      <ProfileSection name={profile.name} age={profile.age} bio={profile.bio} />
+      <MyUploadSection />
     </div>
   );
 };
