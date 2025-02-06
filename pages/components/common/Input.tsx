@@ -8,7 +8,7 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon?: 'search';
   label?: string;
-  size?: 'login' | 'search';
+  size?: 'login' | 'search' | 'nickname';
 }
 
 const Input: React.FC<InputProps> = ({

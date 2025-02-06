@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ProfileSection.module.css';
 import Button from '@/pages/components/common/Button';
+import Input from '@/pages/components/common/Input';
 
 interface ProfileSectionProps {
   name: string;
@@ -24,8 +25,12 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ name, age, bio }) => (
       </div>
       <div className={styles.profileEdit}>
         <div className={styles.profileEditNickname}>
-          <p className="text-lg-medium ">닉네임</p>
-          <div className={styles.test}></div>
+          <Input
+            type="text"
+            placeholder="whyne"
+            size="nickname"
+            label="닉네임"
+          />
         </div>
         <Button
           type="default"
