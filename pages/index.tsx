@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useState } from 'react';
 import Head from 'next/head';
 import Button from '@/pages/components/common/Button';
 import indexStyles from './index.module.css';
