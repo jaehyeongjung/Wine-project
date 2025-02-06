@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.registerTitle {
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-2xl);
+  text-align: left;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 16px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.fileUpload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  background-color: #ffffff;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.inputFile {
+  display: none;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+}
+
+.btnBox {
+  display: flex;
+  gap: 10px;
+}
