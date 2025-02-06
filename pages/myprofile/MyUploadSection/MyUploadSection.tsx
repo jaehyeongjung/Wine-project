@@ -33,9 +33,13 @@ const MyUploadSection: React.FC = () => {
         </div>
       </div>
       {selectedTab === 'comment' ? (
-        <div className={styles.myComment}>내가 쓴 후기 내용</div>
+        <div className={styles.myComment}>
+          <div className={styles.myCommentMap}></div>
+        </div>
       ) : (
-        <div className={styles.Registerwine}>내가 등록한 와인 목록</div>
+        <div className={styles.Registerwine}>
+          <div className={styles.RegisterwineMap}></div>
+        </div>
       )}
     </div>
   );
