@@ -1,0 +1,63 @@
+.main_section {
+  max-width: 1140px;
+  margin: 80px auto 0;
+}
+
+.main_section_tablet {
+  max-width: 704px;
+  margin: 48px auto 0;
+}
+
+.main_section_mobile {
+  max-width: 343px;
+  margin: 36px auto 0;
+}
+
+.hero_section {
+  position: relative;
+  max-width: 1140px;
+  height: 535px;
+  margin: 0 auto;
+}
+
+.hero_section_tablet {
+  position: relative;
+  max-width: 704px;
+  height: 394px;
+  margin: 0 auto;
+}
+
+.hero_section_mobile {
+  position: relative;
+  max-width: 343px;
+  height: 403px;
+  margin: 0 auto;
+}
+
+.feature_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 160px 0 109px;
+  max-width: 699;
+  height: 320;
+  gap: 96px;
+}
+
+.feature_section_tablet {
+  gap: 96px;
+  margin: 80px 0 72px;
+}
+
+.feature_section_mobile {
+  margin: 48px 0 62px;
+  gap: 48px;
+}
+
+.image_container {
+  position: relative;
+  width: 100%;
+  max-width: 699px;
+  aspect-ratio: 699/320; /* 원본 이미지의 비율 */
+}
