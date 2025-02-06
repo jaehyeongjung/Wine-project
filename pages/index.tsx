@@ -1,92 +1,83 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
-import Button from './components/common/Button';
-import styles from '@/styles/Home.module.css';
+import Button from '@/pages/components/common/Button';
+import indexStyles from './index.module.css';
+import homeStyles from '@/styles/Home.module.css';
+import Header from '../components/layout/Header';
+import Image from 'next/image';
+import useDevice from '../hooks/useDevice';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const { mode } = useDevice();
+  const router = useRouter();
+
 
   return (
-    <div className={styles.container}>
+    <div className={indexStyles.container}>
       <Head>
-        <title>Button Component Test</title>
+        <title>Wine Project</title>
+        <meta name="description" content="와인 추천 서비스" />
       </Head>
 
 
-      <h1>버튼 컴포넌트 테스트</h1>
+      <Header />
 
-      <Button
-        type="default"
-        size="width400"
-        text="가입하기"
-        color="purple"
-        textColor="white"
-      />
-      <Button
-        type="default"
-        size="width279"
-        text="와인 보러가기"
-        color="purple"
-        textColor="white"
-      />
-      <Button
-        type="default"
-        size="width284"
-        text="와인 등록하기"
-        color="purple"
-        textColor="white"
-      />
-      <Button
-        type="default"
-        size="width96x42"
-        text="초기화"
-        color="lite_purple"
-        textColor="purple"
-      />
-      <Button
-        type="default"
-        size="width223"
-        text="필터 적용하기"
-        color="purple"
-        textColor="white"
-      />
 
-      <Button
-        type="default"
-        size="width280"
-        text="280"
-        color="purple"
-        textColor="white"
-      />
+      <main
+        className={`${indexStyles.main_section} ${indexStyles[`main_section_${mode}`]}`}
+      >
+        <section
+          className={`${indexStyles.hero_section} ${indexStyles[`hero_section_${mode}`]}`}
+        >
+          <Image
+            src="/images/landing_01.svg"
+            alt="와인추천 서비스 소개 이미지"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        </section>
 
-      <Button
-        type="default"
-        size="width108"
-        text="확인"
-        color="purple"
-        textColor="white"
-      />
+        <section
+          className={`${indexStyles.feature_section} ${indexStyles[`feature_section_${mode}`]}`}
+        >
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_02.svg"
+              alt="와인 추천 콘텐츠 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
 
-      <Button
-        type="default"
-        size="width113"
-        text="113"
-        color="purple"
-        textColor="white"
-      />
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_03.svg"
+              alt="내 맞춤 와인 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
 
-      <Button
-        type="default"
-        size="width480"
-        text="리뷰 남기기"
-        color="purple"
-        textColor="white"
-      />
-
-      <Button type="kakao" text="kakao로 시작하기" />
-      <Button type="google" text="Google로 시작하기" />
-
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_04.svg"
+              alt="리뷰 시스템 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <Button
+            type="default"
+            size="width279"
+            text="와인 보러가기"
+            color="purple"
+            textColor="white"
+            onClick={() => router.push('/wines')}
+          />
+        </section>
+      </main>
     </div>
   );
 };
