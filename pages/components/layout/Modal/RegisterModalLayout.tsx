@@ -51,8 +51,8 @@ const RegisterModalLayout = ({ closeModal }: Props) => {
               className={styles.imagePreview}
               src={image}
               alt="미리보기"
-              width={32}
-              height={32}
+              width={120}
+              height={120}
             />
           ) : (
             <Image
