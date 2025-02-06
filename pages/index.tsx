@@ -1,39 +1,80 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
-import Modal from './components/common/Modal';
-import Test from './components/layout/Test';
-import Button from './components/common/Button';
-import styles from '@/styles/Home.module.css';
+import Button from '@/pages/components/common/Button';
+import indexStyles from './index.module.css';
+import homeStyles from '@/styles/Home.module.css';
+import Header from '../components/layout/Header';
+import Image from 'next/image';
+import useDevice from '../hooks/useDevice';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const { mode } = useDevice();
+  const router = useRouter();
 
   return (
-    <div className={styles.container}>
+    <div className={indexStyles.container}>
       <Head>
-        <title>Button Component Test</title>
+        <title>Wine Project</title>
+        <meta name="description" content="와인 추천 서비스" />
       </Head>
 
-      <h1>첫 페이지</h1>
-      <div>
-        <Button
-          onClick={() => setShowModal(true)}
-          type="default"
-          size="width96x42"
-          text="테스트"
-          color="purple"
-          textColor="white"
-        />
-        <Modal
-          className={styles.modalBox}
-          showModal={showModal}
-          closeModal={() => setShowModal(false)}
-          clossBtn={true}
+      <Header />
+
+      <main
+        className={`${indexStyles.main_section} ${indexStyles[`main_section_${mode}`]}`}
+      >
+        <section
+          className={`${indexStyles.hero_section} ${indexStyles[`hero_section_${mode}`]}`}
         >
-          <Test />
-        </Modal>
-      </div>
+          <Image
+            src="/images/landing_01.svg"
+            alt="와인추천 서비스 소개 이미지"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        </section>
+
+        <section
+          className={`${indexStyles.feature_section} ${indexStyles[`feature_section_${mode}`]}`}
+        >
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_02.svg"
+              alt="와인 추천 콘텐츠 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_03.svg"
+              alt="내 맞춤 와인 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+
+          <div className={indexStyles.image_container}>
+            <Image
+              src="/images/landing_04.svg"
+              alt="리뷰 시스템 이미지 소개"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <Button
+            type="default"
+            size="width279"
+            text="와인 보러가기"
+            color="purple"
+            textColor="white"
+            onClick={() => router.push('/wines')}
+          />
+        </section>
+      </main>
     </div>
   );
 };

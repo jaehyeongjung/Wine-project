@@ -1,0 +1,87 @@
+.header_container {
+  max-width: 1140px;
+  position: relative;
+  height: 70px;
+  top: 24px;
+  border-radius: 16px;
+  padding: 0px 60px;
+  background-color: #101318;
+}
+
+.header_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.header_container_desktop {
+  margin: 0 auto;
+}
+
+.header_box_desktop {
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.header_container_tablet {
+  max-width: 704px;
+  margin: 0 auto;
+}
+
+.header_box_tablet {
+  max-width: 584px;
+  margin: 0 auto;
+}
+
+.header_container_mobile {
+  top: 16px;
+  border-radius: 12px;
+  padding: 0px 20px;
+  max-width: 343px;
+  margin: 0 auto;
+}
+
+.header_box_mobile {
+  max-width: 303px;
+  margin: 0 auto;
+}
+
+.wine_logo {
+  color: var(--white);
+  height: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.sign_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.sign_container_mobile {
+  gap: 20px;
+}
+
+.signin,
+.signup {
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-xs);
+  align-items: right;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signin:hover,
+.signup:hover,
+.wines:hover,
+.wine_logo:hover {
+  opacity: 0.8;
+}
