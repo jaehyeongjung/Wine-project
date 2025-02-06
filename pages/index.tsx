@@ -80,8 +80,8 @@ const Home: NextPage = () => {
         textColor="white"
       />
 
-      <Button type="kakao" size="social" text="kakao로 시작하기" />
-      <Button type="google" size="social" text="Google로 시작하기" />
+      <Button type="kakao" text="kakao로 시작하기" />
+      <Button type="google" text="Google로 시작하기" />
     </div>
   );
 };

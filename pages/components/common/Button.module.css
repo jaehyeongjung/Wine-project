@@ -12,14 +12,10 @@
   width: 24px;
   height: auto;
   margin-right: 12px;
-  align-self: center; 
+  align-self: center;
   position: relative;
   top: 5px;
-
 }
-
-
-
 
 /* 버튼 크기 */
 .width400 {
@@ -140,7 +136,6 @@
   font-weight: var(--font-bold);
 }
 
-
 /* 배경색 */
 .purple {
   background-color: var(--purple100);
@@ -171,7 +166,6 @@
   color: var(--purple100);
 }
 
-/* ✅ 카카오 & 구글 버튼 스타일 */
 .kakao {
   width: 400px;
   height: 52px;
@@ -182,6 +176,7 @@
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);
   font-weight: var(--font-medium);
+  cursor: pointer;
 }
 
 .google {
@@ -194,7 +189,9 @@
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);
   font-weight: var(--font-medium);
+  cursor: pointer;
 }
+
 @media (min-width: 769px) and (max-width: 1024px) {
   .width284 {
     width: 220px;
@@ -229,9 +226,8 @@
   }
 
   .logo {
-    width: 20px
+    width: 20px;
   }
-
 
   .google {
     width: 303px;
