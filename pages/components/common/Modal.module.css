@@ -19,9 +19,6 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
   border-radius: 16px;
   border: none;

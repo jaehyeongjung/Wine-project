@@ -1,14 +1,13 @@
 import { ReactNode } from 'react';
-import styles from '@/styles/Modal.module.css';
 import Image from 'next/image';
-import Button from './Button';
+import styles from './Modal.module.css';
 
 interface Props {
   className?: string;
   showModal: boolean;
   closeModal: () => void;
   children?: ReactNode;
-  clossBtn?: boolean;
+  closeBtn?: boolean;
 }
 
 const Modal = ({
@@ -16,7 +15,7 @@ const Modal = ({
   showModal,
   closeModal,
   children,
-  clossBtn,
+  closeBtn,
 }: Props) => {
   if (!showModal) return null;
 
@@ -26,7 +25,7 @@ const Modal = ({
         className={`${styles.content} ${className || ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {clossBtn && (
+        {closeBtn && (
           <Image
             className={styles.closeIcon}
             onClick={closeModal}
@@ -37,14 +36,6 @@ const Modal = ({
           />
         )}
         {children} {/* 모달 내부에 원하는 내용을 삽입 가능 */}
-        <Button
-          onClick={closeModal}
-          type="default"
-          size="width96x42"
-          text="취소"
-          color="lite_purple"
-          textColor="purple"
-        />
       </div>
     </div>
   );
