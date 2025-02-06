@@ -1,9 +1,7 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
 import Head from 'next/head';
 import Button from '@/pages/components/common/Button';
 import indexStyles from './index.module.css';
-import homeStyles from '@/styles/Home.module.css';
 import Header from '../components/layout/Header';
 import Image from 'next/image';
 import useDevice from '../hooks/useDevice';

@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 import styles from './[id].module.css';
 import ProfileSection from './ProfileSection/ProfileSection';
 import MyUploadSection from './MyUploadSection/MyUploadSection';
+import Header from '@/components/layout/Header';
 
 const dummyProfiles: Record<
   string,
   { name: string; age: number; bio: string }
 > = {
-  '1': { name: '홍길동', age: 25, bio: '프론트엔드 개발자' },
+  '1': { name: '완다', age: 25, bio: 'wanda95@email.com' },
   '2': { name: '김철수', age: 30, bio: '백엔드 개발자' },
   '3': { name: '이영희', age: 28, bio: '디자이너' },
 };
@@ -24,10 +25,17 @@ const MyProfile: React.FC = () => {
   const profile = dummyProfiles[id as string]; // 임시 데이터에서 해당 프로필 가져오기
 
   return (
-    <div className={styles.profileContainer}>
-      <ProfileSection name={profile.name} age={profile.age} bio={profile.bio} />
-      <MyUploadSection />
-    </div>
+    <>
+      <Header />
+      <div className={styles.profileContainer}>
+        <ProfileSection
+          name={profile.name}
+          age={profile.age}
+          bio={profile.bio}
+        />
+        <MyUploadSection />
+      </div>
+    </>
   );
 };
 
