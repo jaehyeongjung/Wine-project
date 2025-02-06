@@ -3,7 +3,7 @@ import styles from './Button.module.css';
 
 interface ButtonProps {
   type?: 'default' | 'kakao' | 'google'; // 버튼 타입
-  size:
+  size?:
     | 'width400'
     | 'width279'
     | 'width284'
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
       ? styles.kakao
       : type === 'google'
         ? styles.google
-        : `${styles.button} ${styles[size]} ${styles[color]} ${styles[`text-${textColor}`]}`;
+        : `${styles.button} ${size ? styles[size] : ''} ${styles[color]} ${styles[`text-${textColor}`]}`;
 
   return (
     <button
