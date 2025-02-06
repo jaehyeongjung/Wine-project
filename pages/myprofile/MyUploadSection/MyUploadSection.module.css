@@ -19,7 +19,6 @@
 }
 
 .myUploadBarTotal {
-
   width: 43px;
   height: 24px;
 }
@@ -28,6 +27,7 @@
   width: 96px;
   height: 100%;
   white-space: nowrap;
+  color: #9facbd;
 }
 
 .myUploadBarMenuRegisterwine {
@@ -35,4 +35,12 @@
   height: 100%;
   color: #9facbd;
   white-space: nowrap;
+}
+
+.clickableText {
+  cursor: pointer;
+}
+
+.active {
+  color: black; /* 선택된 탭의 글자 색 */
 }

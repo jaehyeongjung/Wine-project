@@ -27,7 +27,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ name, age, bio }) => (
         <div className={styles.profileEditNickname}>
           <Input
             type="text"
-            placeholder="whyne"
+            placeholder={name}
             size="nickname"
             label="닉네임"
           />
