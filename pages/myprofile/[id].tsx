@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styles from './[id].module.css';
 import ProfileSection from './ProfileSection/ProfileSection';
 import MyUploadSection from './MyUploadSection/MyUploadSection';
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/HeaderVersion2';
 
 const dummyProfiles: Record<
   string,

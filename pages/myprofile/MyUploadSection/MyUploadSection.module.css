@@ -1,5 +1,38 @@
 .myUploadSection {
-  background-color: beige;
   width: 800px;
   height: 1000px;
+}
+
+.myUploadBar {
+  width: 800px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myUploadBarMenu {
+  width: 259px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.myUploadBarTotal {
+
+  width: 43px;
+  height: 24px;
+}
+
+.myUploadBarMenuComment {
+  width: 96px;
+  height: 100%;
+  white-space: nowrap;
+}
+
+.myUploadBarMenuRegisterwine {
+  width: 131px;
+  height: 100%;
+  color: #9facbd;
+  white-space: nowrap;
 }

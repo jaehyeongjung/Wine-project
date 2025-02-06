@@ -85,3 +85,10 @@
 .wine_logo:hover {
   opacity: 0.8;
 }
+
+.header_img{
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  background-color: #ffffff;
+}
