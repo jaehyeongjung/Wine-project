@@ -49,12 +49,14 @@
 
 .wine_logo {
   color: var(--white);
+  width: 52px;
   height: 15px;
   text-decoration: none;
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
+  position: relative;
 }
 
 .sign_container {
@@ -77,6 +79,14 @@
   color: #ffffff;
   text-decoration: none;
   cursor: pointer;
+}
+
+.login_mobile {
+  font-size: var(--text-md);
+}
+
+.signup_mobile {
+  font-size: var(--text-md);
 }
 
 .login:hover,

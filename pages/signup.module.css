@@ -1,11 +1,24 @@
+.signup_background {
+  background-color: var(--gray100);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .signup_container {
+  width: 100%;
   max-width: 496px;
   min-height: 803px;
-  margin: 138px auto;
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid var(--gray500);
+  border-radius: 16px;
+  margin: 0;
 }
 
 .signup_container_tablet {
@@ -19,12 +32,10 @@
 }
 
 .signup_logo {
-  color: var(--black);
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  height: 30px;
   margin: 80px 0px 40px;
-  text-align: center;
+  width: 104px;
+  height: 30px;
+  position: relative;
 }
 
 .signup_logo_tablet {
@@ -52,7 +63,7 @@
   width: 400px;
   height: 48px;
   border-radius: 16px;
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray500);
   padding: 14px 20px;
   background-color: var(--white);
 }
@@ -67,7 +78,7 @@
   width: 400px;
   height: 48px;
   border-radius: 16px;
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray500);
   padding: 14px 20px;
   gap: 10px;
   background-color: var(--white);
@@ -83,7 +94,7 @@
   width: 400px;
   height: 48px;
   border-radius: 16px;
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray500);
   padding: 14px 20px;
   gap: 10px;
   background-color: var(--white);
@@ -99,7 +110,7 @@
   width: 400px;
   height: 48px;
   border-radius: 16px;
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray500);
   padding: 14px 20px;
   gap: 10px;
   background-color: var(--white);
