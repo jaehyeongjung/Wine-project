@@ -31,7 +31,7 @@ const Header = () => {
         <nav
           className={`${styles.sign_container} ${styles[`sign_container_${mode}`]}`}
         >
-          <Link href="/login" className={styles.signin}>
+          <Link href="/login" className={styles.login}>
             로그인
           </Link>
           <Link href="/signup" className={styles.signup}>

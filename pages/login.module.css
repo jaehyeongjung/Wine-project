@@ -1,0 +1,136 @@
+.signup_container {
+  max-width: 496px;
+  height: 772px;
+  margin: 154px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--gray500);
+}
+
+.signup_container_tablet {
+  max-width: 496px;
+  height: 740px;
+}
+
+.signup_container_mobile {
+  max-width: 343px;
+  height: 648px;
+}
+
+.signup_logo {
+  color: var(--black);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  height: 30px;
+  margin: 80px 0px 40px;
+  text-align: center;
+}
+
+.signup_logo_tablet {
+  margin: 64px 0px 40px;
+}
+
+.signup_logo_mobile {
+  margin: 56px 0px 32px;
+}
+
+.label {
+  display: block;
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  margin: 24px 0px 10px;
+}
+
+.label_mobile {
+  font-size: var(--text-md);
+  margin: 9px 0px 10px;
+}
+
+.email_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  background-color: var(--white);
+}
+
+.email_input_mobile {
+  border-radius: 12px;
+  width: 303px;
+  height: 42px;
+}
+
+.password_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  gap: 10px;
+  background-color: var(--white);
+}
+
+.password_input_mobile {
+  width: 303px;
+  height: 42px;
+}
+
+.forgetpwd {
+  display: block;
+  margin: 10px 0px 56px;
+  font-weight: var(--font-regular);
+  font-size: var(--text-md);
+  color: var(--purple100);
+}
+
+.forgetpwd_mobile {
+  margin: 10px 0px 40px;
+}
+
+.button_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.button_container_mobile {
+  gap: 16px;
+}
+
+.signup_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0px 80px;
+  gap: 8px;
+}
+
+.signup_link_tablet {
+  margin: 32px 0px 64px;
+}
+.signup_link_mobile {
+  margin: 24px 0px 56px;
+}
+
+.signup_label {
+  font-weight: var(--font-regular);
+  font-size: var(--text-lg);
+  color: var(--gray500);
+}
+
+.signup_label_mobile {
+  font-size: var(--text-md);
+}
+
+.link {
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  color: var(--purple100);
+}
+
+.link_mobile {
+  font-size: var(--text-md);
+}

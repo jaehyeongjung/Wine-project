@@ -68,7 +68,7 @@
   gap: 20px;
 }
 
-.signin,
+.login,
 .signup {
   font-weight: var(--font-medium);
   font-size: var(--text-lg);
@@ -79,7 +79,7 @@
   cursor: pointer;
 }
 
-.signin:hover,
+.login:hover,
 .signup:hover,
 .wines:hover,
 .wine_logo:hover {

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Button from '@/pages/components/common/Button';
+import Button from '@/components/common/Button';
 import indexStyles from './index.module.css';
 import homeStyles from '@/styles/Home.module.css';
 import Header from '../components/layout/Header';

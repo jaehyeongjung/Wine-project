@@ -1,0 +1,150 @@
+.signup_container {
+  max-width: 496px;
+  min-height: 803px;
+  margin: 138px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--gray500);
+}
+
+.signup_container_tablet {
+  max-width: 496px;
+  min-height: 771px;
+}
+
+.signup_container_mobile {
+  max-width: 343px;
+  min-height: 681px;
+}
+
+.signup_logo {
+  color: var(--black);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  height: 30px;
+  margin: 80px 0px 40px;
+  text-align: center;
+}
+
+.signup_logo_tablet {
+  margin: 64px 0px 40px;
+}
+
+.signup_logo_mobile {
+  margin: 56px 0px 32px;
+}
+
+.label {
+  display: block;
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  margin: 24px 0px 10px;
+}
+
+.label_mobile {
+  font-size: var(--text-md);
+  margin: 9px 0px 10px;
+}
+
+.email_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  background-color: var(--white);
+}
+
+.email_input_mobile {
+  border-radius: 12px;
+  width: 303px;
+  height: 42px;
+}
+
+.nickname_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  gap: 10px;
+  background-color: var(--white);
+}
+
+.nickname_input_mobile {
+  border-radius: 12px;
+  width: 303px;
+  height: 42px;
+}
+
+.password_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  gap: 10px;
+  background-color: var(--white);
+}
+
+.password_input_mobile {
+  border-radius: 12px;
+  width: 303px;
+  height: 42px;
+}
+
+.repassword_input {
+  width: 400px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--black);
+  padding: 14px 20px;
+  gap: 10px;
+  background-color: var(--white);
+  margin-bottom: 32px;
+}
+
+.repassword_input_mobile {
+  border-radius: 12px;
+  width: 303px;
+  height: 42px;
+  margin-bottom: 40px;
+}
+
+.login_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0px 80px;
+  gap: 10px;
+}
+
+.login_link_tablet {
+  margin: 40px 0px 64px;
+}
+
+.login_link_mobile {
+  margin: 40px 0px 56px;
+}
+
+.login_label {
+  font-weight: var(--font-regular);
+  font-size: var(--text-lg);
+  color: var(--gray500);
+}
+
+.login_label_mobile {
+  font-size: var(--text-md);
+}
+
+.link {
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  color: var(--purple100);
+}
+
+.link_mobile {
+  font-size: var(--text-md);
+}
