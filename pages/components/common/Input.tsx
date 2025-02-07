@@ -20,6 +20,8 @@ const Input: React.FC<InputProps> = ({
   label,
   size = 'login',
 }) => {
+  const borderRadius = size === 'search' ? '50px' : '16px';
+
   return (
     <div className={styles.inputContainer}>
       {label && <label className={styles.label}>{label}</label>}
@@ -38,6 +40,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         className={`${styles.input} ${styles[size]} ${type === 'search' ? styles.search : ''}`}
+        style={{ borderRadius }}
       />
     </div>
   );
