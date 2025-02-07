@@ -1,0 +1,101 @@
+.container {
+  position: relative;
+}
+
+.typeBox {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 14px 20px;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.filterTypeBox {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 14px 20px;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.boxItem {
+  flex: 1;
+  color: #2d3034;
+}
+
+.optionBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 156px;
+  position: absolute;
+  top: 56px;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.optionItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 52px;
+  margin: 6px;
+  padding-left: 16px;
+}
+
+.filterOptionItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 46px;
+  margin: 5px;
+  padding-left: 16px;
+}
+
+.optionItem:hover {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--purple10);
+  color: var(--purple100);
+}
+
+.filterOptionItem:hover {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--purple10);
+  color: var(--purple100);
+}
+
+/* kebab start */
+.kebabContainer {
+  position: relative;
+}
+
+.kebabOptionBox {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 52px;
+  right: 0px;
+  width: 126px;
+  height: 104px;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.kebabOptionItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

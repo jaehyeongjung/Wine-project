@@ -15,6 +15,16 @@
   align-self: flex-start;
 }
 
+.filterLabel {
+  font-size: var(--text-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-medium);
+  color: var(--gray800);
+  margin-bottom: 14px;
+  display: block;
+  align-self: flex-start;
+}
+
 .iconImg {
   position: absolute;
   left: 20px;
@@ -55,12 +65,20 @@
   height: 48px;
 }
 
-
 .nickname {
   width: 240px;
   height: 48px;
 }
 
+.modal {
+  width: 100%;
+  height: 48px;
+}
+
+.filter {
+  width: 100%;
+  height: 42px;
+}
 
 /* tablet */
 @media (min-width: 769px) and (max-width: 1024px) {

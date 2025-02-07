@@ -1,8 +1,9 @@
-import Button from '@/pages/components/common/Button';
-import styles from './RegisterModalLayout.module.css';
-import Input from '../../common/Input';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import Button from '@/pages/components/common/Button';
+import Input from '@/pages/components/common/Input';
+import DropDown from '@/pages/components/common/DropDown';
+import styles from './RegisterModalLayout.module.css';
 
 interface Props {
   closeModal: () => void;
@@ -26,33 +27,58 @@ const RegisterModalLayout = ({ closeModal }: Props) => {
     }
   };
 
+  // 화면 너비가 375px 이하일 때 필터 텍스트 추가하기
+  const [isScreen, setIsScreen] = useState(window.innerWidth <= 375);
+  useEffect(() => {
+    const handleResize = () => setIsScreen(window.innerWidth <= 375);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className={styles.container}>
-      <div className={styles.registerTitle}>와인 등록</div>
+    <div className={isScreen ? styles.FilterContainer : styles.container}>
+      {isScreen && <div className={styles.filterTitle}>필터</div>}
+      {!isScreen && <div className={styles.registerTitle}>와인 등록</div>}
       <Input
         type="text"
         placeholder="와인 이름 입력"
-        size="login"
+        size={isScreen ? 'filter' : 'modal'}
         label="와인 이름"
       />
-      <Input type="text" placeholder="가격 입력" size="login" label="가격" />
+      <Input
+        type="text"
+        placeholder="가격 입력"
+        size={isScreen ? 'filter' : 'modal'}
+        label="가격"
+      />
       <Input
         type="text"
         placeholder="원산지 입력"
-        size="login"
+        size={isScreen ? 'filter' : 'modal'}
         label="원산지"
       />
-      <div>타입</div>
-      <div className={styles.imageUpload}>
+      <div
+        className={
+          isScreen ? styles.FilterWineTypeDropDown : styles.wineTypeDropDown
+        }
+      >
+        <div>타입</div>
+        <DropDown isScreen={isScreen} options={['Red', 'White', 'Sparkling']} />
+      </div>
+      <div className={isScreen ? styles.FilterImageUpload : styles.imageUpload}>
         <div>와인 사진</div>
-        <label className={styles.fileUpload} onClick={imageClick}>
+        <label
+          className={isScreen ? styles.fileUploadFilter : styles.fileUpload}
+          onClick={imageClick}
+        >
           {image ? (
             <Image
               className={styles.imagePreview}
               src={image}
               alt="미리보기"
-              width={120}
-              height={120}
+              width={isScreen ? 120 : 140}
+              height={isScreen ? 120 : 140}
             />
           ) : (
             <Image
