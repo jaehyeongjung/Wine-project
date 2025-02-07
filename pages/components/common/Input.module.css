@@ -55,6 +55,13 @@
   height: 48px;
 }
 
+
+.nickname {
+  width: 240px;
+  height: 48px;
+}
+
+
 /* tablet */
 @media (min-width: 769px) and (max-width: 1024px) {
   .login {

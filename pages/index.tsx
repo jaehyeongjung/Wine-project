@@ -21,6 +21,7 @@ const Home: NextPage = () => {
 
       <Header />
 
+
       <main
         className={`${indexStyles.main_section} ${indexStyles[`main_section_${mode}`]}`}
       >
