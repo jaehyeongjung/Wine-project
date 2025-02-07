@@ -7,6 +7,11 @@
 
 /* 와인 등록 버튼 css 시작 */
 .registerModalBox {
-  padding: 20px 16px;
+  padding: 24px;
+  width: 460px;
+
+  @media (max-width: 768px) {
+    width: 375px;
+  }
 }
 /* 와인 등록 버튼 css 끝 */

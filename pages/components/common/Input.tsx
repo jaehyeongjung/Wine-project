@@ -9,8 +9,7 @@ interface InputProps {
   icon?: 'search';
   label?: string;
 
-  size?: 'login' | 'search' | 'nickname';
-
+  size?: 'login' | 'search' | 'nickname' | 'modal' | 'filter';
 }
 
 const Input: React.FC<InputProps> = ({
@@ -26,7 +25,13 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={styles.inputContainer}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label
+          className={size === 'filter' ? styles.filterLabel : styles.label}
+        >
+          {label}
+        </label>
+      )}
 
       {icon === 'search' && (
         <img
