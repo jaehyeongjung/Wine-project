@@ -1,0 +1,116 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.FilterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterTitle {
+  height: 32px;
+  margin-bottom: 8px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xl);
+  line-height: var(--line-height-xl);
+  text-align: left;
+}
+
+.registerTitle {
+  height: 32px;
+  margin-bottom: 8px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-2xl);
+  line-height: var(--line-height-xl);
+  text-align: left;
+}
+
+.wineTypeDropDown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  text-align: left;
+}
+
+.FilterWineTypeDropDown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-md);
+  line-height: var(--line-height-md);
+  text-align: left;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 16px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.FilterImageUpload {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 16px;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  font-size: var(--text-md);
+  line-height: var(--line-height-md);
+}
+
+.fileUpload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  background-color: #ffffff;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.fileUploadFilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  background-color: #ffffff;
+  border: 1px solid #cfdbea;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.inputFile {
+  display: none;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.btnBox {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}

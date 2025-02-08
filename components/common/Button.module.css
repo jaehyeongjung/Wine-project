@@ -166,6 +166,11 @@
   color: var(--purple100);
 }
 
+.text-black {
+  color: var(--black);
+}
+
+/* ✅ 카카오 & 구글 버튼 스타일 */
 .kakao {
   width: 400px;
   height: 52px;
