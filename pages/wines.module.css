@@ -10,6 +10,7 @@
   height: 299px;
   border-radius: 16px;
   background-color: var(--gray100);
+  overflow: hidden;
 }
 
 .wines_list {
@@ -34,7 +35,7 @@
   height: 628px;
   background-color: wheat;
   position: relative;
-  top: -400px;
+  top: -375px; /* 400 */
 }
 
 .custom_input_wrapper {
@@ -181,7 +182,90 @@
 }
 
 .ContentRatingTotal {
-    width: 100px;
-    height: 24px;
-    color: var(--gray500);
+  width: 100px;
+  height: 24px;
+  color: var(--gray500);
+}
+
+.winesRecommendText {
+  width: 135px;
+  height: 24px;
+  margin-left: 30px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+  white-space: nowrap;
+  position: relative;
+  padding-top: 30px;
+}
+
+.wineRecommendSlide {
+  height: 185px;
+  width: 1200px;
+  margin-top: 60px;
+  margin-left: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.wineRecommendSlideMap {
+  width: 232px;
+  height: 185px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 2px 20px 0px #0000000a;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.wineRecoomnedSlideInner {
+  width: 172px;
+  height: 161px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wineRecommendSlideImg {
+  width: 44px;
+  height: 161px;
+  display: flex;
+  justify-content: center;
+}
+
+.wineRecommendSlideData {
+  width: 100px;
+  height: 125px;
+}
+
+.wineRecommendSlideImg img {
+  height: 100%;
+}
+
+.RecommendContentRating {
+  width: 100px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.RecommnedContentRaitingNumber {
+  width: 57px;
+  height: 43px;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 42.96px;
+}
+
+.RecommendContentRatingText {
+  width: 100%;
+  height: 54px;
+  color: var(--gray500);
+  word-wrap: break-word; 
+}
+
+.starRatingContiner {
+    height: 18px;
+    width: 90px;
 }
