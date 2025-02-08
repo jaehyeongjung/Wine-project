@@ -20,7 +20,7 @@ interface ButtonProps {
   radius?: number;
   color?: 'purple' | 'gray' | 'white' | 'lite_purple';
   text: string;
-  textColor?: 'white' | 'gray' | 'purple';
+  textColor?: 'white' | 'gray' | 'purple' | 'black';
   onClick?: () => void;
 }
 

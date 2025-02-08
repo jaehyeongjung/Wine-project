@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ProfileSection.module.css';
-import Button from '@/pages/components/common/Button';
-import Input from '@/pages/components/common/Input';
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
 
 interface ProfileSectionProps {
   name: string;

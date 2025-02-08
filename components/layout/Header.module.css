@@ -49,12 +49,14 @@
 
 .wine_logo {
   color: var(--white);
+  width: 52px;
   height: 15px;
   text-decoration: none;
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
+  position: relative;
 }
 
 .sign_container {
@@ -68,7 +70,7 @@
   gap: 20px;
 }
 
-.signin,
+.login,
 .signup {
   font-weight: var(--font-medium);
   font-size: var(--text-lg);
@@ -79,7 +81,15 @@
   cursor: pointer;
 }
 
-.signin:hover,
+.login_mobile {
+  font-size: var(--text-md);
+}
+
+.signup_mobile {
+  font-size: var(--text-md);
+}
+
+.login:hover,
 .signup:hover,
 .wines:hover,
 .wine_logo:hover {

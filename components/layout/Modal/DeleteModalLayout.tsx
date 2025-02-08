@@ -1,4 +1,4 @@
-import Button from '@/pages/components/common/Button';
+import Button from '@/components/common/Button';
 import styles from './DeleteModalLayout.module.css';
 
 interface Props {
