@@ -15,3 +15,10 @@
   }
 }
 /* 와인 등록 버튼 css 끝 */
+
+/* 리뷰 등록 버튼 */
+.reviewModalBox {
+  min-width: 375px;
+  width: 528px;
+  padding: 24px;
+}
