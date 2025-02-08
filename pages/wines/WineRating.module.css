@@ -1,3 +1,9 @@
+.ratingBox {
+  border-radius: 16px;
+  width: 280px;
+  height: 311px;
+}
+
 .rating {
   display: flex;
   gap: 20px;

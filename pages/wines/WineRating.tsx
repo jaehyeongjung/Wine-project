@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './WineRating.module.css';
+import Button from '../../components/common/Button';
 
 interface WineRatingProps {
   rating: number;
@@ -15,8 +16,8 @@ const WineRating: React.FC<WineRatingProps> = ({ rating }) => {
         stars.push(
           <img
             key={i}
-            src="/icons/test1.png"
-            alt="Filled Star"
+            src="/icons/stars.png"
+            alt="stars"
             className={style.starImage}
           />,
         );
@@ -24,8 +25,8 @@ const WineRating: React.FC<WineRatingProps> = ({ rating }) => {
         stars.push(
           <img
             key={i}
-            src="/icons/test2.png"
-            alt="Empty Star"
+            src="/icons/empty-stars.png"
+            alt="empty Star"
             className={style.starImage}
           />,
         );
@@ -46,7 +47,18 @@ const WineRating: React.FC<WineRatingProps> = ({ rating }) => {
             </div>
           </div>
         </div>
-        1
+        <p>5</p>
+        <p>4</p>
+        <p>3</p>
+        <p>2</p>
+        <p>1</p>
+        <Button
+          type="default"
+          size="width113"
+          color="purple"
+          textColor="white"
+          text="리뷰 남기기"
+        />
       </div>
     </div>
   );

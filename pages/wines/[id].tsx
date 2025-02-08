@@ -24,17 +24,16 @@ const DetailPage: React.FC = () => {
         <p className={styles.price}>￦ 64,990</p>
       </div>
 
-      {/* 리뷰와 평점 부분 */}
-      <div
-        className={`${styles.reviewContainer} ${styles[`reviewContainer_${mode}`]}`}
-      >
-        <p className={styles.reviewTitle}>리뷰 목록</p>
-        <WineRating rating={4.8} />
-      </div>
-
-      {/* 리뷰 컴포넌트 */}
-      <div className={`${styles.review} ${styles[`review_${mode}`]}`}>
-        <WineReview />
+      <div>
+        <div className={styles.reviewContent}>
+          <div className={styles.reviewList}>
+            <p className={styles.reviewTitle}>리뷰 목록</p>
+            <WineReview />
+          </div>
+          <div className={styles.reviewRating}>
+            <WineRating rating={4.8} />
+          </div>
+        </div>
       </div>
     </div>
   );

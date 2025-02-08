@@ -32,16 +32,22 @@
 
 .reviewContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--gray300);
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.reviewContent {
+  display: flex;
+}
+
+.reviewList {
+  flex: 3;
 }
 
 .reviewTitle {
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-  color: var(--gray800);
   margin-bottom: 22px;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-2xl);
 }
