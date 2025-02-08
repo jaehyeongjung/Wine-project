@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Button from '@/pages/components/common/Button';
-import Input from '@/pages/components/common/Input';
-import DropDown from '@/pages/components/common/DropDown';
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
+import DropDown from '@/components/common/DropDown';
 import styles from './RegisterModalLayout.module.css';
 
 interface Props {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Modal from './components/common/Modal';
-import DeleteModalLayout from './components/layout/Modal/DeleteModalLayout';
-import RegisterModalLayout from './components/layout/Modal/RegisterModalLayout';
-import Button from './components/common/Button';
+import Modal from '../components/common/Modal';
+import DeleteModalLayout from '../components/layout/Modal/DeleteModalLayout';
+import RegisterModalLayout from '../components/layout/Modal/RegisterModalLayout';
+import Button from '../components/common/Button';
 import styles from './test.module.css';
 
 export default function test() {
