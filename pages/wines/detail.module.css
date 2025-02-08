@@ -24,12 +24,24 @@
   background-color: var(--purple10);
 }
 
-.descripotion {
+.description {
   margin-top: 20px;
   margin-bottom: 13px;
   color: var(--gray500);
 }
 
-.review {
+.reviewContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray300);
+}
+
+.reviewTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--gray800);
   margin-bottom: 22px;
 }

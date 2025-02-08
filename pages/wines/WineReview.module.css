@@ -1,0 +1,6 @@
+.reviewBox {
+  outline: 1px solid #ccc;
+  border-radius: 16px;
+  max-width: 800px;
+  height: 100%;
+}
