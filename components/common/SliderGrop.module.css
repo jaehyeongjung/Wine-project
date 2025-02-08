@@ -1,0 +1,66 @@
+/* 슬라이더 트랙 */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  background: var(--gray100);
+  border: 1px solid var(--gray200);
+  border-radius: 50px;
+  outline: none;
+}
+
+/* 슬라이더 핸들러 */
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--purple100);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.04);
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  word-break: keep-all;
+}
+
+.sliderBox {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  width: 402px;
+  font-weight: var(---font-medium);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+}
+
+.labelItem {
+  width: 54px;
+  height: 25px;
+  background-color: var(--gray100);
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: var(--gray500);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-md);
+  line-height: var(--line-height-md);
+}
+
+.rowItem {
+  width: 70px;
+  text-align: left;
+}
+
+.highItem {
+  width: 56px;
+  text-align: right;
+}
