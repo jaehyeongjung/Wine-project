@@ -3,51 +3,16 @@
   margin: auto;
 }
 
-.content {
-  outline: 1px solid #ccc;
-  border-radius: 16px;
-  max-width: 1140px;
-  height: 260px;
-  margin: 80px auto 0;
-  margin-bottom: 60px;
-}
-
-.price {
-  font-size: var(--text-2lg);
-  font-weight: var(--font-bold);
-  line-height: var(--line-height-xs-small);
-  color: var(--purple100);
-  border-radius: 12px;
-  width: 114px;
-  height: 37px;
-  padding: 8px 15px;
-  background-color: var(--purple10);
-}
-
-.description {
-  margin-top: 20px;
-  margin-bottom: 13px;
-  color: var(--gray500);
-}
-
-.reviewContainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-}
-
 .reviewContent {
   display: flex;
-}
-
-.reviewList {
-  flex: 3;
+  margin-top: 90px;
+  gap: 60px;
 }
 
 .reviewTitle {
   margin-bottom: 22px;
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
-  line-height: var(--line-height-2xl);
+  line-height: var(--line-height-xl);
+  color: var(--gray800);
 }

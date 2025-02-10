@@ -1,0 +1,72 @@
+.container {
+  margin-top: 10px;
+  height: 302px;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.cardBox {
+  margin-top: 62px;
+  position: relative;
+  display: flex;
+  height: 260px;
+  width: 100%;
+  border: 1px solid var(--gray200);
+  border-radius: 16px;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  width: 244px;
+}
+
+.image {
+  width: 58px;
+  height: 209px;
+  object-fit: contain;
+}
+
+.info {
+  margin-right: 20px;
+  margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wineName {
+  font-size: 30px;
+  font-weight: var(--font-semibold);
+  line-height: 35.8px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.description {
+  margin-top: 20px;
+  margin-bottom: 13px;
+  color: var(--gray500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-size: var(--text-2lg);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-xs-small);
+  color: var(--purple100);
+  border-radius: 12px;
+  width: 114px;
+  height: 37px;
+  padding: 8px 15px;
+  background-color: var(--purple10);
+}
+
+.backButton {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}

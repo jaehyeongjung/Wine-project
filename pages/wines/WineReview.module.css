@@ -1,9 +1,10 @@
 .reviewBox {
-  outline: 1px solid #ccc;
+  outline: 1px solid var(--gray200);
   border-radius: 16px;
   max-width: 800px;
   min-height: 100%;
   padding: 16.5px 40px;
+  margin-bottom: 20px;
 }
 
 .profile {
@@ -57,4 +58,8 @@
 .likeIcon {
   width: 38px;
   height: 38px;
+}
+
+.comment {
+  margin-bottom: 20px;
 }

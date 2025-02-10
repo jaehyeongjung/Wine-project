@@ -1,7 +1,14 @@
 import React from 'react';
+import SliderGrop from '../../components/common/SliderGrop';
 import styles from './WineReview.module.css';
 
 const WineReview: React.FC = () => {
+  const sliders = [
+    { label: '향', row: '약함', high: '강함', value: 50 },
+    { label: '바디감', row: '가벼움', high: '무거움', value: 70 },
+    { label: '단맛', row: '적음', high: '많음', value: 30 },
+  ];
+
   return (
     <div>
       <div className={styles.reviewBox}>
@@ -30,13 +37,16 @@ const WineReview: React.FC = () => {
           <span>체리</span>
           <span>오크</span>
         </div>
-        <p>
+        <p className={styles.comment}>
           Deep maroon color, tasting notes of blackberry, dark chocolate, plum.
           Super jammy and bold with some smoky after notes. Big flavor. Amazing
           value (would pay three times the price for it), well balanced flavor.
           Could drink all day everyday with or without food. I need more
           immediately.
         </p>
+        <div className={styles.sliderSection}>
+          <SliderGrop items={sliders} type={false} />
+        </div>
       </div>
     </div>
   );

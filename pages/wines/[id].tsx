@@ -5,6 +5,7 @@ import styles from './detail.module.css';
 import useDevice from '../../hooks/useDevice';
 import WineReview from './WineReview';
 import WineRating from './WineRating';
+import WineDetailCard from './WineDetailCard';
 
 const DetailPage: React.FC = () => {
   const router = useRouter();
@@ -15,23 +16,21 @@ const DetailPage: React.FC = () => {
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
       <Header />
       <div className={`${styles.content} ${styles[`content_${mode}`]}`}>
-        <h1>
-          Sentinel Carbernet
-          <br />
-          Sauvignon 2016
-        </h1>
-        <p className={styles.description}>Western Cape, South Africa</p>
-        <p className={styles.price}>￦ 64,990</p>
+        <WineDetailCard />
       </div>
 
       <div>
         <div className={styles.reviewContent}>
-          <div className={styles.reviewList}>
+          <div>
             <p className={styles.reviewTitle}>리뷰 목록</p>
+            <WineReview />
+            <WineReview />
+            <WineReview />
+            <WineReview />
             <WineReview />
           </div>
           <div className={styles.reviewRating}>
-            <WineRating rating={4.8} />
+            <WineRating />
           </div>
         </div>
       </div>
