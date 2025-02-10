@@ -23,6 +23,7 @@ interface ButtonProps {
   text: string;
   textColor?: 'white' | 'gray' | 'purple' | 'black';
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -33,19 +34,21 @@ const Button: React.FC<ButtonProps> = ({
   text,
   textColor = 'white',
   onClick,
+  disabled,
 }) => {
   const buttonClass =
     type === 'kakao'
       ? styles.kakao
       : type === 'google'
         ? styles.google
-        : `${styles.button} ${size ? styles[size] : ''} ${styles[color]} ${styles[`text-${textColor}`]}`;
-
+        : `${styles.button} ${size ? styles[size] : ''} ${styles[color]} ${styles[`text-${textColor}`]}
+        ${disabled ? styles.disabled : ''}`;
   return (
     <button
       className={buttonClass}
       style={{ borderRadius: radius ? `${radius}px` : undefined }}
       onClick={onClick}
+      disabled={disabled}
     >
       {type === 'google' && (
         <img

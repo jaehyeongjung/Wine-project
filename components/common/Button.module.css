@@ -17,6 +17,10 @@
   top: 5px;
 }
 
+.disabled {
+  cursor: not-allowed !important;
+}
+
 /* 버튼 크기 */
 .width400 {
   width: 400px;
