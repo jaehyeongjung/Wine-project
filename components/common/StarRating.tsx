@@ -16,7 +16,11 @@ const StarRating: React.FC<StarRatingProps> = ({
       {[...Array(totalStars)].map((_, index) => (
         <img
           key={index}
-          src={index < rating ? '/icons/starColor.svg' : '/icons/star.svg'}
+          src={
+            index < Math.floor(rating)
+              ? '/icons/starColor.svg'
+              : '/icons/star.svg'
+          }
           alt="별점"
           width={size}
           height={size}

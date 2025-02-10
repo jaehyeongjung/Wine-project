@@ -94,10 +94,7 @@ const Wines: React.FC = () => {
                           <p className={styles.ContentRatingNumber}>
                             {wine.rating}
                           </p>
-                          <StarRating
-                            rating={Math.round(wine.rating)}
-                            size={17.12}
-                          />
+                          <StarRating rating={wine.rating} size={17.12} />
                           <p
                             className={`${styles.ContentRatingTotal} text-md-regular`}
                           >
