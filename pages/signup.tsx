@@ -4,9 +4,130 @@ import Button from '@/components/common/Button';
 import Link from 'next/link';
 import useDevice from '@/hooks/useDevice';
 import Image from 'next/image';
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/router';
 
 const Signup: NextPage = () => {
   const { mode } = useDevice();
+  const [email, setEmail] = useState(''); // ''을 보고 string이라고 자동추론
+  const [emailError, setEmailError] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [nicknameError, setNicknameError] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [pwdError, setPwdError] = useState('');
+  const [rePwd, setRePwd] = useState('');
+  const [rePwdError, setRePwdError] = useState('');
+  const router = useRouter();
+
+  //이메일 스키마 정의
+  const emailSchema = z.object({
+    email: z
+      .string()
+      .min(1, '이메일은 필수 입력입니다.')
+      .email('올바른 이메일 형식이 아닙니다.'),
+  });
+
+  const nicknameSchema = z.object({
+    nickname: z
+      .string()
+      .min(1, '닉네임은 필수 입력입니다.')
+      .max(20, '닉네임은 최대 20자까지 가능합니다.'),
+  });
+
+  const pwdSchema = z.object({
+    pwd: z
+      .string()
+      .min(1, '비밀번호는 필수 입력입니다.')
+      .min(8, '비밀번호는 최소 8자 이상입니다.')
+      .regex(
+        /^[A-Za-z0-9!@#$%^&*]+$/,
+        '비밀번호는 숫자, 영문, 특수문자(!@#$%^&*)로만 가능합니다',
+      ),
+  });
+
+  const rePwdSchema = z.object({
+    rePwd: z
+      .string()
+      .min(1, '비밀번호 확인을 입력해주세요.')
+      .refine((rePwd) => rePwd === pwd, {
+        message: '비밀번호가 일치하지 않습니다.',
+      }),
+  });
+
+  // 타입 추론
+  type EmailSchemaType = z.infer<typeof emailSchema>;
+  type nicknameSchemaType = z.infer<typeof nicknameSchema>;
+  type PwdSchemaType = z.infer<typeof pwdSchema>;
+  type rePwdSchemaType = z.infer<typeof rePwdSchema>;
+
+  interface FormData {
+    email: string;
+    nickname: string;
+    pwd: string;
+  }
+
+  //Result를 여기서 다 선언
+  const emailResult = emailSchema.safeParse({ email: email.trim() });
+  const nicknameResult = nicknameSchema.safeParse({
+    nickname: nickname.trim(),
+  });
+  const pwdResult = pwdSchema.safeParse({ pwd: pwd.trim() });
+  const rePwdResult = rePwdSchema.safeParse({ rePwd: rePwd.trim() });
+
+  const handleEmailBlur = () => {
+    if (!emailResult.success) {
+      setEmailError(emailResult.error.errors[0].message);
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handleNicknameBlur = () => {
+    if (!nicknameResult.success) {
+      setNicknameError(nicknameResult.error.errors[0].message);
+    } else {
+      setNicknameError('');
+    }
+  };
+
+  const handlePwdBlur = () => {
+    if (!pwdResult.success) {
+      setPwdError(pwdResult.error.errors[0].message);
+    } else {
+      setPwdError('');
+    }
+  };
+
+  const handleRePwdBlur = () => {
+    if (!rePwdResult.success) {
+      setRePwdError(rePwdResult.error.errors[0].message);
+    } else {
+      setRePwdError('');
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); //form 자동제출 방지
+
+    if (
+      emailResult.success &&
+      nicknameResult.success &&
+      pwdResult.success &&
+      rePwdResult.success
+    ) {
+      const formData: FormData = {
+        email: email.trim(),
+        nickname: nickname.trim(),
+        pwd: pwd.trim(),
+      };
+
+      try {
+        // API 호출성공하면
+        router.push('/');
+      } catch (error) {}
+    }
+  };
 
   return (
     <div className={styles.signup_background}>
@@ -25,7 +146,7 @@ const Signup: NextPage = () => {
         </div>
 
         <form>
-          <div className="form_group">
+          <div className={styles.form_group}>
             <label
               htmlFor="email"
               className={`${styles.label} ${styles[`label_${mode}`]}`}
@@ -37,10 +158,17 @@ const Signup: NextPage = () => {
               type="email"
               placeholder="whyne@email.com"
               className={`${styles.email_input} ${styles[`email_input_${mode}`]}`}
+              onBlur={handleEmailBlur}
+              onChange={(e) => setEmail(e.target.value)}
             />
+            {emailError && (
+              <p className={`${styles.error} ${styles[`error_${mode}`]}`}>
+                {emailError}
+              </p>
+            )}
           </div>
 
-          <div className="form_group">
+          <div className={styles.form_group}>
             <label
               htmlFor="nickname"
               className={`${styles.label} ${styles[`label_${mode}`]}`}
@@ -52,10 +180,17 @@ const Signup: NextPage = () => {
               type="text"
               placeholder="whyne"
               className={`${styles.nickname_input} ${styles[`nickname_input_${mode}`]}`}
+              onBlur={handleNicknameBlur}
+              onChange={(e) => setNickname(e.target.value)}
             />
+            {nicknameError && (
+              <p className={`${styles.error} ${styles[`error_${mode}`]}`}>
+                {nicknameError}
+              </p>
+            )}
           </div>
 
-          <div className="form_group">
+          <div className={styles.form_group}>
             <label
               htmlFor="password"
               className={`${styles.label} ${styles[`label_${mode}`]}`}
@@ -67,10 +202,19 @@ const Signup: NextPage = () => {
               type="password"
               placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
               className={`${styles.password_input} ${styles[`password_input_${mode}`]}`}
+              onBlur={handlePwdBlur}
+              onChange={(e) => setPwd(e.target.value)}
             />
+            {pwdError && (
+              <p className={`${styles.error} ${styles[`error_${mode}`]}`}>
+                {pwdError}
+              </p>
+            )}
           </div>
 
-          <div className="form_group">
+          <div
+            className={`${styles.form_group_repassword} ${styles[`form_group_repassword_${mode}`]}`}
+          >
             <label
               htmlFor="repassword"
               className={`${styles.label} ${styles[`label_${mode}`]}`}
@@ -82,17 +226,39 @@ const Signup: NextPage = () => {
               type="password"
               placeholder="비밀번호 확인"
               className={`${styles.repassword_input} ${styles[`repassword_input_${mode}`]}`}
+              onBlur={handleRePwdBlur}
+              onChange={(e) => setRePwd(e.target.value)}
             />
+            {rePwdError && (
+              <p className={`${styles.error} ${styles[`error_${mode}`]}`}>
+                {rePwdError}
+              </p>
+            )}
           </div>
 
-          <Button
-            type="default"
-            size="width400"
-            radius={16}
-            color="purple"
-            text="가입하기"
-            textColor="white"
-          />
+          {emailResult.success &&
+          nicknameResult.success &&
+          pwdResult.success &&
+          rePwdResult.success ? (
+            <Button
+              type="default"
+              size="width400"
+              radius={16}
+              color="purple"
+              text="가입하기"
+              textColor="white"
+            />
+          ) : (
+            <Button
+              type="default"
+              size="width400"
+              radius={16}
+              color="gray"
+              text="가입하기"
+              textColor="white"
+              disabled={true}
+            />
+          )}
         </form>
 
         <div className={styles.login_link}>
