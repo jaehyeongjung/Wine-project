@@ -66,7 +66,10 @@ export default function test() {
           closeModal={() => setShowModal(false)}
           closeBtn={true}
         >
-          <Review closeModal={() => setShowModal(false)} />
+          <Review
+            wineName={'Sentinel Carbernet Sauvignon 2016'}
+            closeModal={() => setShowModal(false)}
+          />
         </Modal>
       </div>
     </div>

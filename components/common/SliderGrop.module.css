@@ -26,6 +26,7 @@
 .sliderContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 18px;
   word-break: keep-all;
@@ -44,6 +45,9 @@
 }
 
 .labelItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 54px;
   height: 25px;
   background-color: var(--gray100);
@@ -53,11 +57,21 @@
   font-weight: var(--font-semibold);
   font-size: var(--text-md);
   line-height: var(--line-height-md);
+
+  @media (max-width: 768px) {
+    font-size: var(--text-xs);
+    line-height: var(--line-height-xs);
+  }
 }
 
 .rowItem {
   width: 70px;
   text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: var(--text-md);
+    line-height: var(--line-height-md);
+  }
 }
 
 .highItem {

@@ -4,17 +4,22 @@ import styles from './SliderGrop.module.css';
 interface Props {
   items: { label: string; row: string; high: string; value: number }[];
   type: boolean;
+  onValueChange?: (index: number, newValue: number) => void;
 }
 
-const SliderGrop: React.FC<Props> = ({ items, type }: Props) => {
+const SliderGrop: React.FC<Props> = ({ items, type, onValueChange }) => {
   const [values, setValues] = useState(items.map((item) => item.value));
-  console.log(values);
+
   const handleChange = (index: number, newValue: number) => {
     setValues((prev) => {
       const newValues = [...prev]; // 기존 값을 복사하여 수정
       newValues[index] = newValue; // 특정 인덱스만 수정
       return newValues;
     });
+
+    if (onValueChange) {
+      onValueChange(index, newValue); // 부모에게 값 전달
+    }
   };
 
   return (
