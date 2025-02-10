@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
+import { postSignUp } from '@/utils/api/auth';
 
 const Signup: NextPage = () => {
   const { mode } = useDevice();
@@ -64,7 +65,8 @@ const Signup: NextPage = () => {
   interface FormData {
     email: string;
     nickname: string;
-    pwd: string;
+    password: string;
+    passwordConfirmation: string;
   }
 
   //Result를 여기서 다 선언
@@ -107,7 +109,7 @@ const Signup: NextPage = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //form 자동제출 방지
 
     if (
@@ -119,13 +121,18 @@ const Signup: NextPage = () => {
       const formData: FormData = {
         email: email.trim(),
         nickname: nickname.trim(),
-        pwd: pwd.trim(),
+        password: pwd.trim(),
+        passwordConfirmation: rePwd.trim(),
       };
 
       try {
         // API 호출성공하면
+        const result = await postSignUp(formData);
         router.push('/');
-      } catch (error) {}
+      } catch (error: any) {
+        console.error('API 에러:', error.response.data);
+        alert(error.response.data.message);
+      }
     }
   };
 
@@ -145,7 +152,7 @@ const Signup: NextPage = () => {
           />
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.form_group}>
             <label
               htmlFor="email"
