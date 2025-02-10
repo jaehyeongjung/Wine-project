@@ -1,0 +1,62 @@
+.ratingBox {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.ratingAvg {
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 64.44px;
+  margin: 0;
+}
+
+.ratingCount {
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  line-height: 16.71px;
+  color: var(--gray500);
+  text-align: left;
+}
+
+.ratingBars {
+  margin-top: 20px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ratingScore {
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  line-height: 19.09px;
+  color: var(--gray500);
+}
+
+.ratingBarContainer {
+  flex: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  margin: 0 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.ratingBar {
+  height: 100%;
+  background-color: #7c4dff;
+}
+
+.ratingButton {
+  margin-top: 30px;
+}
