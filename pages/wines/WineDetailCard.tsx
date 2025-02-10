@@ -15,10 +15,6 @@ const DetailPage: React.FC = () => {
       'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/686/1738855781446/type=image2.png',
   };
 
-  const handleBackPage = () => {
-    console.log('뒤로 가기');
-  };
-
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
       <div className={styles.cardBox}>
@@ -37,7 +33,7 @@ const DetailPage: React.FC = () => {
         <div className={styles.backButton}>
           <Button
             type="default"
-            size="width75"
+            size="width40"
             color="lite_purple"
             textColor="purple"
             text="←"
