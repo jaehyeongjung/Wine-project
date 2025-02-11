@@ -54,17 +54,190 @@
 
 .Registerwine {
   width: 800px;
-
+  height: 270px;
+  display: flex;
+  align-items: flex-end;
 }
 .RegisterwineMap {
-    width: 100%;
-    height: 228px;
-    border-radius: 16px;
-    border: 1px solid #cfdbea;
+  width: 100%;
+  height: 228px;
+  border-radius: 16px;
+  border: 1px solid #cfdbea;
+  display: flex;
+  align-items: center;
 }
 .myCommentMap {
   width: 100%;
-  height: 202px;
+  min-height: 202px;
   border-radius: 16px;
   border: 1px solid #cfdbea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myCommentInner {
+  width: 720px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.myCommentInnerStarAndTimeContainer {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myCommentInnerStarAndTime {
+  height: 42px;
+  width: 158px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myCommentInnerStar {
+  width: 80px;
+  height: 100%;
+  border-radius: 12px;
+  background-color: var(--purple10);
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+}
+
+.myCommentInnerTime {
+  width: 63px;
+  height: 26px;
+  color: var(--gray500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myCommentInnerDeatail {
+  min-height: 88px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.myCommentInnerDropdown {
+  width: 26px;
+  height: 26px;
+}
+
+.myCommentInnerDetailTitle {
+  width: 100%;
+  height: 26px;
+  color: var(--gray500);
+}
+
+.myCommentInnerDetailReview {
+  width: 100%;
+  min-height: 52px;
+  color: var(--gray800);
+}
+
+.myCommentInnerStar img {
+  width: 14.27px;
+}
+
+.myCommentInnerStarNum {
+  width: 28px;
+  height: 26px;
+  color: var(--purple100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.myCommentInnerStarImg {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterwineImg {
+  width: 76px;
+  height: 270px;
+  margin-left: 60px;
+  margin-top: -43px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.RegisterwineImg img {
+  width: 105%;
+}
+
+.RegisterwineData {
+  width: 584px;
+  height: 158px;
+  margin-left: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.RegisterwineDataText {
+  height: 111px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.RegisterwineDataPrice {
+  width: 114px;
+  height: 37px;
+  background-color: var(--purple10);
+  color: var(--purple100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterwineDataTextDetail {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RegisterwineDataTextDropdown {
+  width: 26px;
+  height: 26px;
+}
+.RegisterwineDataTextDetailTitle {
+  width: 100%;
+  height: 72px;
+  color: var(--gray800);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 35.8px;
+}
+
+.RegisterwineDataTextDetailFrom {
+  width: 198px;
+  height: 26px;
+  color: var(--gray500);
+}
+
+.RegisterwineContainer {
+  width: 800px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
