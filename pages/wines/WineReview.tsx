@@ -1,13 +1,14 @@
 import React from 'react';
-import SliderGrop from '../../components/common/SliderGrop';
+import SliderGroup from '../../components/common/SliderGroup';
 import styles from './WineReview.module.css';
 
 const WineReview: React.FC = () => {
-  const sliders = [
-    { label: '향', row: '약함', high: '강함', value: 50 },
-    { label: '바디감', row: '가벼움', high: '무거움', value: 70 },
-    { label: '단맛', row: '적음', high: '많음', value: 30 },
-  ];
+  const sliders = {
+    lightBold: 50,
+    smoothTannic: 70,
+    drySweet: 30,
+    softAcidic: 20,
+  };
 
   return (
     <div>
@@ -45,7 +46,7 @@ const WineReview: React.FC = () => {
           immediately.
         </p>
         <div className={styles.sliderSection}>
-          <SliderGrop items={sliders} type={false} />
+          <SliderGroup values={sliders} disabled />
         </div>
       </div>
     </div>
