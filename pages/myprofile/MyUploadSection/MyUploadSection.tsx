@@ -16,26 +16,38 @@ const MyUploadSection: React.FC = () => {
       className={`${styles.myUploadSection} ${styles[`myUploadSection_${mode}`]}`}
     >
       <div className={`${styles.myUploadBar} ${styles[`myUploadBar_${mode}`]}`}>
-        <div className={styles.myUploadBarMenu}>
+        <div
+          className={`${styles.myUploadBarMenu} ${styles[`myUploadBarMenu_${mode}`]}`}
+        >
           <div
-            className={`${styles.myUploadBarMenuComment} ${selectedTab === 'comment' ? styles.active : ''}`}
+            className={`${styles.myUploadBarMenuComment} ${styles[`myUploadBarMenuComment_${mode}`]} ${selectedTab === 'comment' ? styles.active : ''}`}
             onClick={() => handleTabChange('comment')}
           >
-            <p className={`text-xl-bold ${styles.clickableText}`}>
+            <p
+              className={`text-xl-bold ${styles.clickableText} ${styles[`clickableText_${mode}`]}`}
+            >
               내가 쓴 후기
             </p>
           </div>
           <div
-            className={`${styles.myUploadBarMenuRegisterwine} ${selectedTab === 'wine' ? styles.active : ''}`}
+            className={`${styles.myUploadBarMenuRegisterwine} ${styles[`myUploadBarMenuRegisterwine_${mode}`]}  ${selectedTab === 'wine' ? styles.active : ''}`}
             onClick={() => handleTabChange('wine')}
           >
-            <p className={`text-xl-bold ${styles.clickableText}`}>
+            <p
+              className={`text-xl-bold ${styles.clickableText} ${styles[`clickableText_${mode}`]}`}
+            >
               내가 등록한 와인
             </p>
           </div>
         </div>
-        <div className={styles.myUploadBarTotal}>
-          <p className="text-md-regular">총 12개</p>
+        <div
+          className={`${styles.myUploadBarTotal} ${styles[`myUploadBarTotal_${mode}`]}`}
+        >
+          <p
+            className={`${styles.myUploadBarTotalText} ${styles[`myUploadBarTotalText_${mode}`]}`}
+          >
+            총 12개
+          </p>
         </div>
       </div>
       {selectedTab === 'comment' ? (
@@ -61,7 +73,7 @@ const MyUploadSection: React.FC = () => {
                       <img src="/icons/starColor.svg"></img>
                     </div>
                     <p
-                      className={`${styles.myCommentInnerStarNum} text-2lg-bold`}
+                      className={`${styles.myCommentInnerStarNum} ${styles[`myCommentInnerStarNum_${mode}`]} text-2lg-bold`}
                     >
                       5.0
                     </p>
@@ -80,11 +92,13 @@ const MyUploadSection: React.FC = () => {
                 className={`${styles.myCommentInnerDeatail} ${styles[`myCommentInnerDetail_${mode}`]}`}
               >
                 <p
-                  className={`${styles.myCommentInnerDetailTitle} text-lg-medium`}
+                  className={`${styles.myCommentInnerDetailTitle} ${styles[`myCommentInnerDetailTitle_${mode}`]} text-lg-medium`}
                 >
                   Sentinal Carbernet Sauvignon 2016
                 </p>
-                <p className={styles.myCommentInnerDetailReview}>
+                <p
+                  className={`${styles.myCommentInnerDetailReview} ${styles[`myCommentInnerDetailReview_${mode}`]}`}
+                >
                   Deep maroon color, tasting notes of blackberry, dark
                   chocolate, plum. Super jammy and bold with some smoky after
                   notes. Big flavor. Amazing value (would pay three times the

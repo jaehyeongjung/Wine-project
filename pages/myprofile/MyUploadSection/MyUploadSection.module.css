@@ -12,9 +12,23 @@
   margin: 0 auto;
 }
 
+.myUploadSection_mobile {
+  width: 343px;
+  min-height: 400px;
+  margin: 0 auto;
+}
+
 .myUploadBar {
   width: 100%;
   height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myUploadBar_mobile {
+  width: 100%;
+  height: 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,13 +41,44 @@
   justify-content: space-between;
 }
 
+.myUploadBarMenu_mobile {
+  width: 221px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .myUploadBarTotal {
   width: 43px;
   height: 24px;
 }
 
+.myUploadBarTotalText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.myUploadBarTotalText_mobile {
+  line-height: 18px;
+  font-size: 12px;
+}
+
+.myUploadBarTotal_mobile {
+  width: 32px;
+  height: 18px;
+  white-space: nowrap;
+}
+
 .myUploadBarMenuComment {
   width: 96px;
+  height: 100%;
+  white-space: nowrap;
+  color: #9facbd;
+}
+
+.myUploadBarMenuComment_mobile {
+  width: 87px;
   height: 100%;
   white-space: nowrap;
   color: #9facbd;
@@ -46,8 +91,20 @@
   white-space: nowrap;
 }
 
+.myUploadBarMenuRegisterwine_mobile {
+  width: 118px;
+  height: 100%;
+  color: #9facbd;
+  white-space: nowrap;
+}
+
 .clickableText {
   cursor: pointer;
+}
+
+.clickableText_mobile {
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .active {
@@ -65,13 +122,12 @@
   align-items: flex-end;
 }
 
-.Registerwine_tablet{
-    width: 704px;
-    height: 270px;
-    display: flex;
-    align-items: flex-end;
-  }
-
+.Registerwine_tablet {
+  width: 704px;
+  height: 270px;
+  display: flex;
+  align-items: flex-end;
+}
 
 .RegisterwineMap {
   width: 100%;
@@ -95,17 +151,28 @@
   min-height: 193px;
 }
 
+.myCommentMap_mobile {
+  min-height: 187px;
+}
+
 .myCommentInner {
   width: 720px;
   min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 20px;
 }
 
-.myCommentInner_tablet{
-    width: 624px;
-    height: 146px;
+.myCommentInner_tablet {
+  width: 624px;
+  height: 146px;
+}
+
+.myCommentInner_mobile {
+  width: 303px;
+  height: 148px;
+  gap: 10px;
 }
 
 .myCommentInnerStarAndTimeContainer {
@@ -116,8 +183,12 @@
   align-items: center;
 }
 
-.myCommentInnerStarAndTimeContainer_tablet{
-    height: 32px;
+.myCommentInnerStarAndTimeContainer_tablet {
+  height: 32px;
+}
+
+.myCommentInnerStarAndTimeContainer_mobile {
+  height: 32px;
 }
 
 .myCommentInnerStarAndTime {
@@ -128,6 +199,13 @@
   align-items: center;
 }
 
+.myCommentInnerStarAndTime_mobile {
+  height: 100%;
+  width: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .myCommentInnerStar {
   width: 80px;
@@ -140,7 +218,9 @@
   justify-content: center;
 }
 
-
+.myCommentInnerStar_mobile {
+  width: 60px;
+}
 
 .myCommentInnerTime {
   width: 63px;
@@ -151,6 +231,12 @@
   justify-content: center;
 }
 
+.myCommentInnerTime_mobile {
+  width: 55px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+}
 
 .myCommentInnerDeatail {
   min-height: 88px;
@@ -158,14 +244,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 10px;
 }
 
-
-
+.myCommentInnerDeatail_mobile {
+  min-height: 106px;
+  width: 100%;
+}
 
 .myCommentInnerDropdown {
   width: 26px;
   height: 26px;
+}
+
+.myCommentInnerDropdown_mobile {
+  width: 24px;
+  height: 24px;
 }
 
 .myCommentInnerDetailTitle {
@@ -174,14 +268,31 @@
   color: var(--gray500);
 }
 
+.myCommentInnerDetailTitle_mobile {
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
 .myCommentInnerDetailReview {
   width: 100%;
   min-height: 52px;
   color: var(--gray800);
+  background-color: aqua;
+}
+
+.myCommentInnerDetailReview_mobile {
+  min-height: 72px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .myCommentInnerStar img {
   width: 14.27px;
+}
+
+.myCommentInnerStar_mobile img {
+  width: 11.42px;
 }
 
 .myCommentInnerStarNum {
@@ -194,6 +305,13 @@
   margin-top: 4px;
 }
 
+.myCommentInnerStarNum_mobile {
+    width: 22px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
 .myCommentInnerStarImg {
   width: 20px;
   height: 20px;
@@ -201,8 +319,6 @@
   justify-content: center;
   align-items: center;
 }
-
-
 
 .RegisterwineImg {
   width: 76px;
@@ -225,12 +341,10 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
 }
 
 .RegisterwineData_tablet {
-    width: 490px;
-
+  width: 490px;
 }
 
 .RegisterwineDataText {
@@ -285,7 +399,7 @@
   gap: 20px;
 }
 
-.RegisterwineContainer_tablet{
-    width: 704px;
-    min-height: 640px;
+.RegisterwineContainer_tablet {
+  width: 704px;
+  min-height: 640px;
 }
