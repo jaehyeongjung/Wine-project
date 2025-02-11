@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { postSignIn } from '@/utils/api/auth';
 
 const Login: NextPage = () => {
   const { mode } = useDevice();
@@ -32,7 +33,7 @@ const Login: NextPage = () => {
 
   interface LoginFormData {
     email: string;
-    pwd: string;
+    password: string;
   }
 
   const emailResult = emailSchema.safeParse({ email: email.trim() });
@@ -54,7 +55,7 @@ const Login: NextPage = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //form 자동제출 방지
 
     const emailResult = emailSchema.safeParse({ email: email.trim() });
@@ -63,13 +64,16 @@ const Login: NextPage = () => {
     if (emailResult.success && pwdResult.success) {
       const formData: LoginFormData = {
         email: email.trim(),
-        pwd: pwd.trim(),
+        password: pwd.trim(),
       };
 
       try {
-        // API 호출성공하면
+        const result = await postSignIn(formData);
         router.push('/');
-      } catch (error) {}
+      } catch (error: any) {
+        console.error('API 에러:', error.response.data);
+        alert(error.response.data.message);
+      }
     }
   };
 
@@ -87,7 +91,7 @@ const Login: NextPage = () => {
           />
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.form_group}>
             <label
               htmlFor="email"
