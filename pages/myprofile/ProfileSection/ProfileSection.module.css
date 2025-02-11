@@ -1,5 +1,6 @@
 .profileSection {
   width: 280px;
+
   height: 530px;
   background-color: white;
   border: 1px solid #cfdbea;
@@ -12,8 +13,15 @@
 }
 
 .profileSection_tablet {
-    width: 704px;
+    
+    width: 704px; 
     height: 247px;
+
+}
+
+.profileSection_mobile {
+    width: 343px;
+    height: 241px;
 }
 
 .profileInner {
@@ -32,6 +40,13 @@
     gap: 30px;
 }
 
+.profileInner_mobile{
+    width: 303px;
+    height: 202px;
+    align-items: start;
+    gap: 20px;
+}
+
 .profileData {
   width: 164px;
   height: 270px;
@@ -45,6 +60,13 @@
     width: 267px;
     height: 80px;
     flex-direction: row;    
+}
+
+.profileData_mobile{
+    width: 211px;
+    height: 60px;
+    flex-direction: row;    
+    gap: 16px;
 }
 
 .profileEdit {
@@ -63,6 +85,12 @@
     justify-content: space-between;
 }
 
+.profileEdit_mobile{
+    width: 303px;
+    height: 122px;
+    gap: 6px;
+}
+
 .profileImage {
   width: 164px;
   height: 164px;
@@ -73,6 +101,11 @@
 .profileImage_tablet{
     width: 80px;
     height: 80px;
+}
+
+.profileImage_mobile{
+    width: 60px;
+    height: 60px;
 }
 
 .profileNameAndEmail {

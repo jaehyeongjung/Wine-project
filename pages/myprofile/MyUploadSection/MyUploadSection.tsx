@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './MyUploadSection.module.css';
 import useDevice from '@/hooks/useDevice';
+import { symbol } from 'zod';
 
 const MyUploadSection: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'comment' | 'wine'>('comment');
@@ -11,8 +12,10 @@ const MyUploadSection: React.FC = () => {
   };
 
   return (
-    <div className={styles.myUploadSection}>
-      <div className={styles.myUploadBar}>
+    <div
+      className={`${styles.myUploadSection} ${styles[`myUploadSection_${mode}`]}`}
+    >
+      <div className={`${styles.myUploadBar} ${styles[`myUploadBar_${mode}`]}`}>
         <div className={styles.myUploadBarMenu}>
           <div
             className={`${styles.myUploadBarMenuComment} ${selectedTab === 'comment' ? styles.active : ''}`}
@@ -36,13 +39,25 @@ const MyUploadSection: React.FC = () => {
         </div>
       </div>
       {selectedTab === 'comment' ? (
-        <div className={styles.myComment}>
-          <div className={styles.myCommentMap}>
-            <div className={styles.myCommentInner}>
-              <div className={styles.myCommentInnerStarAndTimeContainer}>
-                <div className={styles.myCommentInnerStarAndTime}>
-                  <div className={styles.myCommentInnerStar}>
-                    <div className={styles.myCommentInnerStarImg}>
+        <div className={`${styles.myComment} ${styles[`myComment_${mode}`]}`}>
+          <div
+            className={`${styles.myCommentMap} ${styles[`myCommentMap_${mode}`]}`}
+          >
+            <div
+              className={`${styles.myCommentInner} ${styles[`myCommentInner_${mode}`]}`}
+            >
+              <div
+                className={`${styles.myCommentInnerStarAndTimeContainer} ${styles[`myCommentInnerStarAndTimeContainer_${mode}`]}`}
+              >
+                <div
+                  className={`${styles.myCommentInnerStarAndTime} ${styles[`myCommentInnerStarAndTime_${mode}`]}`}
+                >
+                  <div
+                    className={`${styles.myCommentInnerStar} ${styles[`myCommentInnerStar_${mode}`]}`}
+                  >
+                    <div
+                      className={`${styles.myCommentInnerStarImg} ${styles[`myCommentInnerStarImg_${mode}`]}`}
+                    >
                       <img src="/icons/starColor.svg"></img>
                     </div>
                     <p
@@ -51,7 +66,9 @@ const MyUploadSection: React.FC = () => {
                       5.0
                     </p>
                   </div>
-                  <p className={`${styles.myCommentInnerTime} text-lg-regular`}>
+                  <p
+                    className={`${styles.myCommentInnerTime} ${styles[`myCommentInnerTime_${mode}`]} text-lg-regular`}
+                  >
                     10시간전
                   </p>
                 </div>
@@ -59,7 +76,9 @@ const MyUploadSection: React.FC = () => {
                   <img src="/icons/dropDown.svg"></img>
                 </div>
               </div>
-              <div className={styles.myCommentInnerDeatail}>
+              <div
+                className={`${styles.myCommentInnerDeatail} ${styles[`myCommentInnerDetail_${mode}`]}`}
+              >
                 <p
                   className={`${styles.myCommentInnerDetailTitle} text-lg-medium`}
                 >
@@ -77,13 +96,19 @@ const MyUploadSection: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.RegisterwineContainer}>
-          <div className={styles.Registerwine}>
+        <div
+          className={`${styles.RegisterwineContainer} ${styles[`RegisterwineContainer_${mode}`]}`}
+        >
+          <div
+            className={`${styles.Registerwine} ${styles[`Registerwine_${mode}`]}`}
+          >
             <div className={styles.RegisterwineMap}>
               <div className={styles.RegisterwineImg}>
                 <img src="/images/testWine.svg"></img>
               </div>
-              <div className={styles.RegisterwineData}>
+              <div
+                className={`${styles.RegisterwineData} ${styles[`RegisterwineData_${mode}`]}`}
+              >
                 <div className={styles.RegisterwineDataText}>
                   <div className={styles.RegisterwineDataTextDetail}>
                     <div className={styles.RegisterwineDataTextDetailTitle}>

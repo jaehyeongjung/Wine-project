@@ -1,5 +1,6 @@
 .profileContainer{
     width: 1140px;
+    max-width: 100%;
     display: flex;
     gap: 60px;
     margin: 0 auto;
@@ -8,6 +9,7 @@
 
 .profileContainer_tablet{
     flex-direction: column;
+
 
 }
 
