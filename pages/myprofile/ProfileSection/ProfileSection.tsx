@@ -38,7 +38,11 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
             <div
               className={`${styles.profileName} ${styles[`profileName_${mode}`]}`}
             >
-              <p className="text-2xl-bold">{name}</p>
+              <p
+                className={`${styles.profileNameText} ${styles[`profileNameText_${mode}`]}`}
+              >
+                {name}
+              </p>
             </div>
           </div>
         </div>

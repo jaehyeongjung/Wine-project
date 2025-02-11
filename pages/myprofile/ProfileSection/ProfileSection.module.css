@@ -13,15 +13,13 @@
 }
 
 .profileSection_tablet {
-    
-    width: 704px; 
-    height: 247px;
-
+  width: 704px;
+  height: 247px;
 }
 
 .profileSection_mobile {
-    width: 343px;
-    height: 241px;
+  width: 343px;
+  height: 241px;
 }
 
 .profileInner {
@@ -33,18 +31,18 @@
   gap: 48px;
 }
 
-.profileInner_tablet{
-    width: 624px;
-    height: 194px;
-    align-items: start;
-    gap: 30px;
+.profileInner_tablet {
+  width: 624px;
+  height: 194px;
+  align-items: start;
+  gap: 30px;
 }
 
-.profileInner_mobile{
-    width: 303px;
-    height: 202px;
-    align-items: start;
-    gap: 20px;
+.profileInner_mobile {
+  width: 303px;
+  height: 202px;
+  align-items: start;
+  gap: 20px;
 }
 
 .profileData {
@@ -56,17 +54,17 @@
   align-items: center;
 }
 
-.profileData_tablet{
-    width: 267px;
-    height: 80px;
-    flex-direction: row;    
+.profileData_tablet {
+  width: 267px;
+  height: 80px;
+  flex-direction: row;
 }
 
-.profileData_mobile{
-    width: 211px;
-    height: 60px;
-    flex-direction: row;    
-    gap: 16px;
+.profileData_mobile {
+  width: 211px;
+  height: 60px;
+  flex-direction: row;
+  gap: 16px;
 }
 
 .profileEdit {
@@ -78,34 +76,34 @@
   align-items: flex-end;
 }
 
-.profileEdit_tablet{
-    width: 624px;
-    height: 84px;
-    flex-direction: row;
-    justify-content: space-between;
+.profileEdit_tablet {
+  width: 624px;
+  height: 84px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.profileEdit_mobile{
-    width: 303px;
-    height: 122px;
-    gap: 6px;
+.profileEdit_mobile {
+  width: 303px;
+  height: 122px;
+  gap: 6px;
 }
 
 .profileImage {
   width: 164px;
   height: 164px;
   border-radius: 999px;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
-.profileImage_tablet{
-    width: 80px;
-    height: 80px;
+.profileImage_tablet {
+  width: 80px;
+  height: 80px;
 }
 
-.profileImage_mobile{
-    width: 60px;
-    height: 60px;
+.profileImage_mobile {
+  width: 60px;
+  height: 60px;
 }
 
 .profileNameAndEmail {
@@ -116,8 +114,27 @@
   gap: 16px;
 }
 
-.profileNameAndEmail_tablet{
-    height: 66px;    
+.profileNameText {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.profileNameText_mobile {
+  font-size: 20px;
+  line-height: 32px;
+  justify-content: start;
+}
+
+.profileNameAndEmail_tablet {
+  height: 66px;
+}
+
+.profileNameAndEmail_mobile {
+  width: 135px;
+  height: 32px;
 }
 
 .profileName {
@@ -125,10 +142,10 @@
   height: 32px;
 }
 
-.profileName_tablet{
-    width: 135px;
-    height: 32px;
-    display: flex;
+.profileName_tablet {
+  width: 135px;
+  height: 32px;
+  display: flex;
 }
 
 .profileEmail {
@@ -138,32 +155,45 @@
   text-align: center;
 }
 
-
-.profileEditNickname{
-    width: 100%;
-    height: 84px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.profileEditNickname {
+  width: 100%;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.profileEditNickname_tablet{
-    width: 484px;
+.profileEditNickname_tablet {
+  width: 484px;
+}
+
+.profileEditNickname_mobile {
+  width: 100%;
 }
 
 .profileEditNickname_tablet input {
-    width: 100%;
+  width: 100%;
+}
+
+.profileEditNickname_mobile input {
+  width: 100%;
+  height: 42px;
 }
 
 .profileEdit_tablet button {
-    width: 116px;
-    height: 48px;
+  width: 116px;
+  height: 48px;
 }
 
-
-.profileImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  
+.profileEdit_mobile button {
+    width: 89px;
+    height: 42px;
+    font-size: 14px;
+    line-height: 24px;
   }
 
+.profileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

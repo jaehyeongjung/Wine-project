@@ -1,16 +1,16 @@
-.profileContainer{
-    width: 1140px;
-    max-width: 100%;
-    display: flex;
-    gap: 60px;
-    margin: 0 auto;
-    margin-top: 61px;
+.profileContainer {
+  width: 1140px;
+  max-width: 100%;
+  display: flex;
+  gap: 60px;
+  margin: 0 auto;
+  margin-top: 61px;
 }
 
-.profileContainer_tablet{
-    flex-direction: column;
-
-
+.profileContainer_tablet {
+  flex-direction: column;
 }
 
-
+.profileContainer_mobile {
+  flex-direction: column;
+}
