@@ -6,4 +6,9 @@
     margin-top: 61px;
 }
 
+.profileContainer_tablet{
+    flex-direction: column;
+
+}
+
 

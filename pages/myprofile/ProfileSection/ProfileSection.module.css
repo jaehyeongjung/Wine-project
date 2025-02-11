@@ -8,6 +8,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+}
+
+.profileSection_tablet {
+    width: 704px;
+    height: 247px;
 }
 
 .profileInner {
@@ -19,14 +25,26 @@
   gap: 48px;
 }
 
+.profileInner_tablet{
+    width: 624px;
+    height: 194px;
+    align-items: start;
+    gap: 30px;
+}
+
 .profileData {
   width: 164px;
   height: 270px;
-
   display: flex;
   flex-direction: column;
   gap: 32px;
   align-items: center;
+}
+
+.profileData_tablet{
+    width: 267px;
+    height: 80px;
+    flex-direction: row;    
 }
 
 .profileEdit {
@@ -38,11 +56,23 @@
   align-items: flex-end;
 }
 
+.profileEdit_tablet{
+    width: 624px;
+    height: 84px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .profileImage {
   width: 164px;
   height: 164px;
   border-radius: 999px;
   overflow: hidden;  
+}
+
+.profileImage_tablet{
+    width: 80px;
+    height: 80px;
 }
 
 .profileNameAndEmail {
@@ -53,10 +83,19 @@
   gap: 16px;
 }
 
+.profileNameAndEmail_tablet{
+    height: 66px;    
+}
+
 .profileName {
   width: 100%;
   height: 32px;
-  text-align: center;
+}
+
+.profileName_tablet{
+    width: 135px;
+    height: 32px;
+    display: flex;
 }
 
 .profileEmail {
@@ -66,11 +105,6 @@
   text-align: center;
 }
 
-.test{
-    background-color: blue;
-    height: 48px;
-    width: 100%;
-}
 
 .profileEditNickname{
     width: 100%;
@@ -80,8 +114,23 @@
     gap: 10px;
 }
 
+.profileEditNickname_tablet{
+    width: 484px;
+}
+
+.profileEditNickname_tablet input {
+    width: 100%;
+}
+
+.profileEdit_tablet button {
+    width: 116px;
+    height: 48px;
+}
+
+
 .profileImage img {
     width: 100%;
     height: 100%;
     object-fit: cover;  
   }
+

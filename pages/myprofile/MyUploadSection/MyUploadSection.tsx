@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './MyUploadSection.module.css';
-import { symbol } from 'zod';
+import useDevice from '@/hooks/useDevice';
+
 const MyUploadSection: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'comment' | 'wine'>('comment');
+  const { mode } = useDevice();
 
   const handleTabChange = (tab: 'comment' | 'wine') => {
     setSelectedTab(tab);
