@@ -1,0 +1,65 @@
+.reviewBox {
+  outline: 1px solid var(--gray200);
+  border-radius: 16px;
+  max-width: 800px;
+  min-height: 100%;
+  padding: 16.5px 40px;
+  margin-bottom: 20px;
+}
+
+.profile {
+  width: 64px;
+  height: 64px;
+}
+
+.profileBox {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tagBox {
+  margin-bottom: 24px;
+}
+
+.iconBox {
+  display: flex;
+  gap: 24px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+
+.nickname {
+  font-size: var(--text-2lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--line-height-2lg);
+  color: var(--gray800);
+}
+
+.timeAgo {
+  font-size: var(--text-lg);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-lg);
+  color: var(--gray500);
+}
+
+.likeIcon {
+  width: 38px;
+  height: 38px;
+}
+
+.comment {
+  margin-bottom: 20px;
+}

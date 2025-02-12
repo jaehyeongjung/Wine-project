@@ -1,0 +1,18 @@
+.container {
+  max-width: 1140px;
+  margin: auto;
+}
+
+.reviewContent {
+  display: flex;
+  margin-top: 90px;
+  gap: 60px;
+}
+
+.reviewTitle {
+  margin-bottom: 22px;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-xl);
+  color: var(--gray800);
+}

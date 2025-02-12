@@ -20,9 +20,9 @@ const Modal = ({
   if (!showModal) return null;
 
   return (
-    <div className={styles.overlay} onClick={closeModal}>
+    <div className={styles.dimmed} onClick={closeModal}>
       <div
-        className={`${styles.content} ${className || ''}`}
+        className={`${styles.content} ${styles.hiddenScrollbar} ${className || ''}`}
         onClick={(e) => e.stopPropagation()}
       >
         {closeBtn && (

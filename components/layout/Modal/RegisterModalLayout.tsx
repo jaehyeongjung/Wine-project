@@ -7,9 +7,10 @@ import styles from './RegisterModalLayout.module.css';
 
 interface Props {
   closeModal: () => void;
+  isScreen: boolean;
 }
 
-const RegisterModalLayout = ({ closeModal }: Props) => {
+const RegisterModalLayout = ({ closeModal, isScreen }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [image, setImage] = useState<string | null>(null);
 
@@ -27,19 +28,10 @@ const RegisterModalLayout = ({ closeModal }: Props) => {
     }
   };
 
-  // 화면 너비가 375px 이하일 때 필터 텍스트 추가하기
-  const [isScreen, setIsScreen] = useState(window.innerWidth <= 375);
-  useEffect(() => {
-    const handleResize = () => setIsScreen(window.innerWidth <= 375);
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <div className={isScreen ? styles.FilterContainer : styles.container}>
       {isScreen && <div className={styles.filterTitle}>필터</div>}
-      {!isScreen && <div className={styles.registerTitle}>와인 등록</div>}
+      {!isScreen && <div className={styles.title}>와인 등록</div>}
       <Input
         type="text"
         placeholder="와인 이름 입력"
@@ -66,7 +58,7 @@ const RegisterModalLayout = ({ closeModal }: Props) => {
         <div>타입</div>
         <DropDown isScreen={isScreen} options={['Red', 'White', 'Sparkling']} />
       </div>
-      <div className={isScreen ? styles.FilterImageUpload : styles.imageUpload}>
+      <div className={isScreen ? styles.filterImageUpload : styles.imageUpload}>
         <div>와인 사진</div>
         <label
           className={isScreen ? styles.fileUploadFilter : styles.fileUpload}
@@ -96,7 +88,7 @@ const RegisterModalLayout = ({ closeModal }: Props) => {
           onChange={fileChange}
         />
       </div>
-      <div className={styles.btnBox}>
+      <div className={isScreen ? styles.filterBtnBox : styles.btnBox}>
         <Button
           onClick={closeModal}
           type="default"

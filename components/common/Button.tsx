@@ -15,6 +15,7 @@ interface ButtonProps {
     | 'width294'
     | 'width113'
     | 'width156'
+    | 'width75'
     | 'width480';
 
   radius?: number;
