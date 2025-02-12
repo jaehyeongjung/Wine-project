@@ -1,8 +1,10 @@
 import React from 'react';
 import SliderGrop from '../../components/common/SliderGrop';
-import styles from './WineReview.module.css';
+import styles from './wineReview.module.css';
+import useDevice from '../../hooks/useDevice';
 
 const WineReview: React.FC = () => {
+  const { mode } = useDevice();
   const sliders = [
     { label: '향', row: '약함', high: '강함', value: 50 },
     { label: '바디감', row: '가벼움', high: '무거움', value: 70 },
@@ -11,7 +13,7 @@ const WineReview: React.FC = () => {
 
   return (
     <div>
-      <div className={styles.reviewBox}>
+      <div className={`${styles.reviewBox} ${styles[`reviewBox_${mode}`]}`}>
         <div className={styles.reviewHeader}>
           <div className={styles.profileBox}>
             <img

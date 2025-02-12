@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './WineDetailCard.module.css';
+import styles from './wineDetailCard.module.css';
 import useDevice from '../../hooks/useDevice';
 import Button from '../../components/common/Button';
 import router from 'next/router';
@@ -22,7 +22,7 @@ const DetailPage: React.FC = () => {
           <img
             src={wineData.image}
             alt={wineData.name}
-            className={styles.image}
+            className={`${styles.image} ${styles[`image_${mode}`]}`}
           />
         </div>
         <div className={styles.info}>

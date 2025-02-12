@@ -19,20 +19,25 @@ const DetailPage: React.FC = () => {
         <WineDetailCard />
       </div>
 
-      <div>
-        <div className={styles.reviewContent}>
-          <div>
-            <p className={styles.reviewTitle}>리뷰 목록</p>
-            <WineReview />
-            <WineReview />
-            <WineReview />
-            <WineReview />
-            <WineReview />
-          </div>
-          <div className={styles.reviewRating}>
-            <WineRating />
-          </div>
+      <div
+        className={`${styles.reviewContent} ${styles[`reviewContent_${mode}`]}`}
+      >
+        {/* 태블릿, 모바일에서는 WineRating을 위로 이동 */}
+        {(mode === 'tablet' || mode === 'mobile') && <WineRating />}
+
+        <div>
+          <p
+            className={`${styles.reviewTitle} ${styles[`reviewTitle_${mode}`]}`}
+          >
+            리뷰 목록
+          </p>
+          <WineReview />
+          <WineReview />
+          <WineReview />
         </div>
+
+        {/* 데스크톱에서는 기존 순서 유지 */}
+        {mode === 'desktop' && <WineRating />}
       </div>
     </div>
   );

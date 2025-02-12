@@ -16,3 +16,23 @@
   line-height: var(--line-height-xl);
   color: var(--gray800);
 }
+
+/* 테블릿 */
+.reviewTitle_tablet {
+  display: none;
+}
+
+.reviewContent_tablet {
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 모바일 */
+.reviewTitle_mobile {
+  display: none;
+}
+
+.reviewContent_mobile {
+  flex-direction: column;
+  gap: 40px;
+}

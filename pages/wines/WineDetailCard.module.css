@@ -1,6 +1,6 @@
 .container {
   margin-top: 10px;
-  height: 302px;
+  min-height: 302px;
   width: 100%;
   padding-top: 20px;
 }
@@ -9,7 +9,7 @@
   margin-top: 62px;
   position: relative;
   display: flex;
-  height: 260px;
+  min-height: 260px;
   width: 100%;
   border: 1px solid var(--gray200);
   border-radius: 16px;
@@ -17,15 +17,15 @@
 
 .imageContainer {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: auto;
   width: 244px;
 }
 
 .image {
   width: 58px;
-  height: 209px;
   object-fit: contain;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .description {
-  margin-top: 20px;
+  margin-top: 13px;
   margin-bottom: 13px;
   color: var(--gray500);
   overflow: hidden;
@@ -63,10 +63,23 @@
   height: 37px;
   padding: 8px 15px;
   background-color: var(--purple10);
+  text-align: center;
 }
 
 .backButton {
   position: absolute;
   top: 8px;
   left: 8px;
+}
+
+/* 테블릿 */
+.container_tablet {
+  max-width: 704px;
+  margin: auto;
+}
+
+/* 모바일 */
+.container_mobile {
+  max-width: 343px;
+  margin: auto;
 }

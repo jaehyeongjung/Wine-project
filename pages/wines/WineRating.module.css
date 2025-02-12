@@ -1,7 +1,5 @@
 .ratingBox {
-  width: 300px;
-  margin: 0 auto;
-  text-align: center;
+  width: 280px;
 }
 
 .rating {
@@ -46,7 +44,7 @@
 .ratingBarContainer {
   flex: 1;
   height: 10px;
-  background-color: #e0e0e0;
+  background-color: var(--gray100);
   margin: 0 10px;
   border-radius: 5px;
   overflow: hidden;
@@ -54,9 +52,49 @@
 
 .ratingBar {
   height: 100%;
-  background-color: #7c4dff;
+  background-color: var(--purple100);
 }
 
 .ratingButton {
   margin-top: 30px;
+}
+
+/* 태블릿 레이아웃 */
+.ratingBox_tablet {
+  max-width: 578px;
+  width: 100%;
+  min-height: 162px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ratingRow_tablet {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.rating_tablet {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 모바일 레이아웃 */
+.ratingBox_mobile {
+  width: 100%;
+}
+
+.ratingBars_mobile {
+  margin-top: 15px;
+}
+
+.ratingButton_mobile {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.rating_mobile {
+  display: flex;
+  justify-content: space-between;
 }
