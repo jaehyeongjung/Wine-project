@@ -110,6 +110,11 @@ body {
   font-weight: var(--font-regular);
 }
 
+.text-2lg-bold {
+  font-size: var(--text-2lg);
+  line-height: var(--line-height-2lg);
+  font-weight: var(--font-bold);
+}
 .text-lg-bold {
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);

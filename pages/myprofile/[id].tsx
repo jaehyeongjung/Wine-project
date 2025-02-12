@@ -3,6 +3,7 @@ import styles from './[id].module.css';
 import ProfileSection from './ProfileSection/ProfileSection';
 import MyUploadSection from './MyUploadSection/MyUploadSection';
 import Header from '@/components/layout/HeaderVersion2';
+import useDevice from '@/hooks/useDevice';
 
 const dummyProfiles: Record<
   string,
@@ -24,6 +25,7 @@ const dummyProfiles: Record<
 
 const MyProfile: React.FC = () => {
   const router = useRouter();
+  const { mode } = useDevice();
   const { id } = router.query;
 
   // id가 없거나 임시 데이터에 없는 id가 들어오면 기본 메시지 표시
@@ -36,7 +38,9 @@ const MyProfile: React.FC = () => {
   return (
     <>
       <Header imageUrl={profile.photoUrl} />
-      <div className={styles.profileContainer}>
+      <div
+        className={`${styles.profileContainer} ${styles[`profileContainer_${mode}`]}`}
+      >
         <ProfileSection
           name={profile.name}
           photoUrl={profile.photoUrl}
