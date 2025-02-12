@@ -116,30 +116,42 @@ const MyUploadSection: React.FC = () => {
           <div
             className={`${styles.Registerwine} ${styles[`Registerwine_${mode}`]}`}
           >
-            <div className={styles.RegisterwineMap}>
-              <div className={styles.RegisterwineImg}>
+            <div
+              className={`${styles.RegisterwineMap} ${styles[`RegisterwineMap_${mode}`]}`}
+            >
+              <div
+                className={`${styles.RegisterwineImg} ${styles[`RegisterwineImg_${mode}`]}`}
+              >
                 <img src="/images/testWine.svg"></img>
               </div>
               <div
                 className={`${styles.RegisterwineData} ${styles[`RegisterwineData_${mode}`]}`}
               >
-                <div className={styles.RegisterwineDataText}>
-                  <div className={styles.RegisterwineDataTextDetail}>
-                    <div className={styles.RegisterwineDataTextDetailTitle}>
+                <div
+                  className={`${styles.RegisterwineDataText} ${styles[`RegisterwineDataText_${mode}`]}`}
+                >
+                  <div
+                    className={`${styles.RegisterwineDataTextDetail} ${styles[`RegisterwineDataTextDetail_${mode}`]}`}
+                  >
+                    <div
+                      className={`${styles.RegisterwineDataTextDetailTitle} ${styles[`RegisterwineDataTextDetailTitle_${mode}`]}`}
+                    >
                       Sentinel Carbernet Sauvignon 2016
                     </div>
                     <div
-                      className={`${styles.RegisterwineDataTextDetailFrom} text-lg-regular`}
+                      className={`${styles.RegisterwineDataTextDetailFrom} ${styles[`RegisterwineDataTextDetailFrom_${mode}`]}`}
                     >
                       Western Cape, South Africa
                     </div>
                   </div>
-                  <div className={styles.RegisterwineDataTextDropdown}>
+                  <div
+                    className={`${styles.RegisterwineDataTextDropdown} ${styles[`RegisterwineDataTextDropdown_${mode}`]}`}
+                  >
                     <img src="/icons/dropDown.svg"></img>
                   </div>
                 </div>
                 <div
-                  className={`${styles.RegisterwineDataPrice} text-2lg-bold`}
+                  className={`${styles.RegisterwineDataPrice} ${styles[`RegisterwineDataPrice_${mode}`]}`}
                 >
                   ₩ 64,990
                 </div>
