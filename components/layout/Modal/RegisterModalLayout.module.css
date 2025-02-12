@@ -10,22 +10,20 @@
   gap: 24px;
 }
 
-.filterTitle {
+.title {
   height: 32px;
   margin-bottom: 8px;
-  font-family: var(--font-primary);
   font-weight: var(--font-bold);
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   line-height: var(--line-height-xl);
   text-align: left;
 }
 
-.registerTitle {
+.filterTitle {
   height: 32px;
   margin-bottom: 8px;
-  font-family: var(--font-primary);
   font-weight: var(--font-bold);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   line-height: var(--line-height-xl);
   text-align: left;
 }
@@ -34,7 +32,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: var(--font-primary);
   font-weight: var(--font-medium);
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);
@@ -45,7 +42,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: var(--font-primary);
   font-weight: var(--font-medium);
   font-size: var(--text-md);
   line-height: var(--line-height-md);
@@ -57,18 +53,16 @@
   flex-direction: column;
   text-align: left;
   gap: 16px;
-  font-family: var(--font-primary);
   font-weight: var(--font-medium);
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);
 }
 
-.FilterImageUpload {
+.filterImageUpload {
   display: flex;
   flex-direction: column;
   text-align: left;
   gap: 16px;
-  font-family: var(--font-primary);
   font-weight: var(--font-medium);
   font-size: var(--text-md);
   line-height: var(--line-height-md);
@@ -80,8 +74,8 @@
   align-items: center;
   width: 140px;
   height: 140px;
-  background-color: #ffffff;
-  border: 1px solid #cfdbea;
+  background-color: var(--white);
+  border: 1px solid var(--gray200);
   border-radius: 16px;
   cursor: pointer;
 }
@@ -92,8 +86,8 @@
   align-items: center;
   width: 120px;
   height: 120px;
-  background-color: #ffffff;
-  border: 1px solid #cfdbea;
+  background-color: var(--white);
+  border: 1px solid var(--gray200);
   border-radius: 16px;
   cursor: pointer;
 }
@@ -112,5 +106,11 @@
 .btnBox {
   display: flex;
   gap: 10px;
+  margin-top: 8px;
+}
+
+.filterBtnBox {
+  display: flex;
+  gap: 8px;
   margin-top: 8px;
 }
