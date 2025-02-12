@@ -51,7 +51,7 @@
   gap: 20px;
 }
 
-.wines_lisMapDetailContainer {
+.wines_listMapDetailContainer {
   width: 800px;
   height: 248px;
   border-bottom: 1px solid var(--gray200);
@@ -66,7 +66,7 @@
   margin-left: 60px;
 }
 
-.wines_lisMapReviewContianer {
+.wines_listMapReviewContianer {
   height: 127px;
   display: flex;
   justify-content: center;
@@ -199,7 +199,7 @@
   padding-top: 30px;
 }
 
-.wineRecommendSlide {
+.winesRecommendSlide {
   height: 185px;
   width: 1200px;
   margin-top: 60px;
@@ -208,7 +208,7 @@
   gap: 15px;
 }
 
-.wineRecommendSlideMap {
+.winesRecommendSlideMap {
   width: 232px;
   height: 185px;
   background-color: white;
@@ -219,26 +219,26 @@
   justify-content: center;
 }
 
-.wineRecoomnedSlideInner {
+.winesRecommendSlideInner {
   width: 172px;
   height: 161px;
   display: flex;
   justify-content: space-between;
 }
 
-.wineRecommendSlideImg {
+.winesRecommendSlideImg {
   width: 44px;
   height: 161px;
   display: flex;
   justify-content: center;
 }
 
-.wineRecommendSlideData {
+.winesRecommendSlideData {
   width: 100px;
   height: 125px;
 }
 
-.wineRecommendSlideImg img {
+.winesRecommendSlideImg img {
   height: 100%;
 }
 
@@ -265,7 +265,7 @@
   word-wrap: break-word; 
 }
 
-.starRatingContiner {
+.starRatingContainer {
     height: 18px;
     width: 90px;
 }
