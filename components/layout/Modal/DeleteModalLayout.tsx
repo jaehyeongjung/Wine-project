@@ -1,11 +1,25 @@
 import Button from '@/components/common/Button';
 import styles from './DeleteModalLayout.module.css';
+import { ProductDelete } from '@/utils/api/product';
+import { ReviewDelete } from '@/utils/api/review';
 
 interface Props {
   closeModal: () => void;
+  wineId?: number;
+  reviewId?: number;
 }
 
-const DeleteModalLayOut = ({ closeModal }: Props) => {
+const DeleteModalLayout = ({ closeModal, wineId, reviewId }: Props) => {
+  const handleRequest = async () => {
+    try {
+      if (wineId) await ProductDelete(wineId);
+      if (reviewId) await ReviewDelete(reviewId);
+      closeModal();
+    } catch (error: any) {
+      console.error('삭제 오류:', error.response?.data || error.message);
+    }
+  };
+
   return (
     <div>
       <div className={styles.deletTitle}>정말 삭제하시겠습니까?</div>
@@ -19,6 +33,7 @@ const DeleteModalLayOut = ({ closeModal }: Props) => {
           textColor="gray"
         />
         <Button
+          onClick={handleRequest}
           type="default"
           size="width156"
           text="삭제하기"
@@ -30,4 +45,4 @@ const DeleteModalLayOut = ({ closeModal }: Props) => {
   );
 };
 
-export default DeleteModalLayOut;
+export default DeleteModalLayout;
