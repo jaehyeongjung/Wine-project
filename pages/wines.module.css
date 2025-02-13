@@ -298,6 +298,13 @@
 .ContentPriceBtn {
   width: 36px;
   height: 36px;
+  position: relative;
+  top: -40px;
+  left: 520px;
+}
+
+.ContentPriceBtn_tablet {
+  left: 47g0px;
 }
 
 .ContentPriceBtn_mobile {
