@@ -3,6 +3,15 @@
   height: auto;
   margin: 0 auto;
   margin-top: 44px;
+  min-height: 1500px;
+}
+
+.winesContainer_tablet {
+  width: 704px;
+}
+
+.winesContainer_mobile {
+  width: 343px;
 }
 
 .winesRecommend {
@@ -13,12 +22,27 @@
   overflow: hidden;
 }
 
+.winesRecommend_mobile {
+  height: 241px;
+  border-radius: 12px;
+}
+
 .wines_list {
   width: 800px;
-  height: 417px;
+  height: 417px; /* 417*/
   margin-top: 20px;
   display: block; /* flex -> flex-end로 주니깐 내부 map이 생길때 밀림현상 발생하여 block 처리 후, 개별적으로 탑마진처리*/
   margin-left: 340px;
+}
+
+.wines_list_tablet {
+  width: 707px;
+  margin-left: 0px;
+}
+
+.wines_list_mobile {
+  width: 343px;
+  margin-left: 0px;
 }
 
 .wines_listMap {
@@ -30,17 +54,56 @@
   margin-top: 42px; /* block 처리 후 탑 마진처리 */
 }
 
+
+.wines_listMap_mobile {
+  height: 360px;
+  border-radius: 12px;
+  margin-top: 57px; /* block 처리 후 탑 마진처리 */
+}
+
 .winesFilter {
   width: 284px;
-  height: 628px;
-  background-color: wheat;
+  height: 578px;
   position: relative;
   top: -375px; /* 400 */
+  background-color: aquamarine;
+}
+
+.winesFilter_tablet {
+  width: 48px;
+  height: 48px;
+  top: -485px;
+}
+
+.winesFilter_mobile {
+  width: 38px;
+  height: 38px;
+  top: -418px;
 }
 
 .custom_input_wrapper {
   margin-top: 40px;
   margin-left: 340px;
+}
+
+.custom_input_wrapper_tablet input {
+  height: 48px;
+  width: 396px;
+}
+
+.custom_input_wrapper_tablet {
+  margin-top: 40px;
+  margin-left: 72px;
+}
+
+.custom_input_wrapper_mobile {
+  margin-top: 24px;
+  margin-left: 0px;
+}
+
+.custom_input_wrapper_mobile input {
+  height: 38px;
+  width: 343px;
 }
 
 .wines_listMapContainer {
@@ -51,13 +114,24 @@
   gap: 20px;
 }
 
+.wines_listMapContainer_mobile {
+  gap: 0px;
+}
+
 .wines_listMapDetailContainer {
-  width: 800px;
+  width: 100%px;
   height: 248px;
   border-bottom: 1px solid var(--gray200);
   display: flex;
   align-items: flex-end;
 }
+
+.wines_listMapDetailContainer_mobile {
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+}
+
 .wines_listMapDetail {
   height: 211.5px;
   width: 690px;
@@ -66,11 +140,27 @@
   margin-left: 60px;
 }
 
-.wines_listMapReviewContianer {
+.wines_listMapDetail_tablet {
+  width: 624px;
+  gap: 49px;
+  margin-left: 40px;
+}
+
+.wines_listMapDetail_mobile {
+  width: 303px;
+  gap: 36px;
+  margin-left: 20px;
+}
+
+.wines_listMapReviewContainer {
   height: 127px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.wines_listMapReviewContainer_mobile {
+  height: 120px;
 }
 
 .wines_listMapReview {
@@ -79,6 +169,17 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+}
+
+.wines_listMapReview_tablet {
+  width: 624px;
+}
+
+.wines_listMapReview_mobile {
+  width: 303px;
+  height: 104px;
+  gap: 8px;
 }
 
 .wines_listMapReviewTitle {
@@ -87,10 +188,25 @@
   height: 26px;
 }
 
+.wines_listMapReviewTitle_mobile {
+  width: 52px;
+  height: 24px;
+  font-size: 14px;
+  list-style: 24px;
+}
+
 .wines_listMapReviewContent {
   width: 100%;
   height: 52px;
   color: var(--gray500);
+}
+
+.wines_listMapReviewContent {
+  height: 52px;
+}
+
+.wines_listMapReviewContent_mobile {
+  height: 72px;
 }
 
 .wines_listMapDetailImg {
@@ -102,16 +218,55 @@
   align-items: center;
 }
 
+.wines_listMapDetailImg_mobile {
+  width: 70px;
+  height: 212px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.wines_listMapDetailImg_tablet {
+  width: 74px;
+  height: 208px;
+  margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 .wines_listMapDetailImg img {
   width: 100%;
   margin-top: 2.5px;
 }
 
-.wines_listMapDetailContnet {
+.wines_listMapDetailImg_tablet img {
+  width: 100%;
+  margin-top: -10px;
+}
+
+.wines_listMapDetailContent {
   width: 549px;
   height: 188px;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  
+}
+
+.wines_listMapDetailContent_mobile {
+  width: 187px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wines_listMapDetailContent_tablet {
+  width: 503px;
   gap: 16px;
 }
 
@@ -123,17 +278,35 @@
   align-items: center;
 }
 
-.wines_listMapDetailContentPrice {
-  width: 100%;
-  height: 42px;
+.wines_listMapDetailContentData_mobile {
+  height: 88px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.wines_listMapDetailContentPrice {
+  width: 100%;
+  height: 42px;
+}
+
+.wines_listMapDetailContentPrice_mobile {
+  width: 100%;
+  height: 29px;
+}
+
 .ContentPriceBtn {
   width: 36px;
   height: 36px;
+}
+
+.ContentPriceBtn_mobile {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  top: 26px;
+  left: 165px;
 }
 
 .ContentPrice {
@@ -147,12 +320,30 @@
   align-items: center;
 }
 
+.ContentPrice_mobile {
+  width: 86px;
+  height: 29px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
 .ContentTitleAndFrom {
   width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.ContentTitleAndFrom {
+  width: 300px;
+  height: 100%;
+}
+
+.ContentTitleAndFrom_mobile {
+  width: 187px;
+  height: 100%;
 }
 
 .ContentRating {
@@ -163,9 +354,29 @@
   gap: 10px;
 }
 
+.ContentRating_mobile {
+  width: 130px;
+  height: 37px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 245px;
+  margin-left: -200px;
+  position: relative;
+  left: -58px;
+}
+
 .ContentTitle {
   height: 84px;
   width: 300px;
+}
+
+.ContentTitle_mobile {
+  height: 64px;
+  width: 187px;
+  font-weight: 600;
+  line-height: 32px;
+  font-size: 20px;
 }
 
 .ContentFrom {
@@ -173,6 +384,15 @@
   width: 198px;
   color: var(--gray500);
 }
+
+.ContentFrom_mobile {
+  height: 24px;
+  width: 187px;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 14px;
+}
+
 .ContentRatingNumber {
   width: 76px;
   height: 57px;
@@ -181,10 +401,29 @@
   line-height: 57.28px;
 }
 
+.ContentRatingNumber_mobile {
+  width: 45px;
+  height: 33px;
+  font-size: 28px;
+  line-height: 33.41px;
+}
+
 .ContentRatingTotal {
   width: 100px;
   height: 24px;
   color: var(--gray500);
+}
+
+.ContentRatingTotal_mobile {
+  width: 59px;
+  height: 18px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  position: relative;
+  left: -80px;
+  top: 19px;
+  white-space: nowrap;
 }
 
 .winesRecommendText {
@@ -199,11 +438,31 @@
   padding-top: 30px;
 }
 
+.winesRecommendText_mobile {
+  width: 122px;
+  height: 21px;
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 21.48px;
+  white-space: nowrap;
+  position: relative;
+  padding-top: 20px;
+}
+
 .winesRecommendSlide {
   height: 185px;
   width: 1200px;
   margin-top: 60px;
   margin-left: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.winesRecommendSlide_mobile {
+  height: 160px;
+  width: 1200px;
+  margin-top: 40px;
+  margin-left: 20px;
   display: flex;
   gap: 15px;
 }
@@ -219,9 +478,21 @@
   justify-content: center;
 }
 
+.winesRecommendSlideMap_mobile {
+  width: 193px;
+  height: 160px;
+}
+
 .winesRecommendSlideInner {
   width: 172px;
   height: 161px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.winesRecommendSlideInner_mobile {
+  width: 143px;
+  height: 136px;
   display: flex;
   justify-content: space-between;
 }
@@ -233,9 +504,21 @@
   justify-content: center;
 }
 
+.winesRecommendSlideImg_mobile {
+  width: 38px;
+  height: 136px;
+  display: flex;
+  justify-content: center;
+}
+
 .winesRecommendSlideData {
   width: 100px;
   height: 125px;
+}
+
+.winesRecommendSlideData_mobile {
+  width: 80px;
+  height: 97px;
 }
 
 .winesRecommendSlideImg img {
@@ -250,7 +533,12 @@
   gap: 5px;
 }
 
-.RecommnedContentRaitingNumber {
+.RecommendContentRating_mobile {
+  width: 80px;
+  height: 97px;
+}
+
+.RecommendContentRatingNumber {
   width: 57px;
   height: 43px;
   font-weight: 800;
@@ -258,14 +546,54 @@
   line-height: 42.96px;
 }
 
+.RecommendContentRatingNumber_mobile {
+  width: 45px;
+  height: 33px;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 33.41px;
+}
+
 .RecommendContentRatingText {
   width: 100%;
   height: 54px;
   color: var(--gray500);
-  word-wrap: break-word; 
+  word-wrap: break-word;
+}
+
+.RecommendContentRatingText_mobile {
+  height: 42px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
 }
 
 .starRatingContainer {
-    height: 18px;
-    width: 90px;
+  height: 18px;
+  width: 90px;
+}
+
+.starRatingContainer_mobile {
+  height: 12px;
+  width: 60px;
+}
+
+.winesFilterBtn {
+  width: 284px;
+  height: 50px;
+  background-color: yellow;
+  position: relative;
+  top: -375px;
+}
+
+.winesFilterBtn_tablet {
+  width: 220px;
+  height: 48px;
+  background-color: blue;
+  top: -535px;
+  left: 485px;
+}
+
+.winesFilterBtn_mobile {
+  display: none;
 }

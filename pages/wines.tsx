@@ -32,6 +32,20 @@ const Wines: React.FC = () => {
     },
   ];
 
+  const getStarRatingSize = () => {
+    if (mode === 'mobile') {
+      return 8.56; // 모바일일 때 크기
+    }
+    return 12.84; // 데스크탑과 테블릿일 때 기본 크기
+  };
+
+  const getStarRatingSize2 = () => {
+    if (mode === 'mobile') {
+      return 9.99; // 모바일일 때 크기
+    }
+    return 17.12; // 데스크탑과 테블릿일 때 기본 크기
+  };
+
   return (
     <>
       <Header />
@@ -67,14 +81,14 @@ const Wines: React.FC = () => {
                     className={`${styles.RecommendContentRating} ${styles[`RecommendContentRating_${mode}`]}`}
                   >
                     <p
-                      className={`${styles.RecommnedContentRaitingNumber} ${styles[`RecommendContentRatingNumber_${mode}`]}`}
+                      className={`${styles.RecommendContentRatingNumber} ${styles[`RecommendContentRatingNumber_${mode}`]}`}
                     >
                       4.8
                     </p>
                     <div
                       className={`${styles.starRatingContainer} ${styles[`starRatingContainer_${mode}`]}`}
                     >
-                      <StarRating rating={4.8} size={12.84} />
+                      <StarRating rating={4.8} size={getStarRatingSize()} />
                     </div>
                     <p
                       className={`${styles.RecommendContentRatingText} ${styles[`RecommendContentRatingText_${mode}`]} text-xs-regular`}
@@ -104,7 +118,7 @@ const Wines: React.FC = () => {
             {wineList.map((wine) => (
               <div
                 key={wine.id}
-                className={`${styles.wines_listMap} ${styles[`wines_listMapContainer_${mode}`]}`}
+                className={`${styles.wines_listMap} ${styles[`wines_listMap_${mode}`]}`}
               >
                 <div
                   className={`${styles.wines_listMapDetailContainer} ${styles[`wines_listMapDetailContainer_${mode}`]}`}
@@ -138,14 +152,17 @@ const Wines: React.FC = () => {
                           </div>
                         </div>
                         <div
-                          className={`${styles.ContentRating} ${styles[`ContentRaing_${mode}`]}`}
+                          className={`${styles.ContentRating} ${styles[`ContentRating_${mode}`]}`}
                         >
                           <p
-                            className={`${styles.ContentRatingNumber} ${styles[`ContentRaingNumber_${mode}`]}`}
+                            className={`${styles.ContentRatingNumber} ${styles[`ContentRatingNumber_${mode}`]}`}
                           >
                             {wine.rating}
                           </p>
-                          <StarRating rating={wine.rating} size={17.12} />
+                          <StarRating
+                            rating={wine.rating}
+                            size={getStarRatingSize2()}
+                          />
                           <p
                             className={`${styles.ContentRatingTotal} ${styles[`ContentRatingTotal_${mode}`]} text-md-regular`}
                           >
@@ -171,18 +188,18 @@ const Wines: React.FC = () => {
                   </div>
                 </div>
                 <div
-                  className={`${styles.wines_listMapReviewContianer} ${styles[`wines_listMapReviewContainer_${mode}`]}`}
+                  className={`${styles.wines_listMapReviewContainer} ${styles[`wines_listMapReviewContainer_${mode}`]}`}
                 >
                   <div
                     className={`${styles.wines_listMapReview} ${styles[`wines_listMapReview_${mode}`]}`}
                   >
                     <p
-                      className={`${styles.wines_listMapReviewTitle} ${styles[`wines_listMapReviewTitle`]} text-lg-semibold`}
+                      className={`${styles.wines_listMapReviewTitle} ${styles[`wines_listMapReviewTitle_${mode}`]} text-lg-semibold`}
                     >
                       최신후기
                     </p>
                     <p
-                      className={`${styles.wines_listMapReviewContent} ${styles[`wines_listMapReviewContent`]} text-lg-regular`}
+                      className={`${styles.wines_listMapReviewContent} ${styles[`wines_listMapReviewContent_${mode}`]} text-lg-regular`}
                     >
                       {wine.review}
                     </p>
@@ -192,7 +209,12 @@ const Wines: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className={styles.winesFilter}></div>
+        <div
+          className={`${styles.winesFilter} ${styles[`winesFilter_${mode}`]}`}
+        ></div>
+        <div
+          className={`${styles.winesFilterBtn} ${styles[`winesFilterBtn_${mode}`]}`}
+        ></div>
       </div>
     </>
   );
