@@ -3,7 +3,6 @@ import SliderGroup from '../../components/common/SliderGroup';
 import Modal from '../../components/common/Modal';
 import styles from './WineReview.module.css';
 import useDevice from '../../hooks/useDevice';
-import { likeReview } from '../api/like';
 
 const WineReview: React.FC = () => {
   const { mode } = useDevice();
@@ -11,20 +10,8 @@ const WineReview: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  const sliders = {
-    lightBold: 50,
-    smoothTannic: 70,
-    drySweet: 30,
-    softAcidic: 20,
-  };
-
-  const handleLike = async () => {
-    if (liked) return;
-
-    const response = await likeReview(1);
-    if (response) {
-      setLiked(true);
-    }
+  const handleLike = () => {
+    setLiked(!liked);
   };
 
   return (
@@ -64,10 +51,17 @@ const WineReview: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.tagBox}>
-          <div>
-            <span>체리</span>
-            <span>오크</span>
+        <div className={styles.infoBox}>
+          <div className={`${styles.tagBox} ${styles[`tagBox_${mode}`]}`}>
+            <span className={`${styles.tag} ${styles[`tag_${mode}`]}`}>
+              체리
+            </span>
+            <span className={`${styles.tag} ${styles[`tag_${mode}`]}`}>
+              카라멜
+            </span>
+            <span className={`${styles.tag} ${styles[`tag_${mode}`]}`}>
+              시트러스
+            </span>
           </div>
           <div
             className={`${styles.reviewRating} ${styles[`reviewRating_${mode}`]}`}
@@ -85,31 +79,35 @@ const WineReview: React.FC = () => {
           </div>
         </div>
 
-        <p className={`${styles.comment} ${styles[`comment_${mode}`]}`}>
-          Deep maroon color, tasting notes of blackberry, dark chocolate, plum.
-          Super jammy and bold with some smoky after notes. Big flavor. Amazing
-          value (would pay three times the price for it), well balanced flavor.
-          Could drink all day everyday with or without food. I need more
-          immediately.
-        </p>
+        {expanded && (
+          <>
+            <p className={`${styles.comment} ${styles[`comment_${mode}`]}`}>
+              Deep maroon color, tasting notes of blackberry, dark chocolate,
+              plum. Super jammy and bold with some smoky after notes. Big
+              flavor. Amazing value (would pay three times the price for it),
+              well balanced flavor. Could drink all day everyday with or without
+              food. I need more immediately.
+            </p>
 
-        {expanded && <SliderGroup values={sliders} disabled />}
+            <SliderGroup
+              values={{
+                lightBold: 50,
+                smoothTannic: 70,
+                drySweet: 30,
+                softAcidic: 20,
+              }}
+              disabled
+            />
+          </>
+        )}
+
         <div className={styles.arrowContainer}>
-          {!expanded ? (
-            <img
-              className={styles.arrowIcon}
-              src="/icons/arrowDown.svg"
-              alt="열기"
-              onClick={() => setExpanded(true)}
-            />
-          ) : (
-            <img
-              className={styles.arrowIcon}
-              src="/icons/arrowUp.svg"
-              alt="접기"
-              onClick={() => setExpanded(false)}
-            />
-          )}
+          <img
+            className={styles.arrowIcon}
+            src={expanded ? '/icons/arrowUp.svg' : '/icons/arrowDown.svg'}
+            alt={expanded ? '접기' : '열기'}
+            onClick={() => setExpanded(!expanded)}
+          />
         </div>
       </div>
 
