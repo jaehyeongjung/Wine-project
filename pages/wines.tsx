@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './wines.module.css';
 import Header from '@/components/layout/Header';
 import Input from '@/components/common/Input';
 import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
+import Button from '@/components/common/Button';
+import PriceSlide from '@/components/PriceSilde/PriceSlide';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
@@ -13,6 +15,7 @@ const Wines: React.FC = () => {
       id: 1,
       name: 'Sentinel Cabernet Sauvignon 2016',
       origin: 'Western Cape, South Africa',
+      type: 'Red',
       rating: 4.8,
       reviewCount: 47,
       price: 64990,
@@ -24,6 +27,7 @@ const Wines: React.FC = () => {
       id: 2,
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
+      type: 'White',
       rating: 4.9,
       reviewCount: 120,
       price: 450000,
@@ -36,6 +40,7 @@ const Wines: React.FC = () => {
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
       rating: 4.9,
+      type: 'Sparkling',
       reviewCount: 120,
       price: 450000,
       image: '/images/testWine.svg',
@@ -47,6 +52,7 @@ const Wines: React.FC = () => {
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
       rating: 4.9,
+      type: 'Sparkling',
       reviewCount: 120,
       price: 450000,
       image: '/images/testWine.svg',
@@ -58,6 +64,7 @@ const Wines: React.FC = () => {
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
       rating: 4.9,
+      type: 'Sparkling',
       reviewCount: 120,
       price: 450000,
       image: '/images/testWine.svg',
@@ -70,6 +77,7 @@ const Wines: React.FC = () => {
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
       rating: 4.9,
+      type: 'Sparkling',
       reviewCount: 120,
       price: 450000,
       image: '/images/testWine.svg',
@@ -82,6 +90,7 @@ const Wines: React.FC = () => {
       origin: 'Napa Valley, USA',
       rating: 4.9,
       reviewCount: 120,
+      type: 'Sparkling',
       price: 450000,
       image: '/images/testWine.svg',
       review:
@@ -94,6 +103,7 @@ const Wines: React.FC = () => {
       rating: 4.9,
       reviewCount: 120,
       price: 450000,
+      type: 'Sparkling',
       image: '/images/testWine.svg',
       review:
         'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
@@ -123,6 +133,58 @@ const Wines: React.FC = () => {
       });
     }
   };
+
+  const [selectedType, setSelectedType] = useState<string>(''); // 선택된 와인 타입
+  const [ratingFilter, setRatingFilter] = useState<{ [key: string]: boolean }>({
+    all: true, // 전체
+    '4.5-5.0': false, // 4.5 ~ 5.0
+    '4.0-4.5': false, // 4.0 ~ 4.5
+    '3.5-4.0': false, // 3.5 ~ 4.0
+    '3.0-3.5': false, // 3.0 ~ 3.5
+  });
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
+
+  // 와인 타입 버튼 클릭 시 필터링
+  const handleTypeFilter = (type: string) => {
+    setSelectedType(type === selectedType ? '' : type); // 클릭한 타입을 선택/해제
+  };
+
+  // Rating 체크박스 변경 시 필터링
+  const handleRatingFilter = (ratingRange: string) => {
+    setRatingFilter((prevState) => ({
+      ...prevState,
+      [ratingRange]: !prevState[ratingRange], // 체크박스 상태 변경
+    }));
+  };
+
+  // 가격 슬라이더 변경 시 필터링
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(event.target.value);
+    setPriceRange((prevRange) => {
+      return prevRange[0] <= newValue
+        ? [prevRange[0], newValue]
+        : [newValue, prevRange[1]];
+    });
+  };
+
+  // 필터링된 와인 리스트
+  const filteredWineList = wineList.filter((wine) => {
+    const matchesType = selectedType ? wine.type === selectedType : true;
+
+    const matchesRating = Object.keys(ratingFilter).some((key) => {
+      if (ratingFilter[key]) {
+        if (key === 'all') return true;
+        const [min, max] = key.split('-').map(Number);
+        return wine.rating >= min && wine.rating < max;
+      }
+      return false;
+    });
+
+    const matchesPrice =
+      wine.price >= priceRange[0] && wine.price <= priceRange[1];
+
+    return matchesType && matchesRating && matchesPrice;
+  });
 
   return (
     <>
@@ -309,10 +371,152 @@ const Wines: React.FC = () => {
         </div>
         <div
           className={`${styles.winesFilter} ${styles[`winesFilter_${mode}`]}`}
-        ></div>
+        >
+          <div
+            className={`${styles.winesFilterInner} ${styles[`winesFilterInner_${mode}`]}`}
+          >
+            <div
+              className={`${styles.winesFilterInnerType} ${styles[`winesFilterInnerType_${mode}`]}`}
+            >
+              <div
+                className={`${styles.winesFilterInnerTypeTitle} ${styles[`winesFilterInnerTypeTitle_${mode}`]}`}
+              >
+                WINE TYPES
+              </div>
+              <div
+                className={`${styles.winesFilterInnerTypeContainer} ${styles[`winesFilterInnerTypeContainer_${mode}`]}`}
+              >
+                <button
+                  onClick={() => handleTypeFilter('Red')}
+                  className={`${styles.filterButtonRed} ${selectedType === 'Red' ? styles.selected : ''}`}
+                >
+                  Red
+                </button>
+                <button
+                  onClick={() => handleTypeFilter('White')}
+                  className={`${styles.filterButtonWhite} ${selectedType === 'White' ? styles.selected : ''}`}
+                >
+                  White
+                </button>
+                <button
+                  onClick={() => handleTypeFilter('Sparkling')}
+                  className={`${styles.filterButtonSparkling} ${selectedType === 'Sparkling' ? styles.selected : ''}`}
+                >
+                  Sparkling
+                </button>
+              </div>
+            </div>
+            <div
+              className={`${styles.winesFilterInnerPrice} ${styles[`winesFilterInnerPrice_${mode}`]}`}
+            >
+              <div
+                className={`${styles.winesFilterInnerPriceTitle} ${styles[`winesFilterInnerPriceTitle_${mode}`]}`}
+              >
+                PRICE
+              </div>
+              <div
+                className={`${styles.winesFilterInnerPriceScroll} ${styles[`winesFilterInnerPriceScroll_${mode}`]}`}
+              >
+                <div
+                  className={`${styles.winesFilterPrice} ${styles[`winesFilterPrice_${mode}`]}`}
+                >
+                  <PriceSlide />
+                </div>
+              </div>
+            </div>
+            <div
+              className={`${styles.winesFilterInnerRating} ${styles[`winesFilterInnerRating_${mode}`]}`}
+            >
+              <div
+                className={`${styles.winesFilterInnerRatingTitle} ${styles[`winesFilterInnerRatingTitle_${mode}`]}`}
+              >
+                RATING
+              </div>
+              <label
+                className={`${styles.FilterRatingAll} ${styles[`FilterRatingAll_${mode}`]}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={ratingFilter.all}
+                  onChange={() => handleRatingFilter('all')}
+                />
+                <p
+                  className={`${styles.RatingNumberAll} ${styles[`RatingNumberAll_${mode}`]}`}
+                >
+                  전체
+                </p>
+              </label>
+              <label
+                className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={ratingFilter['4.5-5.0']}
+                  onChange={() => handleRatingFilter('4.5-5.0')}
+                />
+                <p
+                  className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                >
+                  4.5 - 5.0
+                </p>
+              </label>
+              <label
+                className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={ratingFilter['4.0-4.5']}
+                  onChange={() => handleRatingFilter('4.0-4.5')}
+                />
+                <p
+                  className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                >
+                  4.0 - 4.5
+                </p>
+              </label>
+              <label
+                className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={ratingFilter['3.5-4.0']}
+                  onChange={() => handleRatingFilter('3.5-4.0')}
+                />
+                <p
+                  className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                >
+                  3.5 - 4.0
+                </p>
+              </label>
+              <label
+                className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={ratingFilter['3.0-3.5']}
+                  onChange={() => handleRatingFilter('3.0-3.5')}
+                />
+
+                <p
+                  className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                >
+                  3.0 - 3.5
+                </p>
+              </label>
+            </div>
+          </div>
+        </div>
         <div
           className={`${styles.winesFilterBtn} ${styles[`winesFilterBtn_${mode}`]}`}
-        ></div>
+        >
+          <Button
+            type="default"
+            size="width284"
+            text="와인 등록하기"
+            color="purple"
+            textColor="white"
+          ></Button>
+        </div>
       </div>
     </>
   );

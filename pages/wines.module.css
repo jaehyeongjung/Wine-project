@@ -65,19 +65,20 @@
   height: 578px;
   position: relative;
   top: -375px; /* 400 */
-  background-color: aquamarine;
 }
 
 .winesFilter_tablet {
   width: 48px;
   height: 48px;
   top: -485px;
+  background-color: aquamarine;
 }
 
 .winesFilter_mobile {
   width: 38px;
   height: 38px;
   top: -418px;
+  background-color: aquamarine;
 }
 
 .custom_input_wrapper {
@@ -591,7 +592,6 @@
 .winesFilterBtn {
   width: 284px;
   height: 50px;
-  background-color: yellow;
   position: relative;
   top: -375px;
 }
@@ -599,7 +599,13 @@
 .winesFilterBtn_tablet {
   width: 220px;
   height: 48px;
-  background-color: blue;
+  top: -535px;
+  left: 485px;
+}
+
+.winesFilterBtn_tablet button {
+  width: 220px;
+  height: 48px;
   top: -535px;
   left: 485px;
 }
@@ -619,7 +625,7 @@
   cursor: pointer;
   position: relative;
   top: 120px;
-  left: 46px
+  left: 46px;
 }
 
 .scrollButtonRight {
@@ -649,7 +655,201 @@
   left: 270px;
 }
 
-.scrollButtonLeft_mobile{
+.scrollButtonLeft_mobile {
   left: 26px;
   top: 100px;
+}
+
+.winesFilterInner {
+  width: 100%;
+  height: 518px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.winesFilterInner_tablet {
+  display: none;
+}
+
+.winesFilterInner_mobile{
+  display: none;
+}
+
+.winesFilterInnerType {
+  width: 100%;
+  height: 83px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerType_tablet {
+  display: none;
+}
+
+.winesFilterInnerType_mobile {
+  display: none;
+}
+
+.winesFilterInnerPrice {
+  width: 252px;
+  height: 103px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerPrice_tablet {
+  display: none;
+}
+
+.winesFilterInnerPrice_mobile {
+  display: none;
+}
+
+.winesFilterInnerRating {
+  width: 98px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.winesFilterInnerTypeTitle {
+  width: 120px;
+  height: 32px;
+  color: var(--gray800);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.winesFilterInnerTypeContainer {
+  width: 280.38px;
+  height: 42px;
+  margin-left: 1.81px;
+  display: flex;
+  gap: 14.57px;
+}
+
+.winesFilterInnerPriceTitle {
+  width: 100%;
+  height: 32px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.winesFilterInnerPriceScroll {
+  width: 100%;
+  height: 51px;
+}
+
+.filterButtonRed {
+  width: 65px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.filterButtonWhite {
+  width: 79px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.filterButtonSparkling {
+  width: 105px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--purple100);
+  color: white;
+}
+
+.winesFilterInnerRatingTitle {
+  width: 100%;
+  height: 32px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.FilterRatingAll {
+  width: 63px;
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.FilterRatingFirst {
+  width: 96px;
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RatingNumber {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  width: 62px;
+  height: 26px;
+}
+
+.RatingNumberAll {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  width: 28px;
+  height: 26px;
+}
+
+.FilterRatingFirst input,
+.FilterRatingAll input {
+  width: 20px;
+  appearance: none;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid #cfdbea;
+  background-color: #f2f4f8;
+}
+
+.FilterRatingFirst input:checked::before,
+.FilterRatingAll input:checked::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #6a42db; 
+  border-radius: 3px;
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.winesFilterPrice {
+  width: 100%;
+  height: 26px;
 }
