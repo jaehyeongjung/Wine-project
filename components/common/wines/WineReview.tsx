@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import SliderGroup from '../../components/common/SliderGroup';
-import Modal from '../../components/common/Modal';
+import SliderGroup from '../SliderGroup';
+import Modal from '../Modal';
 import styles from './WineReview.module.css';
-import useDevice from '../../hooks/useDevice';
+import useDevice from '../../../hooks/useDevice';
 
 const WineReview: React.FC = () => {
   const { mode } = useDevice();

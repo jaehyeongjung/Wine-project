@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './wineDetailCard.module.css';
-import useDevice from '../../hooks/useDevice';
-import Button from '../../components/common/Button';
+import useDevice from '../../../hooks/useDevice';
+import Button from '../Button';
 import router from 'next/router';
 
 const DetailPage: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './wineRating.module.css';
-import Button from '../../components/common/Button';
-import useDevice from '../../hooks/useDevice';
+import Button from '../Button';
+import useDevice from '../../../hooks/useDevice';
 
 const avgRatings = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4 };
 const totalRatings = Object.values(avgRatings).reduce(

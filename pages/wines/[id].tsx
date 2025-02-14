@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Header from '../../components/layout/Header';
-import styles from './detail.module.css';
+import styles from '../../components/common/wines/detail.module.css';
 import useDevice from '../../hooks/useDevice';
-import WineReview from './WineReview';
-import WineRating from './WineRating';
-import WineDetailCard from './WineDetailCard';
+import WineReview from '../../components/common/wines/WineReview';
+import WineRating from '../../components/common/wines/WineRating';
+import WineDetailCard from '../../components/common/wines/WineDetailCard';
 
 const DetailPage: React.FC = () => {
   const router = useRouter();
