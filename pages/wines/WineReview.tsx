@@ -65,8 +65,24 @@ const WineReview: React.FC = () => {
         </div>
 
         <div className={styles.tagBox}>
-          <span>체리</span>
-          <span>오크</span>
+          <div>
+            <span>체리</span>
+            <span>오크</span>
+          </div>
+          <div
+            className={`${styles.reviewRating} ${styles[`reviewRating_${mode}`]}`}
+          >
+            <img
+              className={`${styles.ratingStars} ${styles[`ratingStars_${mode}`]}`}
+              src="/icons/starColor.svg"
+              alt="점수"
+            />
+            <span
+              className={`${styles.ratingNum} ${styles[`ratingNum_${mode}`]}`}
+            >
+              5.0
+            </span>
+          </div>
         </div>
 
         <p className={`${styles.comment} ${styles[`comment_${mode}`]}`}>
