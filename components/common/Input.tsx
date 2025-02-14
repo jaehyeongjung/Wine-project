@@ -2,14 +2,13 @@ import React from 'react';
 import styles from './Input.module.css';
 
 interface InputProps {
-  type?: 'text' | 'email' | 'password' | 'search'; // 타입 설정
+  type?: 'text' | 'email' | 'password' | 'search';
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon?: 'search';
   label?: string;
   name?: string;
-
   size?: 'login' | 'search' | 'nickname' | 'modal' | 'filter';
 }
 
@@ -35,6 +34,7 @@ const Input: React.FC<InputProps> = ({
         </label>
       )}
 
+      {/* 검색 아이콘 */}
       {icon === 'search' && (
         <img
           src="/icons/search.svg"
