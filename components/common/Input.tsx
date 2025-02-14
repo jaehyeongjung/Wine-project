@@ -8,6 +8,7 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon?: 'search';
   label?: string;
+  name?: string;
 
   size?: 'login' | 'search' | 'nickname' | 'modal' | 'filter';
 }
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   icon,
   label,
+  name,
   size = 'login',
 }) => {
   const borderRadius = size === 'search' ? '50px' : '16px';
@@ -35,7 +37,7 @@ const Input: React.FC<InputProps> = ({
 
       {icon === 'search' && (
         <img
-          src="/icons/search.png"
+          src="/icons/search.svg"
           alt="돋보기 아이콘"
           className={styles.iconImg}
         />
@@ -45,6 +47,7 @@ const Input: React.FC<InputProps> = ({
         type={type}
         placeholder={placeholder}
         value={value}
+        name={name}
         onChange={onChange}
         className={`${styles.input} ${styles[size]} ${type === 'search' ? styles.search : ''}`}
         style={{ borderRadius }}

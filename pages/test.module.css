@@ -1,5 +1,6 @@
 /* 삭제하기 모달 css 시작 */
 .deleteModalBox {
+  max-height: 182px;
   padding: 32px 16px 24px;
   box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.04);
 }
@@ -9,10 +10,10 @@
 .registerModalBox {
   padding: 24px;
   width: 460px;
+}
 
-  @media (max-width: 768px) {
-    width: 375px;
-  }
+.registerModalBox_mobile {
+  width: 375px;
 }
 /* 와인 등록 모달 css 끝 */
 
@@ -21,10 +22,10 @@
   min-width: 375px;
   width: 528px;
   padding: 24px;
+}
 
-  @media (max-width: 768px) {
-    width: 375px;
-    padding: 32px 24px;
-  }
+.reviewModalBox_mobile {
+  width: 375px;
+  padding: 32px 24px;
 }
 /* 리뷰 등록 모달 css 끝 */

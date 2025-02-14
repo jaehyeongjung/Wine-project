@@ -1,4 +1,4 @@
-.overlay {
+.dimmed {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,8 +22,22 @@
   position: relative;
   border-radius: 16px;
   border: none;
-  background: white;
   min-width: 300px;
+  height: 100vh;
+  max-height: 1006px;
+  background: white;
   color: #2d3034;
   text-align: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+.hiddenScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hiddenScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
