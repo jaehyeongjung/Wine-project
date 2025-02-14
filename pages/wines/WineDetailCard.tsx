@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './WineDetailCard.module.css';
+import styles from './wineDetailCard.module.css';
 import useDevice from '../../hooks/useDevice';
 import Button from '../../components/common/Button';
 import router from 'next/router';
@@ -15,29 +15,33 @@ const DetailPage: React.FC = () => {
       'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/686/1738855781446/type=image2.png',
   };
 
-  const handleBackPage = () => {
-    console.log('뒤로 가기');
-  };
-
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
-      <div className={styles.cardBox}>
+      <div className={`${styles.cardBox} ${styles[`cardBox_${mode}`]}`}>
         <div className={styles.imageContainer}>
           <img
             src={wineData.image}
             alt={wineData.name}
-            className={styles.image}
+            className={`${styles.image} ${styles[`image_${mode}`]}`}
           />
         </div>
-        <div className={styles.info}>
-          <p className={styles.wineName}>{wineData.name}</p>
-          <p className={styles.description}>{wineData.region}</p>
-          <p className={styles.price}>￦{wineData.price.toLocaleString()}</p>
+        <div className={`${styles.info} ${styles[`info_${mode}`]}`}>
+          <p className={`${styles.wineName} ${styles[`wineName_${mode}`]}`}>
+            {wineData.name}
+          </p>
+          <p
+            className={`${styles.description} ${styles[`description_${mode}`]}`}
+          >
+            {wineData.region}
+          </p>
+          <p className={`${styles.price} ${styles[`price_${mode}`]}`}>
+            ￦{wineData.price.toLocaleString()}
+          </p>
         </div>
         <div className={styles.backButton}>
           <Button
             type="default"
-            size="width75"
+            size="width40"
             color="lite_purple"
             textColor="purple"
             text="←"

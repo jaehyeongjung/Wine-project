@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({
 
       {icon === 'search' && (
         <img
-          src="/icons/search.png"
+          src="/icons/search.svg"
           alt="돋보기 아이콘"
           className={styles.iconImg}
         />
