@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './wines.module.css';
 import Header from '@/components/layout/Header';
 import Input from '@/components/common/Input';
@@ -7,6 +7,7 @@ import useDevice from '@/hooks/useDevice';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
+  const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const wineList = [
     {
       id: 1,
@@ -21,6 +22,73 @@ const Wines: React.FC = () => {
     },
     {
       id: 2,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
+      id: 3,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
+      id: 4,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
+      id: 5,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+
+    {
+      id: 6,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
+      id: 2,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      rating: 4.9,
+      reviewCount: 120,
+      price: 450000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
+      id: 7,
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
       rating: 4.9,
@@ -46,6 +114,16 @@ const Wines: React.FC = () => {
     return 17.12; // 데스크탑과 테블릿일 때 기본 크기
   };
 
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 250; // 한 번에 이동할 거리 (픽셀)
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth', // 부드러운 스크롤
+      });
+    }
+  };
+
   return (
     <>
       <Header />
@@ -60,7 +138,21 @@ const Wines: React.FC = () => {
           >
             이번 달 추천 와인
           </p>
+
+          <button
+            className={`${styles.scrollButtonLeft} ${styles[`scrollButtonLeft_${mode}`]}`}
+            onClick={() => scroll('left')}
+          >
+            <img src="/icons/leftBtn.png"></img>
+          </button>
+          <button
+            className={`${styles.scrollButtonRight} ${styles[`scrollButtonRight_${mode}`]}`}
+            onClick={() => scroll('right')}
+          >
+            <img src="/icons/rightBtn.png"></img>
+          </button>
           <div
+            ref={scrollRef}
             className={`${styles.winesRecommendSlide} ${styles[`winesRecommendSlide_${mode}`]}`}
           >
             {wineList.map((wine) => (

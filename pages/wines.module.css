@@ -54,7 +54,6 @@
   margin-top: 42px; /* block 처리 후 탑 마진처리 */
 }
 
-
 .wines_listMap_mobile {
   height: 360px;
   border-radius: 12px;
@@ -169,7 +168,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
 
 .wines_listMapReview_tablet {
@@ -254,7 +252,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  
 }
 
 .wines_listMapDetailContent_mobile {
@@ -304,7 +301,7 @@
 }
 
 .ContentPriceBtn_tablet {
-  left: 47g0px;
+  left: 470px;
 }
 
 .ContentPriceBtn_mobile {
@@ -458,25 +455,27 @@
 
 .winesRecommendSlide {
   height: 185px;
-  width: 1200px;
-  margin-top: 60px;
+  max-width: 1200px;
+  margin-top: -42px;
   margin-left: 30px;
   display: flex;
   gap: 15px;
+  overflow-x: auto;
+  flex-direction: row;
 }
 
 .winesRecommendSlide_mobile {
   height: 160px;
   width: 1200px;
-  margin-top: 40px;
+  margin-top: -55px;
   margin-left: 20px;
   display: flex;
   gap: 15px;
 }
 
 .winesRecommendSlideMap {
-  width: 232px;
-  height: 185px;
+  min-width: 232px;
+  min-height: 185px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0px 2px 20px 0px #0000000a;
@@ -485,9 +484,13 @@
   justify-content: center;
 }
 
+.winesRecommendSlide::-webkit-scrollbar {
+  display: none;
+}
+
 .winesRecommendSlideMap_mobile {
-  width: 193px;
-  height: 160px;
+  min-width: 193px;
+  min-height: 160px;
 }
 
 .winesRecommendSlideInner {
@@ -603,4 +606,50 @@
 
 .winesFilterBtn_mobile {
   display: none;
+}
+
+.scrollButtonLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  top: 120px;
+  left: 46px
+}
+
+.scrollButtonRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  top: 76px;
+  left: 1050px;
+}
+
+.scrollButtonRight_tablet {
+  left: 625px;
+}
+
+.scrollButtonLeft_tablet {
+  left: 26px;
+}
+
+.scrollButtonRight_mobile {
+  top: 56px;
+  left: 270px;
+}
+
+.scrollButtonLeft_mobile{
+  left: 26px;
+  top: 100px;
 }
