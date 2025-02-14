@@ -149,6 +149,15 @@
   font-weight: var(--font-bold);
 }
 
+.width100 {
+  width: 100px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: var(--text-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-bold);
+}
+
 /* 배경색 */
 .purple {
   background-color: var(--purple100);

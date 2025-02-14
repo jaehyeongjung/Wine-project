@@ -17,7 +17,7 @@ const DetailPage: React.FC = () => {
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
-      <div className={styles.cardBox}>
+      <div className={`${styles.cardBox} ${styles[`cardBox_${mode}`]}`}>
         <div className={styles.imageContainer}>
           <img
             src={wineData.image}
@@ -25,10 +25,18 @@ const DetailPage: React.FC = () => {
             className={`${styles.image} ${styles[`image_${mode}`]}`}
           />
         </div>
-        <div className={styles.info}>
-          <p className={styles.wineName}>{wineData.name}</p>
-          <p className={styles.description}>{wineData.region}</p>
-          <p className={styles.price}>￦{wineData.price.toLocaleString()}</p>
+        <div className={`${styles.info} ${styles[`info_${mode}`]}`}>
+          <p className={`${styles.wineName} ${styles[`wineName_${mode}`]}`}>
+            {wineData.name}
+          </p>
+          <p
+            className={`${styles.description} ${styles[`description_${mode}`]}`}
+          >
+            {wineData.region}
+          </p>
+          <p className={`${styles.price} ${styles[`price_${mode}`]}`}>
+            ￦{wineData.price.toLocaleString()}
+          </p>
         </div>
         <div className={styles.backButton}>
           <Button

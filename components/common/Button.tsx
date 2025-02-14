@@ -4,18 +4,19 @@ import styles from './Button.module.css';
 interface ButtonProps {
   type?: 'default' | 'kakao' | 'google'; // 버튼 타입
   size?:
-    | 'width400'
-    | 'width279'
-    | 'width284'
-    | 'width96x54'
+    | 'width40'
     | 'width96x42'
-    | 'width280'
-    | 'width223'
+    | 'width96x54'
+    | 'width100'
     | 'width108'
-    | 'width294'
     | 'width113'
     | 'width156'
-    | 'width40'
+    | 'width223'
+    | 'width279'
+    | 'width280'
+    | 'width284'
+    | 'width294'
+    | 'width400'
     | 'width480';
 
   radius?: number;

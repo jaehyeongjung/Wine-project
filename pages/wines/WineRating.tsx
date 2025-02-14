@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import style from './wineRating.module.css';
 import Button from '../../components/common/Button';
 import useDevice from '../../hooks/useDevice';
@@ -11,24 +10,24 @@ const totalRatings = Object.values(avgRatings).reduce(
 );
 const averageRating = 4.8;
 
-const getRatingStars = (rating: number) => {
+const getRatingStars = (rating: number, mode: string) => {
   const stars = Math.floor(rating);
   return Array.from({ length: 5 }, (_, i) => (
     <img
       key={i}
-      src={i < stars ? '/icons/stars.png' : '/icons/empty-stars.png'}
+      src={i < stars ? '/icons/starColor.svg' : '/icons/star.svg'}
       alt={i < stars ? 'full star' : 'empty star'}
-      className={style.starImage}
+      className={`${style.ratingStar} ${style[`ratingStar_${mode}`]}`}
     />
   ));
 };
 
-const RatingBars = () => (
-  <div className={style.ratingBars}>
+const RatingBars = ({ className }: { className: string }) => (
+  <div className={`${style.ratingBars} ${className}`}>
     {Object.entries(avgRatings)
       .reverse()
       .map(([score, count]) => (
-        <div key={score} className={style.ratingRow}>
+        <div key={score} className={style.ratingBarRow}>
           <p className={style.ratingScore}>{score}점</p>
           <div className={style.ratingBarContainer}>
             <div
@@ -41,92 +40,120 @@ const RatingBars = () => (
   </div>
 );
 
-const DesktopLayout = () => (
-  <>
-    <div className={style.rating}>
-      <p className={style.ratingAvg}>{averageRating}</p>
-      <div className={style.ratingStarsBox}>
-        <p>{getRatingStars(averageRating)}</p>
-        <p className={style.ratingCount}>
-          {totalRatings.toLocaleString()}개의 후기
-        </p>
-      </div>
-    </div>
-    <RatingBars />
-    <div className={style.ratingButton}>
-      <Button
-        type="default"
-        size="width113"
-        color="purple"
-        textColor="white"
-        text="리뷰 남기기"
-      />
-    </div>
-  </>
-);
-
-const TabletLayout = () => (
+const DesktopLayout = ({ mode }: { mode: string }) => (
   <div className={style.ratingBox}>
-    <div className={style.rating}>
-      <p className={style.ratingAvg}>{averageRating}</p>
-      <Button
-        type="default"
-        size="width113"
-        color="purple"
-        textColor="white"
-        text="리뷰 남기기"
-      />
-      <div className={style.ratingStarsBox}>
-        <p>{getRatingStars(averageRating)}</p>
-        <p className={style.ratingCount}>
-          {totalRatings.toLocaleString()}개의 후기
-        </p>
-      </div>
-    </div>
-    <RatingBars />
-  </div>
-);
-
-const MobileLayout = () => (
-  <>
-    <div className={style.rating}>
-      <div>
+    <div className={`${style.rating} ${style[`rating_${mode}`]}`}>
+      <div className={style.ratingStarsInfo}>
         <p className={style.ratingAvg}>{averageRating}</p>
-        <div className={style.ratingStarsBox}>
-          <p>{getRatingStars(averageRating)}</p>
+        <div
+          className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
+        >
+          <div className={`${style.star} ${style[`star_${mode}`]}`}>
+            {getRatingStars(averageRating, mode)}
+          </div>
           <p className={style.ratingCount}>
             {totalRatings.toLocaleString()}개의 후기
           </p>
         </div>
       </div>
-      <div className={style.ratingButton_mobile}>
+    </div>
+    <RatingBars className={style.ratingBars} />
+    <div className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}>
+      <Button
+        type="default"
+        size="width113"
+        color="purple"
+        textColor="white"
+        text="리뷰 남기기"
+      />
+    </div>
+  </div>
+);
+
+const TabletLayout = ({ mode }: { mode: string }) => (
+  <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
+    <div className={style.leftBox}>
+      <div
+        className={`${style.ratingStarsInfo} ${style[`ratingStarsInfo_${mode}`]}`}
+      >
+        <div>
+          <div
+            className={`${style.ratingAvgBox} ${style[`ratingAvgBox_${mode}`]}`}
+          >
+            <p className={style.ratingAvg}>{averageRating}</p>
+            <div
+              className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
+            >
+              <div className={`${style.star} ${style[`star_${mode}`]}`}>
+                {getRatingStars(averageRating, mode)}
+              </div>
+              <p className={style.ratingCount}>
+                {totalRatings.toLocaleString()}개의 후기
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}
+        >
+          <Button
+            type="default"
+            size="width113"
+            color="purple"
+            textColor="white"
+            text="리뷰 남기기"
+          />
+        </div>
+      </div>
+    </div>
+    <div className={style.ratingBarsContainer}>
+      <RatingBars
+        className={`${style.ratingBars} ${style[`ratingBars_${mode}`]}`}
+      />
+    </div>
+  </div>
+);
+
+const MobileLayout = ({ mode }: { mode: string }) => (
+  <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
+    <div className={`${style.rating} ${style[`rating_${mode}`]}`}>
+      <div className={style.ratingStarsInfo}>
+        <p className={style.ratingAvg_mobile}>{averageRating}</p>
+        <div
+          className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
+        >
+          <div className={`${style.star} ${style[`star_${mode}`]}`}>
+            {getRatingStars(averageRating, mode)}
+          </div>
+          <p className={style.ratingCount}>
+            {totalRatings.toLocaleString()}개의 후기
+          </p>
+        </div>
+      </div>
+      <div className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}>
         <Button
           type="default"
-          size="width40"
+          size="width100"
           color="purple"
           textColor="white"
           text="리뷰 작성하기"
         />
       </div>
     </div>
-    <RatingBars />
-  </>
+    <RatingBars className={style.ratingBars} />
+  </div>
 );
 
 const WineRating = () => {
   const { mode } = useDevice();
+
   return (
-    <div
-      className={classNames(
-        style.ratingBox,
-        style.rating, // 항상 적용할 스타일
-        style[`ratingBox_${mode}`], // mode에 따라 동적으로 변경
-        { [style.mobileStyle]: mode === 'mobile' }, // 모바일일 때만 추가할 스타일
-      )}
-    >
-      {mode === 'desktop' && <DesktopLayout />}
-      {mode === 'tablet' && <TabletLayout />}
-      {mode === 'mobile' && <MobileLayout />}
+    <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
+      {mode === 'desktop' && <DesktopLayout mode={mode} />}
+      {mode === 'tablet' && <TabletLayout mode={mode} />}
+      {mode === 'mobile' && <MobileLayout mode={mode} />}
     </div>
   );
 };

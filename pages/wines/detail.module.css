@@ -5,7 +5,7 @@
 
 .reviewContent {
   display: flex;
-  margin-top: 90px;
+  margin-top: 60px;
   gap: 60px;
 }
 
@@ -17,7 +17,7 @@
   color: var(--gray800);
 }
 
-/* 테블릿 */
+/* 태블릿 */
 .reviewTitle_tablet {
   display: none;
 }
@@ -34,5 +34,6 @@
 
 .reviewContent_mobile {
   flex-direction: column;
+  margin-top: 40px;
   gap: 40px;
 }

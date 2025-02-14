@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-primary: 'Pretendard', sans-serif;
 
@@ -41,6 +49,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--gray800);
+  font-family: var(--font-primary);
 }
 
 body {
@@ -100,6 +110,11 @@ body {
   font-weight: var(--font-regular);
 }
 
+.text-2lg-bold {
+  font-size: var(--text-2lg);
+  line-height: var(--line-height-2lg);
+  font-weight: var(--font-bold);
+}
 .text-lg-bold {
   font-size: var(--text-lg);
   line-height: var(--line-height-lg);

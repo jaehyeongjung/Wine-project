@@ -1,5 +1,7 @@
 .ratingBox {
-  width: 280px;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .rating {
@@ -16,6 +18,13 @@
   margin: 0;
 }
 
+.ratingStarsInfo {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
 .ratingCount {
   font-size: var(--text-md);
   font-weight: var(--font-regular);
@@ -26,9 +35,10 @@
 
 .ratingBars {
   margin-top: 20px;
+  width: 100%;
 }
 
-.ratingRow {
+.ratingBarRow {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
@@ -59,42 +69,134 @@
   margin-top: 30px;
 }
 
-/* 태블릿 레이아웃 */
+.starImage {
+  width: 24px;
+  height: 24px;
+}
+
+.ratingStarBox {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.star {
+  display: flex;
+  gap: 3px;
+}
+
+/* 태블릿 */
+.starImage_tablet {
+  width: 24px;
+  height: 24px;
+}
+
 .ratingBox_tablet {
   max-width: 578px;
   width: 100%;
   min-height: 162px;
   display: flex;
-  justify-content: space-between;
 }
 
-.ratingRow_tablet {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.rating_tablet {
+.ratingStarsInfo_tablet {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
-/* 모바일 레이아웃 */
-.ratingBox_mobile {
+.rating_tabletLayout {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ratingStarsInfo_tabletLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ratingButton_tablet {
+  margin-top: 20px;
+}
+
+.ratingBars_tablet {
+  margin-top: 0;
+  width: 280px;
+  height: 162px;
+}
+
+.ratingBarsContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  align-items: flex-end;
 }
 
-.ratingBars_mobile {
-  margin-top: 15px;
+.leftBox {
+  padding: 18px 0 18px 0;
+}
+
+.ratingAvgBox_tablet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.ratingStarBox_tablet {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.star_tablet {
+  display: flex;
+  gap: 2.58px;
+}
+
+/* 모바일 */
+.ratingBox_mobile {
+  max-width: 343px;
+  min-height: 233px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ratingStarBox_mobile {
+  display: flex;
+  gap: 8px;
+}
+
+.ratingStar_mobile {
+  width: 12.84px;
+  height: 12.26px;
+}
+
+.star_mobile {
+  display: flex;
+  gap: 2.58px;
+}
+
+.ratingAvg_mobile {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 42.96px;
+  color: var(--gray800);
 }
 
 .ratingButton_mobile {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
+  margin-top: 0;
 }
 
 .rating_mobile {
   display: flex;
-  justify-content: space-between;
+  gap: 81px;
+  margin-bottom: 24px;
+}
+
+.ratingBars_mobileLayout {
+  width: 100%;
+  height: 162px;
 }

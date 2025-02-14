@@ -55,18 +55,74 @@
   color: var(--gray500);
 }
 
-.likeIcon {
-  width: 38px;
-  height: 38px;
-}
-
 .comment {
   margin-bottom: 20px;
 }
 
-/* 테블릿 */
+.likeIcon {
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.drop_btn {
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.arrowIcon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: block;
+  margin: 6.5px auto 0;
+}
+
+/* 태블릿 */
 .reviewBox_tablet {
   max-width: 704px;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 32px 40px;
 }
 
 /* 모바일 */
+.reviewBox_mobile {
+  max-width: 343px;
+  margin: auto;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+}
+
+.comment_mobile {
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-md);
+}
+
+.profile_mobile {
+  width: 42px;
+  height: 42px;
+}
+
+.timeAgo_mobile {
+  font-size: 14px;
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-md);
+}
+
+.likeIcon_mobile {
+  width: 32px;
+  height: 32px;
+}
+
+.drop_btn_mobile {
+  width: 32px;
+  height: 32px;
+}
+
+.iconBox_mobile {
+  display: flex;
+  gap: 18px;
+}

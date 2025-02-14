@@ -51,6 +51,9 @@
   color: var(--gray500);
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: var(--text-lg);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-lg);
 }
 
 .price {
@@ -68,18 +71,73 @@
 
 .backButton {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 10px;
+  right: 13px;
 }
 
 /* 테블릿 */
+.cardBox_tablet {
+  max-width: 704px;
+  min-height: 302px;
+}
+
 .container_tablet {
   max-width: 704px;
   margin: auto;
+}
+
+.image_tablet {
+  width: 84px;
+  height: 331.75px;
+}
+
+.info_tablet {
+  display: block;
 }
 
 /* 모바일 */
 .container_mobile {
   max-width: 343px;
   margin: auto;
+}
+
+.wineName_mobile {
+  font-size: var(--text-xl);
+  line-height: 23.87px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.description_mobile {
+  margin-bottom: 4.5px;
+  color: var(--gray500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-md);
+}
+
+.price_mobile {
+  font-size: var(--text-md);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-md);
+  color: var(--purple100);
+  border-radius: 12px;
+  width: 86px;
+  height: 36px;
+  padding: 6px 10px;
+  background-color: var(--purple10);
+  text-align: center;
+  margin-bottom: 29.5px;
+}
+
+.cardBox_mobile {
+  margin-top: 29px;
+  max-width: 343px;
+  min-height: 190px;
+}
+
+.info_mobile {
+  display: block;
 }
