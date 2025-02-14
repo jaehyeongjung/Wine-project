@@ -63,42 +63,48 @@ const Wines: React.FC = () => {
           <div
             className={`${styles.winesRecommendSlide} ${styles[`winesRecommendSlide_${mode}`]}`}
           >
-            <div
-              className={`${styles.winesRecommendSlideMap} ${styles[`winesRecommendSlideMap_${mode}`]}`}
-            >
+            {wineList.map((wine) => (
               <div
-                className={`${styles.winesRecommendSlideInner} ${styles[`winesRecommendSlideInner_${mode}`]}`}
+                key={wine.id}
+                className={`${styles.winesRecommendSlideMap} ${styles[`winesRecommendSlideMap_${mode}`]}`}
               >
                 <div
-                  className={`${styles.winesRecommendSlideImg} ${styles[`winesRecommendSlideImg_${mode}`]}`}
-                >
-                  <img src="/images/testWine.svg" alt="와인 이미지" />
-                </div>
-                <div
-                  className={`${styles.winesRecommendSlideData} ${styles[`winesRecommendSlideData_${mode}`]}`}
+                  className={`${styles.winesRecommendSlideInner} ${styles[`winesRecommendSlideInner_${mode}`]}`}
                 >
                   <div
-                    className={`${styles.RecommendContentRating} ${styles[`RecommendContentRating_${mode}`]}`}
+                    className={`${styles.winesRecommendSlideImg} ${styles[`winesRecommendSlideImg_${mode}`]}`}
                   >
-                    <p
-                      className={`${styles.RecommendContentRatingNumber} ${styles[`RecommendContentRatingNumber_${mode}`]}`}
-                    >
-                      4.8
-                    </p>
+                    <img src={wine.image} alt={wine.name} />
+                  </div>
+                  <div
+                    className={`${styles.winesRecommendSlideData} ${styles[`winesRecommendSlideData_${mode}`]}`}
+                  >
                     <div
-                      className={`${styles.starRatingContainer} ${styles[`starRatingContainer_${mode}`]}`}
+                      className={`${styles.RecommendContentRating} ${styles[`RecommendContentRating_${mode}`]}`}
                     >
-                      <StarRating rating={4.8} size={getStarRatingSize()} />
+                      <p
+                        className={`${styles.RecommendContentRatingNumber} ${styles[`RecommendContentRatingNumber_${mode}`]}`}
+                      >
+                        {wine.rating}
+                      </p>
+                      <div
+                        className={`${styles.starRatingContainer} ${styles[`starRatingContainer_${mode}`]}`}
+                      >
+                        <StarRating
+                          rating={wine.rating}
+                          size={getStarRatingSize()}
+                        />
+                      </div>
+                      <p
+                        className={`${styles.RecommendContentRatingText} ${styles[`RecommendContentRatingText_${mode}`]} text-xs-regular`}
+                      >
+                        {wine.name}
+                      </p>
                     </div>
-                    <p
-                      className={`${styles.RecommendContentRatingText} ${styles[`RecommendContentRatingText_${mode}`]} text-xs-regular`}
-                    >
-                      Sentinel Carbernet Sauvignon 2016
-                    </p>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
         <div
