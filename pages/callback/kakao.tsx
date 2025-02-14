@@ -7,9 +7,26 @@ import { useSearchParams } from 'next/navigation';
 const CallbackKakao = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const code = searchParams.get('code');
+  const code = router.query.code as string; // useSearchParams 대신 router.query 사용
 
-  console.log('코드 여기에요', code);
+  console.log('콜백카카오 컴포넌트 마운트');
+
+  // URL 파라미터 디버깅을 위한 로깅 추가
+  useEffect(() => {
+    // 전체 URL 확인
+    console.log('Current URL:', window.location.href);
+
+    console.log('코드 이거에요', code);
+
+    // searchParams 전체 내용 확인
+    console.log('All Search Params:');
+    searchParams.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    // router.query 확인 (Next.js 라우터의 쿼리 파라미터)
+    console.log('Router Query:', router.query);
+  }, [code, router.query]);
 
   useEffect(() => {
     const handleCallback = async () => {
@@ -24,7 +41,7 @@ const CallbackKakao = () => {
           });
 
           if (result?.ok) {
-            router.push('/'); // 성공시 홈으로 리다이렉트
+            router.push('/');
           } else {
             router.push('/auth/error');
           }
@@ -36,9 +53,13 @@ const CallbackKakao = () => {
     };
 
     handleCallback();
-  }, [router]);
+  }, [router, code]);
 
-  return <div>로그인 처리중...</div>;
+  return (
+    <div>
+      <div>로그인 처리중...</div>
+    </div>
+  );
 };
 
 export default CallbackKakao;
