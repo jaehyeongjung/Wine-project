@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 
 const useDevice = () => {
-  const [windowWidth, setwindowWidth] = useState(0);
   const [mode, setMode] = useState('');
 
   useEffect(() => {
-    setwindowWidth(window.innerWidth);
-
     const updateMode = () => {
       const width = window.innerWidth;
       if (width < 768) {

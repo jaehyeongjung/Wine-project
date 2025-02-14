@@ -6,8 +6,9 @@ import useDevice from '@/hooks/useDevice';
 import Image from 'next/image';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { postSignIn } from '@/utils/api/auth';
+import { useEffect, useState } from 'react';
+import { postOAuthLogin, postSignIn } from '@/pages/api/wineApi';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Login: NextPage = () => {
   const { mode } = useDevice();
@@ -16,6 +17,7 @@ const Login: NextPage = () => {
   const [pwd, setPwd] = useState('');
   const [pwdError, setPwdError] = useState('');
   const router = useRouter();
+  const { data: session } = useSession();
 
   const emailSchema = z.object({
     email: z
@@ -34,6 +36,12 @@ const Login: NextPage = () => {
   interface LoginFormData {
     email: string;
     password: string;
+  }
+
+  interface GoogleSignInRequest {
+    state: string;
+    redirectUri: string;
+    token: string;
   }
 
   const emailResult = emailSchema.safeParse({ email: email.trim() });
@@ -69,11 +77,24 @@ const Login: NextPage = () => {
 
       try {
         const result = await postSignIn(formData);
+        localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('refreshToken', result.refreshToken);
         router.push('/');
       } catch (error: any) {
         console.error('API 에러:', error.response.data);
         alert(error.response.data.message);
       }
+    }
+  };
+
+  const handleOAuthLogin = async (provider: string) => {
+    try {
+      await signIn(provider, {
+        callbackUrl: '/callback/kakao',
+        redirect: true,
+      });
+    } catch (error) {
+      console.error('로그인 중 에러발생:', error);
     }
   };
 
@@ -83,12 +104,14 @@ const Login: NextPage = () => {
         className={`${styles.login_container} ${styles[`login_container_${mode}`]}`}
       >
         <div className={`${styles.login_logo} ${styles[`login_logo_${mode}`]}`}>
-          <Image
-            src="/images/blacklogo.svg"
-            alt="와인 로고 이미지"
-            fill
-            style={{ objectFit: 'cover' }}
-          />
+          <Link href="/">
+            <Image
+              src="/images/blacklogo.svg"
+              alt="와인 로고 이미지"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -174,6 +197,7 @@ const Login: NextPage = () => {
               color="white"
               text="Google로 시작하기"
               textColor="black"
+              onClick={() => handleOAuthLogin('google')}
             />
 
             <Button
@@ -183,6 +207,7 @@ const Login: NextPage = () => {
               color="white"
               text="kakao로 시작하기"
               textColor="black"
+              onClick={() => handleOAuthLogin('kakao')}
             />
           </div>
         </form>
