@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
-import { postSignUp } from '@/utils/api/auth';
+import { postSignUp } from '@/pages/api/wineApi';
 
 const Signup: NextPage = () => {
   const { mode } = useDevice();
@@ -109,6 +109,31 @@ const Signup: NextPage = () => {
     }
   };
 
+  const handlePwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPwd = e.target.value;
+    setPwd(newPwd);
+
+    // 다 입력해놓고, 비밀번호를 바꿀경우 비밀번호 확인 다시검사
+    if (rePwd && rePwd.trim() !== newPwd.trim()) {
+      setRePwdError('비밀번호가 일치하지 않습니다.');
+    } else {
+      setRePwdError('');
+    }
+  };
+
+  const handleRePwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newRePwd = e.target.value;
+    setRePwd(newRePwd);
+
+    // 기존 rePwdSchema를 그대로 사용
+    const result = rePwdSchema.safeParse({ rePwd: newRePwd.trim() });
+    if (!result.success) {
+      setRePwdError(result.error.errors[0].message);
+    } else {
+      setRePwdError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //form 자동제출 방지
 
@@ -144,12 +169,14 @@ const Signup: NextPage = () => {
         <div
           className={`${styles.signup_logo} ${styles[`signup_logo_${mode}`]}`}
         >
-          <Image
-            src="/images/blacklogo.svg"
-            alt="와인 로고 이미지"
-            fill
-            style={{ objectFit: 'cover' }}
-          />
+          <Link href="/">
+            <Image
+              src="/images/blacklogo.svg"
+              alt="와인 로고 이미지"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -210,7 +237,7 @@ const Signup: NextPage = () => {
               placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
               className={`${styles.password_input} ${styles[`password_input_${mode}`]}`}
               onBlur={handlePwdBlur}
-              onChange={(e) => setPwd(e.target.value)}
+              onChange={handlePwdChange}
             />
             {pwdError && (
               <p className={`${styles.error} ${styles[`error_${mode}`]}`}>
@@ -234,7 +261,7 @@ const Signup: NextPage = () => {
               placeholder="비밀번호 확인"
               className={`${styles.repassword_input} ${styles[`repassword_input_${mode}`]}`}
               onBlur={handleRePwdBlur}
-              onChange={(e) => setRePwd(e.target.value)}
+              onChange={handleRePwdChange}
             />
             {rePwdError && (
               <p className={`${styles.error} ${styles[`error_${mode}`]}`}>

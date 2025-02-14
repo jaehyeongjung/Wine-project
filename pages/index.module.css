@@ -60,12 +60,14 @@
 .landing02_image_container {
   position: relative;
   width: 100%;
-  max-width: 640px;
-  aspect-ratio: 640/320;
+  max-width: 699px;
+  aspect-ratio: 699/320;
+  margin-left: 50px;
 }
 
 .landing02_image_container_mobile {
   aspect-ratio: 343/424;
+  margin-left: 0;
 }
 
 .image_container {

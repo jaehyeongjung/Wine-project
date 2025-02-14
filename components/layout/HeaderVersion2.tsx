@@ -1,6 +1,7 @@
 import styles from './Header.module.css';
 import useDevice from '../../hooks/useDevice';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface HeaderProps {
   imageUrl: string;
@@ -29,7 +30,12 @@ const Header: React.FC<HeaderProps> = ({ imageUrl }) => {
           onClick={handleLogoClick}
           className={`${styles.wine_logo} ${styles[`logo_${mode}`]}`}
         >
-          WINE
+          <Image
+            src="/images/whitelogo.svg"
+            alt="와인 로고 이미지"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
         </button>
         <div className={styles.header_img}>
           <img src={imageUrl}></img>
