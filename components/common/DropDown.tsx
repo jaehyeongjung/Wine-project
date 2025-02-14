@@ -5,9 +5,10 @@ import styles from './DropDown.module.css';
 interface Props {
   isScreen: boolean;
   options: string[];
+  onSelect: (option: string) => void;
 }
 
-const DropDown: React.FC<Props> = ({ isScreen, options }) => {
+const DropDown: React.FC<Props> = ({ isScreen, options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -18,6 +19,7 @@ const DropDown: React.FC<Props> = ({ isScreen, options }) => {
 
   const handleSelect = (option: string) => {
     setSelected(option);
+    onSelect(option);
     setIsOpen(false);
   };
 

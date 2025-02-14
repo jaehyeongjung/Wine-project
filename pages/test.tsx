@@ -5,7 +5,6 @@ import DeleteModalLayout from '../components/layout/Modal/DeleteModalLayout';
 import RegisterModalLayout from '../components/layout/Modal/RegisterModalLayout';
 import Button from '../components/common/Button';
 import Review from '../components/layout/Modal/Review';
-import SliderGrop from '@/components/common/Slider';
 import styles from './test.module.css';
 import BottomSheet from '@/components/common/BottomSheet';
 
@@ -14,6 +13,21 @@ export default function test() {
   const [isBottomSheet, setIsBottomSheet] = useState(false);
   const [isScreen, setIsScreen] = useState(false);
   const { mode } = useDevice();
+
+  const ReviewPatchData = {
+    wineId: 801,
+    reviewId: 1691,
+    wineName: 'test wine 1-1',
+    rating: 4,
+    content: 'post test 1\npost test 1\npost test 1',
+    taste: {
+      lightBold: 2,
+      smoothTannic: 9,
+      drySweet: 4,
+      softAcidic: 6,
+    },
+    aroma: ['BERRY', 'OAK', 'VANILLA'],
+  };
 
   // 창 크기 변경 감지
   useEffect(() => {
@@ -48,8 +62,8 @@ export default function test() {
     <div>
       <h1>삭제하기 버튼 모달 테스트</h1>
       <div>
-        {/* <Button
-          onClick={() => setShowModal(true)}
+        <Button
+          onClick={handleOpen}
           type="default"
           size="width96x42"
           text="테스트"
@@ -59,10 +73,10 @@ export default function test() {
         <Modal
           className={styles.deleteModalBox}
           showModal={showModal}
-          closeModal={() => setShowModal(false)}
+          closeModal={handleClose}
         >
-          <DeleteModalLayout closeModal={() => setShowModal(false)} />
-        </Modal> */}
+          <DeleteModalLayout wineId={801} closeModal={handleClose} />
+        </Modal>
       </div>
       <br />
       <div>
@@ -77,7 +91,12 @@ export default function test() {
         />
         {isScreen ? (
           <BottomSheet isBottomSheet={isBottomSheet}>
-            <RegisterModalLayout isScreen closeModal={handleClose} />
+            <RegisterModalLayout
+              isScreen
+              closeModal={handleClose}
+              wineId={801}
+              type="patch"
+            />
           </BottomSheet>
         ) : (
           <Modal
@@ -85,14 +104,18 @@ export default function test() {
             showModal={showModal}
             closeModal={handleClose}
           >
-            <RegisterModalLayout isScreen closeModal={handleClose} />
+            <RegisterModalLayout
+              closeModal={handleClose}
+              wineId={801}
+              type="patch"
+            />
           </Modal>
         )} */}
       </div>
       <br />
       <div>
         <h1>리뷰 등록 모달 테스트</h1>
-        <Button
+        {/* <Button
           onClick={handleOpen}
           type="default"
           size="width96x42"
@@ -107,27 +130,25 @@ export default function test() {
             isBottomSheet={isBottomSheet}
           >
             <Review
-              isScreen
               closeModal={handleClose}
-              wineId={703}
-              wineName={'Sentinel Carbernet Sauvignon 2016'}
+              reviewData={ReviewPatchData}
+              type="patch"
             />
           </BottomSheet>
         ) : (
           <Modal
             className={`${styles.reviewModalBox} ${styles[`reviewModalBox_${mode}`]}`}
             showModal={showModal}
-            closeModal={() => setShowModal(false)}
+            closeModal={handleClose}
             closeBtn={true}
           >
             <Review
-              isScreen
               closeModal={handleClose}
-              wineId={703}
-              wineName={'Sentinel Carbernet Sauvignon 2016'}
+              reviewData={ReviewPatchData}
+              type="patch"
             />
           </Modal>
-        )}
+        )} */}
       </div>
     </div>
   );
