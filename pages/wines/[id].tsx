@@ -6,11 +6,20 @@ import useDevice from '../../hooks/useDevice';
 import WineReview from '../../components/common/wines/WineReview';
 import WineRating from '../../components/common/wines/WineRating';
 import WineDetailCard from '../../components/common/wines/WineDetailCard';
+import { useEffect } from 'react';
 
 const DetailPage: React.FC = () => {
   const router = useRouter();
   const { wineid } = router.query;
   const { mode } = useDevice();
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      console.warn('🚨 토큰 없음, 로그인 페이지로 이동!');
+      router.push('/login');
+    }
+  }, []);
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
@@ -30,8 +39,6 @@ const DetailPage: React.FC = () => {
           >
             리뷰 목록
           </p>
-          <WineReview />
-          <WineReview />
           <WineReview />
         </div>
 
