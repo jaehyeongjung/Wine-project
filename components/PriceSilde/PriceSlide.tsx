@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './PriceSlide.module.css';
+import useDevice from '@/hooks/useDevice';
 
 interface PriceSlideProps {
   minValue?: number; // 기본값 설정을 위해 선택적 프로퍼티로 변경
@@ -34,7 +35,7 @@ const PriceSlide = ({
 
   const minPercent = (minValue / maxLimit) * 100;
   const maxPercent = (maxValue / maxLimit) * 100;
-
+  const { mode } = useDevice();
   return (
     <div>
       <div className={styles.sliderContainer}>
@@ -67,23 +68,25 @@ const PriceSlide = ({
       </div>
 
       <div
-        className={styles.selectedValues}
+        className={`${styles.selectedValuesLeft} ${styles[`selectedValuesLeft_${mode}`]}`}
         style={{
           left: `${minPercent}%`,
-          transform: 'translateX(-50%)',
         }}
       >
         <span className={styles.numberText}>₩{minValue.toLocaleString()}</span>
       </div>
 
       <div
-        className={styles.selectedValues}
+        className={`${styles.selectedValuesRight} ${styles[`selectedValuesRight_${mode}`]}`}
         style={{
           left: `${maxPercent}%`,
-          transform: 'translateX(-50%)',
         }}
       >
-        <span className={styles.numberText}>₩{maxValue.toLocaleString()}</span>
+        <span
+          className={`${styles.numberText} ${styles[`numberText_${mode}`]}`}
+        >
+          ₩{maxValue.toLocaleString()}
+        </span>
       </div>
     </div>
   );

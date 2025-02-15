@@ -121,6 +121,8 @@ const Wines: React.FC = () => {
   });
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // 와인 타입 버튼 클릭 시 필터링
   const handleTypeFilter = (type: string) => {
     setSelectedType(type === selectedType ? '' : type); // 클릭한 타입을 선택/해제
@@ -128,10 +130,44 @@ const Wines: React.FC = () => {
 
   // Rating 체크박스 변경 시 필터링
   const handleRatingFilter = (ratingRange: string) => {
-    setRatingFilter((prevState) => ({
-      ...prevState,
-      [ratingRange]: !prevState[ratingRange], // 체크박스 상태 변경
-    }));
+    if (ratingRange === 'all') {
+      // '전체' 체크박스가 클릭되었을 때
+      const newValue = !ratingFilter.all;
+      setRatingFilter({
+        all: newValue,
+        '4.5-5.0': newValue,
+        '4.0-4.5': newValue,
+        '3.5-4.0': newValue,
+        '3.0-3.5': newValue,
+      });
+    } else {
+      // 개별 체크박스가 클릭되었을 때
+      const newState = {
+        ...ratingFilter,
+        [ratingRange]: !ratingFilter[ratingRange],
+      };
+
+      // 모든 개별 체크박스가 체크되어 있는지 확인
+      const allIndividualChecked = [
+        '4.5-5.0',
+        '4.0-4.5',
+        '3.5-4.0',
+        '3.0-3.5',
+      ].every((key) => newState[key]);
+
+      // 모든 개별 체크박스가 체크 해제되어 있는지 확인
+      const allIndividualUnchecked = [
+        '4.5-5.0',
+        '4.0-4.5',
+        '3.5-4.0',
+        '3.0-3.5',
+      ].every((key) => !newState[key]);
+
+      // '전체' 체크박스 상태 업데이트
+      newState.all = allIndividualChecked;
+
+      setRatingFilter(newState);
+    }
   };
 
   // 가격 슬라이더 변경 시 필터링
@@ -157,6 +193,16 @@ const Wines: React.FC = () => {
 
     return matchesType && matchesRating && matchesPrice;
   });
+
+  const handleFilterButtonClick = () => {
+    if (mode === 'mobile' || mode === 'tablet') {
+      setIsModalOpen(true); // 모바일 또는 태블릿에서만 모달 열기
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // 모달 닫기
+  };
 
   return (
     <>
@@ -343,6 +389,7 @@ const Wines: React.FC = () => {
         </div>
         <div
           className={`${styles.winesFilter} ${styles[`winesFilter_${mode}`]}`}
+          onClick={handleFilterButtonClick}
         >
           <div
             className={`${styles.winesFilterInner} ${styles[`winesFilterInner_${mode}`]}`}
@@ -494,6 +541,168 @@ const Wines: React.FC = () => {
           ></Button>
         </div>
       </div>
+      {/* 여기에 조건부 렌더링을 추가하여 모달을 보여줍니다 */}
+      {isModalOpen && (
+        <>
+          <div className={styles.modalOverlayContainer}></div>
+          <div className={`${styles.modal} ${styles[`modal_${mode}`]}`}>
+            <div
+              className={`${styles.modalFilter} ${styles[`modalFilter_${mode}`]}`}
+            >
+              <div
+                className={`${styles.modalFilterBar} ${styles[`modalFilterBar_${mode}`]}`}
+              >
+                <p className={styles.modalFilterText}>필터</p>
+                <button
+                  className={styles.modalFilterClose}
+                  onClick={closeModal}
+                ></button>
+              </div>
+              <div
+                className={`${styles.modalFilterMain} ${styles[`modalFilterMain_${mode}`]}`}
+              >
+                <div
+                  className={`${styles.winesFilterInner1} ${styles[`winesFilterInner1_${mode}`]}`}
+                >
+                  <div
+                    className={`${styles.winesFilterInnerType1} ${styles[`winesFilterInnerType1_${mode}`]}`}
+                  >
+                    <div
+                      className={`${styles.winesFilterInnerTypeTitle1} ${styles[`winesFilterInnerTypeTitle1_${mode}`]}`}
+                    >
+                      WINE TYPES
+                    </div>
+                    <div
+                      className={`${styles.winesFilterInnerTypeContainer} ${styles[`winesFilterInnerTypeContainer_${mode}`]}`}
+                    >
+                      <button
+                        onClick={() => handleTypeFilter('Red')}
+                        className={`${styles.filterButtonRed} ${selectedType === 'Red' ? styles.selected : ''}`}
+                      >
+                        Red
+                      </button>
+                      <button
+                        onClick={() => handleTypeFilter('White')}
+                        className={`${styles.filterButtonWhite} ${selectedType === 'White' ? styles.selected : ''}`}
+                      >
+                        White
+                      </button>
+                      <button
+                        onClick={() => handleTypeFilter('Sparkling')}
+                        className={`${styles.filterButtonSparkling} ${selectedType === 'Sparkling' ? styles.selected : ''}`}
+                      >
+                        Sparkling
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    className={`${styles.winesFilterInnerPrice1} ${styles[`winesFilterInnerPrice1_${mode}`]}`}
+                  >
+                    <div
+                      className={`${styles.winesFilterInnerPriceTitle} ${styles[`winesFilterInnerPriceTitle_${mode}`]}`}
+                    >
+                      PRICE
+                    </div>
+                    <div
+                      className={`${styles.winesFilterInnerPriceScroll} ${styles[`winesFilterInnerPriceScroll_${mode}`]}`}
+                    >
+                      <div
+                        className={`${styles.winesFilterPrice} ${styles[`winesFilterPrice_${mode}`]}`}
+                      >
+                        <PriceSlide
+                          minValue={priceRange[0]}
+                          maxValue={priceRange[1]}
+                          onChange={handlePriceChange}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className={`${styles.winesFilterInnerRating} ${styles[`winesFilterInnerRating_${mode}`]}`}
+                  >
+                    <div
+                      className={`${styles.winesFilterInnerRatingTitle} ${styles[`winesFilterInnerRatingTitle_${mode}`]}`}
+                    >
+                      RATING
+                    </div>
+                    <label
+                      className={`${styles.FilterRatingAll} ${styles[`FilterRatingAll_${mode}`]}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={ratingFilter.all}
+                        onChange={() => handleRatingFilter('all')}
+                      />
+                      <p
+                        className={`${styles.RatingNumberAll} ${styles[`RatingNumberAll_${mode}`]}`}
+                      >
+                        전체
+                      </p>
+                    </label>
+                    <label
+                      className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={ratingFilter['4.5-5.0']}
+                        onChange={() => handleRatingFilter('4.5-5.0')}
+                      />
+                      <p
+                        className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                      >
+                        4.5 - 5.0
+                      </p>
+                    </label>
+                    <label
+                      className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={ratingFilter['4.0-4.5']}
+                        onChange={() => handleRatingFilter('4.0-4.5')}
+                      />
+                      <p
+                        className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                      >
+                        4.0 - 4.5
+                      </p>
+                    </label>
+                    <label
+                      className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={ratingFilter['3.5-4.0']}
+                        onChange={() => handleRatingFilter('3.5-4.0')}
+                      />
+                      <p
+                        className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                      >
+                        3.5 - 4.0
+                      </p>
+                    </label>
+                    <label
+                      className={`${styles.FilterRatingFirst} ${styles[`FilterRatingFirst_${mode}`]}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={ratingFilter['3.0-3.5']}
+                        onChange={() => handleRatingFilter('3.0-3.5')}
+                      />
+
+                      <p
+                        className={`${styles.RatingNumber} ${styles[`RatingNumber_${mode}`]}`}
+                      >
+                        3.0 - 3.5
+                      </p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

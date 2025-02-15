@@ -48,7 +48,7 @@
   color: #6a42db;
 }
 
-.selectedValues {
+.selectedValuesLeft {
   position: absolute;
   top: 200px;
   transition: left 0.2s ease; /* 부드럽게 위치 이동 */
@@ -56,12 +56,37 @@
   font-size: 16px;
   line-height: 26px;
   text-align: center;
+  transform: translateX(-50%);
 }
+
+
+.selectedValuesRight {
+    position: absolute;
+    top: 200px;
+    transition: left 0.2s ease; /* 부드럽게 위치 이동 */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    transform: translateX(-50%);
+  }
+
+.selectedValuesLeft_tablet {
+  top: 260px;
+  left: 50%;
+  transform: translateX(0%);
+}
+
+.selectedValuesRight_tablet {
+    top: 260px;
+    left: 50%;
+    transform: translateX(-100%);
+  }
 
 .numberText {
   font-weight: 500;
   font-size: 16px;
   line-height: 26px;
   text-align: center;
-  color: var(--purple100)
+  color: var(--purple100);
 }
