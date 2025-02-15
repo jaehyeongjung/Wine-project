@@ -30,19 +30,20 @@ const Wines: React.FC = () => {
       type: 'White',
       rating: 4.9,
       reviewCount: 120,
-      price: 450000,
+      price: 45000,
       image: '/images/testWine.svg',
       review:
         'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
     },
+
     {
       id: 3,
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
-      rating: 4.9,
       type: 'Sparkling',
+      rating: 1.9,
       reviewCount: 120,
-      price: 450000,
+      price: 90000,
       image: '/images/testWine.svg',
       review:
         'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
@@ -51,59 +52,35 @@ const Wines: React.FC = () => {
       id: 4,
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
-      rating: 4.9,
       type: 'Sparkling',
+      rating: 2.9,
       reviewCount: 120,
-      price: 450000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 5,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      rating: 4.9,
-      type: 'Sparkling',
-      reviewCount: 120,
-      price: 450000,
+      price: 10000,
       image: '/images/testWine.svg',
       review:
         'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
     },
 
     {
+      id: 5,
+      name: 'Opus One 2018',
+      origin: 'Napa Valley, USA',
+      type: 'Sparkling',
+      rating: 3.9,
+      reviewCount: 120,
+      price: 10000,
+      image: '/images/testWine.svg',
+      review:
+        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+    },
+    {
       id: 6,
       name: 'Opus One 2018',
       origin: 'Napa Valley, USA',
-      rating: 4.9,
       type: 'Sparkling',
-      reviewCount: 120,
-      price: 450000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 2,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
       rating: 4.9,
       reviewCount: 120,
-      type: 'Sparkling',
-      price: 450000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 7,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      rating: 4.9,
-      reviewCount: 120,
-      price: 450000,
-      type: 'Sparkling',
+      price: 10000,
       image: '/images/testWine.svg',
       review:
         'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
@@ -158,13 +135,8 @@ const Wines: React.FC = () => {
   };
 
   // 가격 슬라이더 변경 시 필터링
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(event.target.value);
-    setPriceRange((prevRange) => {
-      return prevRange[0] <= newValue
-        ? [prevRange[0], newValue]
-        : [newValue, prevRange[1]];
-    });
+  const handlePriceChange = (newRange: [number, number]) => {
+    setPriceRange(newRange);
   };
 
   // 필터링된 와인 리스트
@@ -275,7 +247,7 @@ const Wines: React.FC = () => {
           <div
             className={`${styles.wines_listMapContainer} ${styles[`wines_listMapContainer_${mode}`]}`}
           >
-            {wineList.map((wine) => (
+            {filteredWineList.map((wine) => (
               <div
                 key={wine.id}
                 className={`${styles.wines_listMap} ${styles[`wines_listMap_${mode}`]}`}
@@ -420,7 +392,11 @@ const Wines: React.FC = () => {
                 <div
                   className={`${styles.winesFilterPrice} ${styles[`winesFilterPrice_${mode}`]}`}
                 >
-                  <PriceSlide />
+                  <PriceSlide
+                    minValue={priceRange[0]}
+                    maxValue={priceRange[1]}
+                    onChange={handlePriceChange}
+                  />
                 </div>
               </div>
             </div>

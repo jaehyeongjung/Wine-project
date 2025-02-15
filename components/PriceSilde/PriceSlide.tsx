@@ -1,9 +1,19 @@
 import { useState } from 'react';
 import styles from './PriceSlide.module.css';
 
-const PriceSlide = () => {
-  const [minValue, setMinValue] = useState(10000);
-  const [maxValue, setMaxValue] = useState(50000);
+interface PriceSlideProps {
+  minValue?: number; // 기본값 설정을 위해 선택적 프로퍼티로 변경
+  maxValue?: number;
+  onChange: (newRange: [number, number]) => void;
+}
+
+const PriceSlide = ({
+  minValue = 10000,
+  maxValue = 50000,
+  onChange,
+}: PriceSlideProps) => {
+  const [min, setMin] = useState(minValue);
+  const [max, setMax] = useState(maxValue);
   const minLimit = 0;
   const maxLimit = 100000;
   const step = 1000;
@@ -11,13 +21,15 @@ const PriceSlide = () => {
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(e.target.value);
     if (value > maxValue - step) value = maxValue - step;
-    setMinValue(value);
+    setMin(value);
+    onChange([value, max]);
   };
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(e.target.value);
     if (value < minValue + step) value = minValue + step;
-    setMaxValue(value);
+    setMax(value);
+    onChange([min, value]);
   };
 
   const minPercent = (minValue / maxLimit) * 100;
