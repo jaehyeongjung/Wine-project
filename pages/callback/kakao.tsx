@@ -11,6 +11,8 @@ const CallbackKakao = () => {
 
   console.log('콜백카카오 컴포넌트 마운트');
 
+  console.log(code);
+
   // URL 파라미터 디버깅을 위한 로깅 추가
   useEffect(() => {
     // 전체 URL 확인

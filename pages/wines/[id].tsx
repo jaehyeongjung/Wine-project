@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../components/layout/Header';
+import Header from '../../components/layout/Header/Header';
 import styles from './detail.module.css';
 import useDevice from '../../hooks/useDevice';
 import WineReview from './WineReview';
