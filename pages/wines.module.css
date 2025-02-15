@@ -8,10 +8,12 @@
 
 .winesContainer_tablet {
   width: 704px;
+  min-height: 1200px;
 }
 
 .winesContainer_mobile {
   width: 343px;
+  min-height: 800px;
 }
 
 .winesRecommend {
@@ -54,7 +56,6 @@
   margin-top: 42px; /* block 처리 후 탑 마진처리 */
 }
 
-
 .wines_listMap_mobile {
   height: 360px;
   border-radius: 12px;
@@ -66,19 +67,26 @@
   height: 578px;
   position: relative;
   top: -375px; /* 400 */
-  background-color: aquamarine;
 }
 
 .winesFilter_tablet {
   width: 48px;
   height: 48px;
   top: -485px;
+  background-image: url('/icons/filterDropDown.png'); /* 이미지 경로 */
+  background-size: cover; /* 이미지를 요소 크기에 맞게 잘라서 채움 */
+  background-position: center; /* 이미지가 중앙에 오도록 설정 */
+  background-repeat: no-repeat; /* 이미지 반복하지 않도록 설정 */
 }
 
 .winesFilter_mobile {
   width: 38px;
   height: 38px;
   top: -418px;
+  background-image: url('/icons/filterDropDown.png'); /* 이미지 경로 */
+  background-size: cover; /* 이미지를 요소 크기에 맞게 잘라서 채움 */
+  background-position: center; /* 이미지가 중앙에 오도록 설정 */
+  background-repeat: no-repeat; /* 이미지 반복하지 않도록 설정 */
 }
 
 .custom_input_wrapper {
@@ -169,7 +177,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
 
 .wines_listMapReview_tablet {
@@ -254,7 +261,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  
 }
 
 .wines_listMapDetailContent_mobile {
@@ -304,7 +310,7 @@
 }
 
 .ContentPriceBtn_tablet {
-  left: 47g0px;
+  left: 470px;
 }
 
 .ContentPriceBtn_mobile {
@@ -458,25 +464,27 @@
 
 .winesRecommendSlide {
   height: 185px;
-  width: 1200px;
-  margin-top: 60px;
+  max-width: 1200px;
+  margin-top: -42px;
   margin-left: 30px;
   display: flex;
   gap: 15px;
+  overflow-x: auto;
+  flex-direction: row;
 }
 
 .winesRecommendSlide_mobile {
   height: 160px;
-  width: 1200px;
-  margin-top: 40px;
+  max-width: 1200px;
+  margin-top: -55px;
   margin-left: 20px;
   display: flex;
   gap: 15px;
 }
 
 .winesRecommendSlideMap {
-  width: 232px;
-  height: 185px;
+  min-width: 232px;
+  min-height: 185px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0px 2px 20px 0px #0000000a;
@@ -485,9 +493,13 @@
   justify-content: center;
 }
 
+.winesRecommendSlide::-webkit-scrollbar {
+  display: none;
+}
+
 .winesRecommendSlideMap_mobile {
-  width: 193px;
-  height: 160px;
+  min-width: 193px;
+  min-height: 160px;
 }
 
 .winesRecommendSlideInner {
@@ -588,7 +600,6 @@
 .winesFilterBtn {
   width: 284px;
   height: 50px;
-  background-color: yellow;
   position: relative;
   top: -375px;
 }
@@ -596,7 +607,13 @@
 .winesFilterBtn_tablet {
   width: 220px;
   height: 48px;
-  background-color: blue;
+  top: -535px;
+  left: 485px;
+}
+
+.winesFilterBtn_tablet button {
+  width: 220px;
+  height: 48px;
   top: -535px;
   left: 485px;
 }
@@ -604,3 +621,409 @@
 .winesFilterBtn_mobile {
   display: none;
 }
+
+.scrollButtonLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  top: 120px;
+  left: 46px;
+}
+
+.scrollButtonRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  top: 76px;
+  left: 1050px;
+}
+
+.scrollButtonRight_tablet {
+  left: 625px;
+}
+
+.scrollButtonLeft_tablet {
+  left: 26px;
+}
+
+.scrollButtonRight_mobile {
+  top: 56px;
+  left: 270px;
+}
+
+.scrollButtonLeft_mobile {
+  left: 26px;
+  top: 100px;
+}
+
+.winesFilterInner {
+  width: 100%;
+  height: 518px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.winesFilterInner1 {
+  width: 100%;
+  height: 518px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.winesFilterInner1_mobile{
+  width: 100%;
+  height: 518px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.winesFilterInner_tablet {
+  display: none;
+}
+
+.winesFilterInner_mobile {
+  display: none;
+}
+
+.winesFilterInnerType{
+  width: 100%;
+  height: 83px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerType1 {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerType1_mobile {
+  width: 100%;
+  height: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerType_tablet {
+  display: none;
+}
+
+.winesFilterInnerType_mobile {
+  display: none;
+}
+
+.winesFilterInnerPrice {
+  width: 252px;
+  height: 103px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.winesFilterInnerPrice1 {
+  width: 252px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+.winesFilterInnerPrice_tablet {
+  display: none;
+}
+
+.winesFilterInnerPrice_mobile {
+  display: none;
+}
+
+.winesFilterInnerRating {
+  width: 98px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.winesFilterInnerTypeTitle,.winesFilterInnerTypeTitle1 {
+  width: 120px;
+  height: 32px;
+  color: var(--gray800);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.winesFilterInnerTypeContainer {
+  width: 280.38px;
+  height: 42px;
+  margin-left: 1.81px;
+  display: flex;
+  gap: 14.57px;
+}
+
+
+
+.winesFilterInnerPriceTitle {
+  width: 100%;
+  height: 32px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.winesFilterInnerPriceScroll {
+  width: 100%;
+  height: 51px;
+}
+
+.filterButtonRed {
+  width: 65px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.filterButtonWhite {
+  width: 79px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.filterButtonSparkling {
+  width: 105px;
+  height: 42px;
+  border: 1px solid #cfdbea;
+  border-radius: 100px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--purple100);
+  color: white;
+}
+
+.winesFilterInnerRatingTitle {
+  width: 100%;
+  height: 32px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.FilterRatingAll {
+  width: 63px;
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.FilterRatingFirst {
+  width: 96px;
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RatingNumber {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  width: 62px;
+  height: 26px;
+}
+
+.RatingNumberAll {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  width: 28px;
+  height: 26px;
+}
+
+.FilterRatingFirst input,
+.FilterRatingAll input {
+  width: 20px;
+  appearance: none;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid #cfdbea;
+  background-color: #f2f4f8;
+}
+
+.FilterRatingFirst input:checked::before,
+.FilterRatingAll input:checked::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #6a42db;
+  border-radius: 3px;
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.winesFilterPrice {
+  width: 100%;
+  height: 26px;
+}
+
+.modal {
+  background-color: white;
+  width: 375px;
+  height: 660px;
+  display: none;
+  box-shadow: 2px 2px 20px 0px #0000000a;
+  border-radius: 16px;
+  z-index: 10000; /* 오버레이 위에 모달이 위치하도록 */
+  position: fixed; /* 화면에 고정 */
+  top: 41%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.modal_mobile {
+  width: 90%;
+  top: 57%;
+  height: 550px;
+}
+
+.modalOverlayContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.3); /* 어두운 반투명 배경 */
+  opacity: 0.3;
+  z-index: 999; /* 모달보다 아래로 */
+  display: none;
+}
+
+/* 모바일 및 태블릿 화면에서만 모달 표시 */
+@media (max-width: 1200px) {
+  .modal {
+    display: block;
+  }
+  .modalOverlayContainer {
+    display: block;
+  }
+}
+
+.modalFilter {
+  width: 327px;
+  height: 590px;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modalFilter_mobile {
+  width: 90%;
+  height: 77%;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+  gap: 20px;
+}
+
+.modalBtn {
+  width: 327px;
+  height: 54px;
+  background-color: #6a42db;
+  margin: 0 auto;
+  position: relative;
+  top: 60px;
+}
+
+.modalBtn_mobile {
+  width: 90%;
+  height: 54px;
+  background-color: #6a42db;
+  margin: 0 auto;
+  position: relative;
+  top: 60px;
+}
+
+.modalFilterBar {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalFilterMain {
+  width: 100%;
+  height: 526px;
+
+}
+
+.modalFilterMain_tablet {
+  width: 100%;
+  height: 526px;
+  margin-top: 30px;
+
+}
+
+.modalFilterText {
+  width: 35px;
+  height: 32px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.modalFilterClose {
+  width: 24px;
+  height: 24px;
+  background-image: url('/icons/close.png'); /* 이미지 경로 */
+  background-size: cover; /* 이미지를 요소 크기에 맞게 잘라서 채움 */
+  background-position: center; /* 이미지가 중앙에 오도록 설정 */
+  background-repeat: no-repeat; /* 이미지 반복하지 않도록 설정 */
+  border: none;
+}
+
