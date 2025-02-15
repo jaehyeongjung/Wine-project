@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './wines.module.css';
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/Header/Header';
 import Input from '@/components/common/Input';
 import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
