@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../components/layout/Header';
+import Header from '../../components/layout/Header/Header';
 import styles from './detail.module.css';
 import useDevice from '../../hooks/useDevice';
 import WineReview from './WineReview';
@@ -19,20 +19,23 @@ const DetailPage: React.FC = () => {
         <WineDetailCard />
       </div>
 
-      <div>
-        <div className={styles.reviewContent}>
-          <div>
-            <p className={styles.reviewTitle}>리뷰 목록</p>
-            <WineReview />
-            <WineReview />
-            <WineReview />
-            <WineReview />
-            <WineReview />
-          </div>
-          <div className={styles.reviewRating}>
-            <WineRating />
-          </div>
+      <div
+        className={`${styles.reviewContent} ${styles[`reviewContent_${mode}`]}`}
+      >
+        {(mode === 'tablet' || mode === 'mobile') && <WineRating />}
+
+        <div>
+          <p
+            className={`${styles.reviewTitle} ${styles[`reviewTitle_${mode}`]}`}
+          >
+            리뷰 목록
+          </p>
+          <WineReview />
+          <WineReview />
+          <WineReview />
         </div>
+
+        {mode === 'desktop' && <WineRating />}
       </div>
     </div>
   );

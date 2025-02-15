@@ -5,7 +5,7 @@
 
 .reviewContent {
   display: flex;
-  margin-top: 90px;
+  margin-top: 60px;
   gap: 60px;
 }
 
@@ -15,4 +15,25 @@
   font-weight: var(--font-bold);
   line-height: var(--line-height-xl);
   color: var(--gray800);
+}
+
+/* 태블릿 */
+.reviewTitle_tablet {
+  display: none;
+}
+
+.reviewContent_tablet {
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 모바일 */
+.reviewTitle_mobile {
+  display: none;
+}
+
+.reviewContent_mobile {
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 40px;
 }

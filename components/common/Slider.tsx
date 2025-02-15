@@ -32,7 +32,7 @@ const Slider: React.FC<Props> = ({
           className={styles.range}
           type="range"
           min={0}
-          max={100}
+          max={10}
           value={value}
           disabled={disabled}
           onChange={(e) => onValueChange?.(Number(e.target.value))}
