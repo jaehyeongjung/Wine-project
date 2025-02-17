@@ -94,6 +94,26 @@
   height: 164px;
   border-radius: 999px;
   overflow: hidden;
+  position: relative;
+}
+.profileImage::after {
+  content: '이미지 변경';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profileImage:hover::after {
+  opacity: 1;
 }
 
 .profileImage_tablet {
@@ -186,11 +206,11 @@
 }
 
 .profileEdit_mobile button {
-    width: 89px;
-    height: 42px;
-    font-size: 14px;
-    line-height: 24px;
-  }
+  width: 89px;
+  height: 42px;
+  font-size: 14px;
+  line-height: 24px;
+}
 
 .profileImage img {
   width: 100%;

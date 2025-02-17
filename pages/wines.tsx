@@ -5,7 +5,7 @@ import Input from '@/components/common/Input';
 import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
-import PriceSlide from '@/components/PriceSilde/PriceSlide';
+import PriceSlide from '@/components/PriceSilde/PriceSlide';
 import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
 import BottomSheet from '@/components/common/BottomSheet';
 import Link from 'next/link';
@@ -232,11 +232,7 @@ const Wines: React.FC = () => {
   return (
     <>
       {/* 로그인된 상태면 HeaderWithProfile을, 아니면 Header를 렌더링 */}
-      {isLogin === true ? (
-        <HeaderWithProfile imageUrl={userImage} />
-      ) : (
-        <Header />
-      )}
+      {isLogin === true ? <HeaderWithProfile /> : <Header />}
       <div
         className={`${styles.winesContainer} ${styles[`winesContainer_${mode}`]}`}
       >
