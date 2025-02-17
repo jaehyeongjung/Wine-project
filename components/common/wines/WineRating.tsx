@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom'; // 포탈 사용
 import { useRouter } from 'next/router';
 import styles from './wineRating.module.css';
 import useDevice from '../../../hooks/useDevice';
 import { getWineDetail } from '../../../pages/api/wines/wineReviewApi';
 import Button from '../Button';
+import Review from '../../layout/Modal/Review';
 
 const WineRating: React.FC = () => {
   const { mode } = useDevice();
@@ -11,6 +13,7 @@ const WineRating: React.FC = () => {
   const { id } = router.query;
   const wineId = Array.isArray(id) ? id[0] : id;
   const [wineData, setWineData] = useState<any>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
     if (typeof wineId === 'string') {
@@ -85,6 +88,7 @@ const WineRating: React.FC = () => {
         color="purple"
         textColor="white"
         text="리뷰 남기기"
+        onClick={() => setShowReviewModal(true)}
       />
     </div>
   );
@@ -105,6 +109,7 @@ const WineRating: React.FC = () => {
           color="purple"
           textColor="white"
           text="리뷰 남기기"
+          onClick={() => setShowReviewModal(true)}
         />
       </div>
       <RatingBars />
@@ -116,8 +121,7 @@ const WineRating: React.FC = () => {
       <div className={`${styles.rating} ${styles[`rating_${mode}`]}`}>
         <div className={styles.test}>
           <p className={`${styles.ratingAvg} ${styles[`ratingAvg_${mode}`]}`}>
-            {' '}
-            {(avgRating ?? 0).toFixed(1)}
+            {avgRating.toFixed(1)}
           </p>
           <div className={styles.review_Star_box}>
             <div>{getStars(avgRating)}</div>
@@ -131,6 +135,7 @@ const WineRating: React.FC = () => {
             color="purple"
             textColor="white"
             text="리뷰 작성하기"
+            onClick={() => setShowReviewModal(true)}
           />
         </div>
       </div>
@@ -138,11 +143,27 @@ const WineRating: React.FC = () => {
     </div>
   );
 
+  // const modal = showReviewModal
+  //   ? ReactDOM.createPortal(
+  //       <div className={styles.modalOverlay}>
+  //         <div className={styles.modalContent}>
+  //           <Review
+  //             closeModal={() => setShowReviewModal(false)}
+  //             reviewData={{ wineName: wineData.name, wineId: wineId }}
+  //             type="post"
+  //           />
+  //         </div>
+  //       </div>,
+  //       document.body,
+  //     )
+  //   : null;
+
   return (
     <div className={`${styles.ratingBox} ${styles[`ratingBox_${mode}`]}`}>
       {mode === 'desktop' && <DesktopLayout />}
       {mode === 'tablet' && <TabletLayout />}
       {mode === 'mobile' && <MobileLayout />}
+      {/* {modal} */}
     </div>
   );
 };

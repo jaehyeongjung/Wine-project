@@ -31,7 +31,7 @@ const DetailPage: React.FC = () => {
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
-      <HeaderWithProfile imageUrl={userImage} />
+      <HeaderWithProfile />
       <div className={`${styles.content} ${styles[`content_${mode}`]}`}>
         <WineDetailCard />
       </div>

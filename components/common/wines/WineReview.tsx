@@ -277,14 +277,14 @@ const WineReview: React.FC = () => {
         </InfiniteScroll>
       )}
 
-      <Modal showModal={showModal} closeModal={() => setShowModal(false)}>
+      {/* <Modal showModal={showModal} closeModal={() => setShowModal(false)}>
         <div className={styles.option} onClick={() => alert('수정하기 테스트')}>
           수정하기
         </div>
         <div className={styles.option} onClick={() => alert('삭제하기 테스트')}>
           삭제하기
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
