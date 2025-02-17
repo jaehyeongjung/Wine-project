@@ -4,7 +4,8 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import DropDown from '@/components/common/DropDown';
 import styles from './RegisterModalLayout.module.css';
-import { ProductPatch, ProductPost } from '@/utils/api/product';
+import { ProductPatch, ProductPost } from '@/pages/api/product';
+import { ImagePost } from '@/pages/api/image';
 
 interface Props {
   closeModal: () => void;
@@ -19,7 +20,8 @@ const RegisterModalLayout = ({ closeModal, isScreen, type, wineId }: Props) => {
   const [price, setPrice] = useState('');
   const [region, setRegion] = useState('');
   const [typeList, setTypeList] = useState('');
-  const [image, setImage] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>('');
 
   const inputValuesChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -47,31 +49,46 @@ const RegisterModalLayout = ({ closeModal, isScreen, type, wineId }: Props) => {
     }
   };
 
-  const fileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const fileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImage(imageUrl);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await ImagePost(formData);
+
+      if (response.url) {
+        setImageFile(response.url);
+        setPreviewUrl(URL.createObjectURL(file));
+      } else {
+        console.error('업로드된 URL이 없습니다:', response);
+      }
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
     }
   };
 
-  const handleResponse = async () => {
-    if (!image) {
+  const handleResponse = async (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    if (!imageFile) {
       return alert('사진을 추가해주세요.');
     }
 
-    const data = {
-      name: wineName,
-      region: region,
-      image: image,
-      price: Number(price),
-      type: typeList.toUpperCase(),
-    };
-    console.log(data);
     try {
+      const data = {
+        name: wineName,
+        region: region,
+        image: String(imageFile),
+        price: Number(price),
+        type: typeList.toUpperCase(),
+      };
+
       if (type === 'post') await ProductPost(data);
-      if (type === 'patch') await ProductPatch(wineId, data);
+      if (type === 'patch' && wineId) await ProductPatch(wineId, data);
       closeModal();
+      console.log(data);
     } catch (error: any) {
       console.error('상품 등록 오류:', error.response?.data || error.message);
     }
@@ -131,13 +148,14 @@ const RegisterModalLayout = ({ closeModal, isScreen, type, wineId }: Props) => {
           className={isScreen ? styles.fileUploadFilter : styles.fileUpload}
           onClick={imageClick}
         >
-          {image ? (
+          {previewUrl ? (
             <Image
               className={styles.imagePreview}
-              src={image}
+              src={previewUrl}
               alt="미리보기"
               width={isScreen ? 120 : 140}
               height={isScreen ? 120 : 140}
+              // referrerPolicy="no-referrer"
             />
           ) : (
             <Image
@@ -153,6 +171,7 @@ const RegisterModalLayout = ({ closeModal, isScreen, type, wineId }: Props) => {
           type="file"
           ref={fileInputRef}
           onChange={fileChange}
+          accept="image/*"
         />
       </div>
       <div className={isScreen ? styles.filterBtnBox : styles.btnBox}>

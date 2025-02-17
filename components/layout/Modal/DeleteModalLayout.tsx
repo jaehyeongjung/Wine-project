@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
 import styles from './DeleteModalLayout.module.css';
-import { ProductDelete } from '@/utils/api/product';
-import { ReviewDelete } from '@/utils/api/review';
+import { ProductDelete } from '@/pages/api/product';
+import { ReviewDelete } from '@/pages/api/review';
 
 interface Props {
   closeModal: () => void;

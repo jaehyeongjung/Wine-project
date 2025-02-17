@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '../../common/Button';
 import ModalStarRating from '../../common/ModalStarRating';
 import SliderGroup from '../../common/SliderGroup';
-import { ReviewPatch, ReviewPost } from '@/utils/api/review';
+import { ReviewPatch, ReviewPost } from '@/pages/api/review';
 import styles from './Review.module.css';
 
 interface ReviewData {

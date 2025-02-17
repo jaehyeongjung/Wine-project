@@ -81,10 +81,11 @@ const Login: NextPage = () => {
         localStorage.setItem('accessToken', result.accessToken);
         localStorage.setItem('refreshToken', result.refreshToken);
         localStorage.setItem('userImage', result.user.image);
+        document.cookie = `accessToken=${result.accessToken}; path=/`; // 쿠키에도 적용
         router.push('/');
       } catch (error: any) {
-        console.error('API 에러:', error.response.data);
-        alert(error.response.data.message);
+        alert(`
+          ${error.response.data.message} : 이메일 혹은 비밀번호를 확인해주세요.`);
       }
     }
   };
@@ -155,13 +156,6 @@ const Login: NextPage = () => {
                 {pwdError}
               </p>
             )}
-
-            <Link
-              href="/signup"
-              className={`${styles.forgetpwd} ${styles[`forgetpwd_${mode}`]}`}
-            >
-              비밀번호를 잊으셨나요?
-            </Link>
           </div>
 
           <div
