@@ -462,6 +462,10 @@
   padding-top: 20px;
 }
 
+.detailBtn{
+  cursor: pointer;
+}
+
 .winesRecommendSlide {
   height: 185px;
   max-width: 1200px;
@@ -597,11 +601,26 @@
   width: 60px;
 }
 
+.modalOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.3); /* 어두운 반투명 배경 */
+  opacity: 0.3;
+  z-index: 999; /* 모달보다 아래로 */
+}
+
 .winesFilterBtn {
   width: 284px;
   height: 50px;
   position: relative;
   top: -375px;
+}
+
+.custom_input_wrapper input::-webkit-search-cancel-button {
+  display: none; 
 }
 
 .winesFilterBtn_tablet {
@@ -618,8 +637,13 @@
   left: 485px;
 }
 
+.registerModalBox{
+  padding: 24px;
+}
+
 .winesFilterBtn_mobile {
-  display: none;
+  position: fixed;
+  top: 90% /* 하단에서 20px 떨어지게 */
 }
 
 .scrollButtonLeft {

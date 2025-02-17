@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styles from './wines.module.css';
 import Header from '@/components/layout/Header/Header';
 import Input from '@/components/common/Input';
@@ -6,13 +6,26 @@ import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
 import PriceSlide from '@/components/PriceSilde/PriceSlide';
+import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
+import BottomSheet from '@/components/common/BottomSheet';
+import Link from 'next/link';
+import Modal from '@/components/common/Modal';
+import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
+  const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value); // 검색어 상태 업데이트
+  };
+
+  const [userImage, setUserImage] = useState('/images/wineProfile.svg');
+
   const wineList = [
     {
-      id: 1,
+      id: 4,
       name: 'Sentinel Cabernet Sauvignon 2016',
       origin: 'Western Cape, South Africa',
       type: 'Red',
@@ -23,69 +36,61 @@ const Wines: React.FC = () => {
       review:
         'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
     },
-    {
-      id: 2,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'White',
-      rating: 4.9,
-      reviewCount: 120,
-      price: 45000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
 
-    {
-      id: 3,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 1.9,
-      reviewCount: 120,
-      price: 90000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
     {
       id: 4,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 2.9,
-      reviewCount: 120,
-      price: 10000,
+      name: '김치',
+      origin: 'Western Cape, South Africa',
+      type: 'Red',
+      rating: 4.8,
+      reviewCount: 47,
+      price: 64990,
       image: '/images/testWine.svg',
       review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-
-    {
-      id: 5,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 3.9,
-      reviewCount: 120,
-      price: 10000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 6,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 4.9,
-      reviewCount: 120,
-      price: 10000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
+        'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
     },
   ];
+
+  //페이지가 Client-Side에 마운트 될 때까지 기다렸다가 localStorage에 접근하기
+  useEffect(() => {
+    // 클라이언트 사이드에서만 실행
+    if (typeof window !== 'undefined') {
+      // 로그인 상태 체크
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        setIsLogin(true);
+
+        // 유저 이미지 설정
+        const storedImage = localStorage.getItem('userImage');
+        if (storedImage) {
+          setUserImage(storedImage);
+        }
+      } else {
+        setIsLogin(false);
+        setUserImage('/images/wineProfile.svg');
+      }
+    }
+  }, []); // 컴포넌트 마운트 시 한 번만 실행
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return; // 서버에서 실행되지 않도록 방어 코드 추가
+    const checkScreenSize = () => {
+      setIsScreen(window.innerWidth <= 768);
+    };
+    checkScreenSize(); // 초기 실행
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+  // 버튼 클릭 시 모달 또는 바텀시트 열기
+  const handleOpen = () => {
+    if (isScreen) {
+      setIsBottomScreen(true);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
+  const [isLogin, setIsLogin] = useState(false);
 
   const getStarRatingSize = () => {
     if (mode === 'mobile') {
@@ -120,8 +125,10 @@ const Wines: React.FC = () => {
     '3.0-3.5': false, // 3.0 ~ 3.5
   });
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
-
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isScreen, setIsScreen] = useState(false);
+  const [isBottomScreen, setIsBottomScreen] = useState(false);
 
   // 와인 타입 버튼 클릭 시 필터링
   const handleTypeFilter = (type: string) => {
@@ -191,22 +198,41 @@ const Wines: React.FC = () => {
     const matchesPrice =
       wine.price >= priceRange[0] && wine.price <= priceRange[1];
 
-    return matchesType && matchesRating && matchesPrice;
+    // 검색어로 필터링
+    const matchesSearchQuery = wine.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    return matchesType && matchesRating && matchesPrice && matchesSearchQuery;
   });
 
   const handleFilterButtonClick = () => {
     if (mode === 'mobile' || mode === 'tablet') {
-      setIsModalOpen(true); // 모바일 또는 태블릿에서만 모달 열기
+      setIsModalOpen2(true); // 모바일 또는 태블릿에서만 모달 열기
+    }
+  };
+
+  const OpenModal = () => {
+    if (isScreen === true) {
+      setIsBottomScreen(true);
+    } else {
+      setIsModalOpen(true);
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false); // 모달 닫기
+    setIsBottomScreen(false);
+  };
+
+  const closeModal2 = () => {
+    setIsModalOpen2(false); // 모달 닫기
   };
 
   return (
     <>
-      <Header />
+      {/* 로그인된 상태면 HeaderWithProfile을, 아니면 Header를 렌더링 */}
+      {isLogin === true ? <HeaderWithProfile /> : <Header />}
       <div
         className={`${styles.winesContainer} ${styles[`winesContainer_${mode}`]}`}
       >
@@ -287,6 +313,8 @@ const Wines: React.FC = () => {
             icon="search"
             placeholder="와인을 검색해 보세요"
             size="search"
+            value={searchQuery}
+            onChange={handleSearchChange} // 검색어 변경 시 호출
           />
         </div>
         <div className={`${styles.wines_list} ${styles[`wines_list_${mode}`]}`}>
@@ -359,7 +387,13 @@ const Wines: React.FC = () => {
                         <div
                           className={`${styles.ContentPriceBtn} ${styles[`ContentPriceBtn_${mode}`]}`}
                         >
-                          <img src="/icons/priceBtn.svg" alt="가격 버튼" />
+                          <Link href={`/wines/${wine.id}`}>
+                            <img
+                              className={styles.detailBtn}
+                              src="/icons/priceBtn.svg"
+                              alt="가격 버튼"
+                            />
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -538,11 +572,32 @@ const Wines: React.FC = () => {
             text="와인 등록하기"
             color="purple"
             textColor="white"
+            onClick={OpenModal}
           ></Button>
+          {isScreen ? (
+            <BottomSheet isBottomSheet={isBottomScreen}>
+              <RegisterModalLayout
+                isScreen
+                closeModal={closeModal}
+                type="post"
+              />
+            </BottomSheet>
+          ) : (
+            <Modal
+              className={`${styles.registerModalBox} ${styles[`registerModalBox_${mode}`]}`}
+              showModal={isModalOpen}
+              closeModal={closeModal}
+            >
+              <RegisterModalLayout
+                closeModal={closeModal}
+                type="post"
+              ></RegisterModalLayout>
+            </Modal>
+          )}
         </div>
       </div>
       {/* 여기에 조건부 렌더링을 추가하여 모달을 보여줍니다 */}
-      {isModalOpen && (
+      {isModalOpen2 && (
         <>
           <div className={styles.modalOverlayContainer}></div>
           <div className={`${styles.modal} ${styles[`modal_${mode}`]}`}>
@@ -555,7 +610,7 @@ const Wines: React.FC = () => {
                 <p className={styles.modalFilterText}>필터</p>
                 <button
                   className={styles.modalFilterClose}
-                  onClick={closeModal}
+                  onClick={closeModal2}
                 ></button>
               </div>
               <div
