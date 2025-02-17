@@ -462,6 +462,10 @@
   padding-top: 20px;
 }
 
+.detailBtn{
+  cursor: pointer;
+}
+
 .winesRecommendSlide {
   height: 185px;
   max-width: 1200px;

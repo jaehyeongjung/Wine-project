@@ -6,13 +6,14 @@ import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
 import PriceSlide from '@/components/PriceSilde/PriceSlide';
+import Link from 'next/link';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const wineList = [
     {
-      id: 1,
+      id: 2,
       name: 'Sentinel Cabernet Sauvignon 2016',
       origin: 'Western Cape, South Africa',
       type: 'Red',
@@ -22,68 +23,6 @@ const Wines: React.FC = () => {
       image: '/images/testWine.svg',
       review:
         'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
-    },
-    {
-      id: 2,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'White',
-      rating: 4.9,
-      reviewCount: 120,
-      price: 45000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-
-    {
-      id: 3,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 1.9,
-      reviewCount: 120,
-      price: 90000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 4,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 2.9,
-      reviewCount: 120,
-      price: 10000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-
-    {
-      id: 5,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 3.9,
-      reviewCount: 120,
-      price: 10000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
-    },
-    {
-      id: 6,
-      name: 'Opus One 2018',
-      origin: 'Napa Valley, USA',
-      type: 'Sparkling',
-      rating: 4.9,
-      reviewCount: 120,
-      price: 10000,
-      image: '/images/testWine.svg',
-      review:
-        'Silky tannins with a deep berry flavor, hint of chocolate, and an elegant long finish.',
     },
   ];
 
@@ -359,7 +298,13 @@ const Wines: React.FC = () => {
                         <div
                           className={`${styles.ContentPriceBtn} ${styles[`ContentPriceBtn_${mode}`]}`}
                         >
-                          <img src="/icons/priceBtn.svg" alt="가격 버튼" />
+                          <Link href={`/wines/${wine.id}`}>
+                            <img
+                              className={styles.detailBtn}
+                              src="/icons/priceBtn.svg"
+                              alt="가격 버튼"
+                            />
+                          </Link>
                         </div>
                       </div>
                     </div>
