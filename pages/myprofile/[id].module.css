@@ -105,3 +105,27 @@
 .RegisterwineContainer_mobile {
   width: 343px;
 }
+
+.noData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  min-height: 440px;
+}
+
+.noData_mobile {
+  gap: 32px;
+}
+
+.noDataText {
+  font-weight: var(--font-regular);
+  font-size: var(--text-2lg);
+  line-height: var(--line-height-lg);
+  color: var(--gray500);
+}
+
+.noDataText_mobile {
+  font-size: var(--text-lg);
+}

@@ -8,8 +8,9 @@ import ProfileSection from './ProfileSection/ProfileSection';
 import Header from '@/components/layout/Header/HeaderWithProfile';
 import useDevice from '@/hooks/useDevice';
 import styles from './[id].module.css';
-import { WineCard } from './MyUploadSection/WineCard';
-import { ReviewCard } from './MyUploadSection/ReviewCard';
+import { WineCard } from './DataCard/WineCard';
+import { ReviewCard } from './DataCard/ReviewCard';
+import Image from 'next/image';
 
 interface Wine {
   id: number;
@@ -183,7 +184,19 @@ const MyProfile: React.FC = () => {
                   ))}
                 </div>
               ) : (
-                <div>등록된 리뷰가 없습니다.</div>
+                <div className={`${styles.noData} ${styles[`noData_${mode}`]}`}>
+                  <Image
+                    src="/images/noReview.svg"
+                    width={136}
+                    height={136}
+                    alt="등록된 데이터가 없습니다"
+                  />
+                  <div
+                    className={`${styles.noDataText} ${styles[`noDataText_${mode}`]}`}
+                  >
+                    작성된 리뷰가 없습니다.
+                  </div>
+                </div>
               )}
             </div>
           )}
@@ -205,7 +218,19 @@ const MyProfile: React.FC = () => {
                   ))}
                 </div>
               ) : (
-                <div>등록된 상품이 없습니다.</div>
+                <div className={`${styles.noData} ${styles[`noData_${mode}`]}`}>
+                  <Image
+                    src="/images/noReview.svg"
+                    width={136}
+                    height={136}
+                    alt="등록된 데이터가 없습니다"
+                  />
+                  <div
+                    className={`${styles.noDataText} ${styles[`noDataText_${mode}`]}`}
+                  >
+                    등록된 상품이 없습니다.
+                  </div>
+                </div>
               )}
             </div>
           )}
