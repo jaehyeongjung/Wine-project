@@ -1,64 +1,84 @@
-import React from 'react';
-import style from './wineRating.module.css';
-import Button from '../Button';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import styles from './wineRating.module.css';
 import useDevice from '../../../hooks/useDevice';
+import { getWineDetail } from '../../../pages/api/wines/wineReviewApi';
+import Button from '../Button';
 
-const avgRatings = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4 };
-const totalRatings = Object.values(avgRatings).reduce(
-  (acc, count) => acc + count,
-  0,
-);
-const averageRating = 4.8;
+const WineRating: React.FC = () => {
+  const { mode } = useDevice();
+  const router = useRouter();
+  const { id } = router.query;
+  const wineId = Array.isArray(id) ? id[0] : id;
+  const [wineData, setWineData] = useState<any>(null);
 
-const getRatingStars = (rating: number, mode: string) => {
-  const stars = Math.floor(rating);
-  return Array.from({ length: 5 }, (_, i) => (
-    <img
-      key={i}
-      src={i < stars ? '/icons/starColor.svg' : '/icons/star.svg'}
-      alt={i < stars ? 'full star' : 'empty star'}
-      className={`${style.ratingStar} ${style[`ratingStar_${mode}`]}`}
-    />
-  ));
-};
+  useEffect(() => {
+    if (typeof wineId === 'string') {
+      getWineDetail(wineId, router).then((data) => {
+        if (data) {
+          setWineData(data);
+        }
+      });
+    }
+  }, [wineId, router]);
 
-const RatingBars = ({ className }: { className: string }) => (
-  <div className={`${style.ratingBars} ${className}`}>
-    {Object.entries(avgRatings)
-      .reverse()
-      .map(([score, count]) => (
-        <div key={score} className={style.ratingBarRow}>
-          <p className={style.ratingScore}>{score}점</p>
-          <div className={style.ratingBarContainer}>
-            <div
-              className={style.ratingBar}
-              style={{ width: `${(count / totalRatings) * 100}%` }}
-            ></div>
+  if (
+    !wineData ||
+    !wineData.avgRatings ||
+    wineData.reviewCount === 0 ||
+    wineData.avgRating === undefined
+  ) {
+    return null;
+  }
+
+  const { avgRating, reviewCount, avgRatings } = wineData;
+  const totalRatings = Object.values(avgRatings).reduce(
+    (acc: number, count) => acc + Number(count),
+    0,
+  );
+
+  const getStars = (rating: number) => {
+    const stars = Math.floor(rating);
+    return Array.from({ length: 5 }, (_, i) => (
+      <img
+        key={i}
+        src={i < stars ? '/icons/starColor.svg' : '/icons/star.svg'}
+        alt={i < stars ? 'full star' : 'empty star'}
+        className={`${styles.ratingStar} ${styles[`ratingStar_${mode}`]}`}
+      />
+    ));
+  };
+
+  const RatingBars = () => (
+    <div className={`${styles.ratingBars} ${styles[`ratingBars_${mode}`]}`}>
+      {Object.entries(avgRatings)
+        .reverse()
+        .map(([score, count]) => (
+          <div key={score} className={styles.ratingBarRow}>
+            <p className={styles.ratingScore}>{score}점</p>
+            <div className={styles.ratingBarContainer}>
+              <div
+                className={styles.ratingBar}
+                style={{
+                  width: `${((Number(count) ?? 0) / totalRatings) * 100}%`,
+                }}
+              ></div>
+            </div>
           </div>
-        </div>
-      ))}
-  </div>
-);
+        ))}
+    </div>
+  );
 
-const DesktopLayout = ({ mode }: { mode: string }) => (
-  <div className={style.ratingBox}>
-    <div className={`${style.rating} ${style[`rating_${mode}`]}`}>
-      <div className={style.ratingStarsInfo}>
-        <p className={style.ratingAvg}>{averageRating}</p>
-        <div
-          className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
-        >
-          <div className={`${style.star} ${style[`star_${mode}`]}`}>
-            {getRatingStars(averageRating, mode)}
-          </div>
-          <p className={style.ratingCount}>
-            {totalRatings.toLocaleString()}개의 후기
-          </p>
+  const DesktopLayout = () => (
+    <div className={styles.ratingBox}>
+      <div className={styles.ratingStarsInfo}>
+        <p className={styles.ratingAvg}>{avgRating.toFixed(1)}</p>
+        <div className={styles.review_Star_box}>
+          <div>{getStars(avgRating)}</div>
+          <p className={styles.ratingCount}>{reviewCount}개의 후기</p>
         </div>
       </div>
-    </div>
-    <RatingBars className={style.ratingBars} />
-    <div className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}>
+      <RatingBars />
       <Button
         type="default"
         size="width113"
@@ -67,93 +87,62 @@ const DesktopLayout = ({ mode }: { mode: string }) => (
         text="리뷰 남기기"
       />
     </div>
-  </div>
-);
+  );
 
-const TabletLayout = ({ mode }: { mode: string }) => (
-  <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
-    <div className={style.leftBox}>
-      <div
-        className={`${style.ratingStarsInfo} ${style[`ratingStarsInfo_${mode}`]}`}
-      >
-        <div>
-          <div
-            className={`${style.ratingAvgBox} ${style[`ratingAvgBox_${mode}`]}`}
-          >
-            <p className={style.ratingAvg}>{averageRating}</p>
-            <div
-              className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
-            >
-              <div className={`${style.star} ${style[`star_${mode}`]}`}>
-                {getRatingStars(averageRating, mode)}
-              </div>
-              <p className={style.ratingCount}>
-                {totalRatings.toLocaleString()}개의 후기
-              </p>
-            </div>
+  const TabletLayout = () => (
+    <div className={`${styles.ratingBox} ${styles[`ratingBox_${mode}`]}`}>
+      <div className={styles.leftBox}>
+        <div className={styles.ratingAvgBox_tablet}>
+          <p className={styles.ratingAvg}>{avgRating.toFixed(1)}</p>
+          <div className={styles.review_Star_box}>
+            <div>{getStars(avgRating)}</div>
+            <p className={styles.ratingCount}>{reviewCount}개의 후기</p>
           </div>
         </div>
+        <Button
+          type="default"
+          size="width113"
+          color="purple"
+          textColor="white"
+          text="리뷰 남기기"
+        />
       </div>
-      <div>
-        <div
-          className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}
-        >
+      <RatingBars />
+    </div>
+  );
+
+  const MobileLayout = () => (
+    <div className={styles.ratingBox}>
+      <div className={`${styles.rating} ${styles[`rating_${mode}`]}`}>
+        <div className={styles.test}>
+          <p className={`${styles.ratingAvg} ${styles[`ratingAvg_${mode}`]}`}>
+            {' '}
+            {(avgRating ?? 0).toFixed(1)}
+          </p>
+          <div className={styles.review_Star_box}>
+            <div>{getStars(avgRating)}</div>
+            <p className={styles.ratingCount}>{reviewCount}개의 후기</p>
+          </div>
+        </div>
+        <div>
           <Button
             type="default"
-            size="width113"
+            size="width100"
             color="purple"
             textColor="white"
-            text="리뷰 남기기"
+            text="리뷰 작성하기"
           />
         </div>
       </div>
+      <RatingBars />
     </div>
-    <div className={style.ratingBarsContainer}>
-      <RatingBars
-        className={`${style.ratingBars} ${style[`ratingBars_${mode}`]}`}
-      />
-    </div>
-  </div>
-);
-
-const MobileLayout = ({ mode }: { mode: string }) => (
-  <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
-    <div className={`${style.rating} ${style[`rating_${mode}`]}`}>
-      <div className={style.ratingStarsInfo}>
-        <p className={style.ratingAvg_mobile}>{averageRating}</p>
-        <div
-          className={`${style.ratingStarBox} ${style[`ratingStarBox_${mode}`]}`}
-        >
-          <div className={`${style.star} ${style[`star_${mode}`]}`}>
-            {getRatingStars(averageRating, mode)}
-          </div>
-          <p className={style.ratingCount}>
-            {totalRatings.toLocaleString()}개의 후기
-          </p>
-        </div>
-      </div>
-      <div className={`${style.ratingButton} ${style[`ratingButton_${mode}`]}`}>
-        <Button
-          type="default"
-          size="width100"
-          color="purple"
-          textColor="white"
-          text="리뷰 작성하기"
-        />
-      </div>
-    </div>
-    <RatingBars className={style.ratingBars} />
-  </div>
-);
-
-const WineRating = () => {
-  const { mode } = useDevice();
+  );
 
   return (
-    <div className={`${style.ratingBox} ${style[`ratingBox_${mode}`]}`}>
-      {mode === 'desktop' && <DesktopLayout mode={mode} />}
-      {mode === 'tablet' && <TabletLayout mode={mode} />}
-      {mode === 'mobile' && <MobileLayout mode={mode} />}
+    <div className={`${styles.ratingBox} ${styles[`ratingBox_${mode}`]}`}>
+      {mode === 'desktop' && <DesktopLayout />}
+      {mode === 'tablet' && <TabletLayout />}
+      {mode === 'mobile' && <MobileLayout />}
     </div>
   );
 };

@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../components/layout/Header';
+import HeaderWithProfile from '../../components/layout/Header/HeaderWithProfile';
 import styles from '../../components/common/wines/detail.module.css';
 import useDevice from '../../hooks/useDevice';
 import WineReview from '../../components/common/wines/WineReview';
 import WineRating from '../../components/common/wines/WineRating';
 import WineDetailCard from '../../components/common/wines/WineDetailCard';
-import { useEffect } from 'react';
 
 const DetailPage: React.FC = () => {
   const router = useRouter();
-  const { wineid } = router.query;
   const { mode } = useDevice();
+  const [userImage, setUserImage] = useState('/images/wineProfile.svg');
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isRedirected, setIsRedirected] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
-    if (!token) {
-      console.warn('🚨 토큰 없음, 로그인 페이지로 이동!');
+    if (!token && !isRedirected) {
+      setIsRedirected(true);
+      alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
       router.push('/login');
+    } else {
+      setIsAuthenticated(true);
     }
-  }, []);
+  }, [router, isRedirected]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
-      <Header />
+      <HeaderWithProfile imageUrl={userImage} />
       <div className={`${styles.content} ${styles[`content_${mode}`]}`}>
         <WineDetailCard />
       </div>
@@ -33,7 +41,7 @@ const DetailPage: React.FC = () => {
       >
         {(mode === 'tablet' || mode === 'mobile') && <WineRating />}
 
-        <div>
+        <div className={styles.reviewBox}>
           <p
             className={`${styles.reviewTitle} ${styles[`reviewTitle_${mode}`]}`}
           >

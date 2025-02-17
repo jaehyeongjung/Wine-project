@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale'; // 한국어 로케일 임포트
+import { ko } from 'date-fns/locale';
 import SliderGroup from '../SliderGroup';
 import Modal from '../Modal';
 import styles from './WineReview.module.css';
 import useDevice from '../../../hooks/useDevice';
-import { fetchWineReview } from '../../../pages/api/wines/wineReviewApi';
+import {
+  getWineDetail,
+  updateReviewLike,
+} from '../../../pages/api/wines/wineReviewApi';
+import Image from 'next/image';
+import Button from '../Button';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const WineReview: React.FC = () => {
   const [reviewData, setReviewData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-  const { id } = router.query as { id?: string }; // 타입 추가
-  const { mode } = useDevice();
-
+  const [hasMore, setHasMore] = useState(true);
   const [expandedReviews, setExpandedReviews] = useState<
     Record<string, boolean>
   >({});
-  const [likedReviews, setLikedReviews] = useState<Record<string, boolean>>({});
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+  const { id } = router.query as { id?: string };
+  const { mode } = useDevice();
+
   const aromaMapping: Record<string, string> = {
     CHERRY: '체리',
     BERRY: '베리',
@@ -44,11 +49,7 @@ const WineReview: React.FC = () => {
 
   useEffect(() => {
     if (!router.isReady || !id) return;
-    setIsLoading(true);
-    fetchWineReview(id, router).then((data) => {
-      setReviewData(data);
-      setIsLoading(false);
-    });
+    fetchReviewData();
   }, [id, router.isReady]);
 
   const toggleExpanded = (reviewId: string) => {
@@ -58,135 +59,223 @@ const WineReview: React.FC = () => {
     }));
   };
 
-  const toggleLike = (reviewId: string) => {
-    setLikedReviews((prev) => ({
-      ...prev,
-      [reviewId]: !prev[reviewId],
-    }));
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
+
+  const fetchReviewData = async () => {
+    if (!id) return;
+
+    try {
+      const data = await getWineDetail(id, router, limit, offset);
+      if (!data || !data.reviews) {
+        setHasMore(false);
+        return;
+      }
+
+      setReviewData((prevData: any) => {
+        if (!prevData) return { ...data, reviews: data.reviews };
+
+        const existingReviewIds = new Set(
+          prevData.reviews.map((r: any) => r.id),
+        );
+        const newReviews = data.reviews.filter(
+          (r: any) => !existingReviewIds.has(r.id),
+        );
+
+        if (newReviews.length < limit) {
+          setHasMore(false);
+        }
+
+        return { ...prevData, reviews: [...prevData.reviews, ...newReviews] };
+      });
+
+      setOffset((prevOffset) => prevOffset + limit);
+    } catch (error) {
+      console.log('리뷰 데이터를 불러오는 데 실패했습니다:', error);
+      setHasMore(false);
+    }
   };
 
-  const getClassNames = (
-    baseClass: string,
-    modeClass: string,
-    condition: boolean,
-  ) => {
-    return `${baseClass} ${modeClass} ${condition ? styles.expanded : ''}`;
+  //좋와요
+  const toggleLike = async (reviewId: string, isLiked: boolean) => {
+    try {
+      setReviewData((prevData: any) => {
+        if (!prevData) return prevData;
+        return {
+          ...prevData,
+          reviews: prevData.reviews.map((review: any) =>
+            review.id === reviewId ? { ...review, isLiked: !isLiked } : review,
+          ),
+        };
+      });
+
+      await updateReviewLike(reviewId, isLiked);
+    } catch (error) {
+      console.log('좋아요 요청 실패:', error);
+    }
   };
 
   return (
     <div>
-      {reviewData?.reviews?.map((review: any) => (
+      {reviewData?.reviews?.length === 0 ? (
         <div
-          key={review.id}
-          className={getClassNames(
-            styles.reviewBox,
-            styles[`reviewBox_${mode}`],
-            expandedReviews[review.id],
-          )}
+          className={`${styles.noReviewBox} ${styles[`noReviewBox_${mode}`]}`}
         >
-          <div className={styles.reviewHeader}>
-            <div className={styles.profileBox}>
-              <img
-                className={`${styles.profile} ${styles[`profile_${mode}`]}`}
-                src="/images/profile.svg"
-                alt="profile"
-              />
-              <div className={styles.profileInfo}>
-                <p
-                  className={`${styles.nickname} ${styles[`nickname_${mode}`]}`}
+          <Image
+            src="/images/noReview.svg"
+            alt="noreview"
+            width={mode === 'mobile' ? 100 : 136}
+            height={mode === 'mobile' ? 100 : 136}
+          />
+          <p className={`${styles.nocoment} ${styles[`nocoment_${mode}`]}`}>
+            작성된 리뷰가 없어요
+          </p>
+          <Button
+            type="default"
+            size={mode === 'mobile' ? 'width137' : 'width169'}
+            color="purple"
+            textColor="white"
+            text="리뷰 남기기"
+          />
+        </div>
+      ) : (
+        <InfiniteScroll
+          dataLength={reviewData?.reviews?.length || 0}
+          next={fetchReviewData}
+          hasMore={hasMore}
+          loader={<p>로딩 중...</p>}
+          endMessage={<p>더 이상 리뷰가 없습니다.</p>}
+        >
+          {reviewData?.reviews?.map((review: any) => (
+            <div
+              key={review.id}
+              className={`${styles.reviewBox} ${styles[`reviewBox_${mode}`]} ${
+                expandedReviews[review.id] ? styles.expanded : ''
+              }`}
+            >
+              <div className={styles.reviewHeader}>
+                <div className={styles.profileBox}>
+                  <Image
+                    className={`${styles.profile} ${styles[`profile_${mode}`]}`}
+                    src={review.user?.image || '/images/profile.svg'}
+                    alt="profile"
+                    width={50}
+                    height={50}
+                    objectFit="cover"
+                  />
+
+                  <div className={styles.profileInfo}>
+                    <p
+                      className={`${styles.nickname} ${styles[`nickname_${mode}`]}`}
+                    >
+                      {review.user?.nickname || '익명'}
+                    </p>
+                    <p
+                      className={`${styles.timeAgo} ${styles[`timeAgo_${mode}`]}`}
+                    >
+                      {formatDistanceToNow(new Date(review.createdAt), {
+                        addSuffix: true,
+                        locale: ko,
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className={`${styles.iconBox} ${styles[`iconBox_${mode}`]}`}
                 >
-                  {review.user?.nickname || '닉네임 없음'}
-                </p>
-                <p className={`${styles.timeAgo} ${styles[`timeAgo_${mode}`]}`}>
-                  {/* 날짜를 한국어로 상대적인 시간으로 변환 */}
-                  {formatDistanceToNow(new Date(review.createdAt), {
-                    addSuffix: true,
-                    locale: ko,
-                  })}
-                </p>
+                  <div onClick={() => toggleLike(review.id, review.isLiked)}>
+                    <Image
+                      className={`${styles.likeIcon} ${styles[`likeIcon_${mode}`]}`}
+                      src={
+                        review.isLiked
+                          ? '/icons/like.svg'
+                          : '/icons/empty-like.svg'
+                      }
+                      alt="like"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+
+                  <Image
+                    className={`${styles.drop_btn} ${styles[`drop_btn_${mode}`]}`}
+                    src="/icons/dropDown.svg"
+                    alt="dropDown-btn"
+                    width={24}
+                    height={24}
+                    onClick={() => setShowModal(true)}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.infoBox}>
+                <div className={`${styles.tagBox} ${styles[`tagBox_${mode}`]}`}>
+                  {review.aroma?.map((aroma: string) => (
+                    <span
+                      key={aroma}
+                      className={`${styles.tag} ${styles[`tag_${mode}`]}`}
+                    >
+                      {aromaMapping[aroma] || ''}
+                    </span>
+                  ))}
+                </div>
+
+                <div
+                  className={`${styles.reviewRating} ${styles[`reviewRating_${mode}`]}`}
+                >
+                  <Image
+                    className={`${styles.ratingStars} ${styles[`ratingStars_${mode}`]}`}
+                    src="/icons/starColor.svg"
+                    alt="점수"
+                    width={16}
+                    height={16}
+                  />
+                  <span
+                    className={`${styles.ratingNum} ${styles[`ratingNum_${mode}`]}`}
+                  >
+                    {review.rating.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+
+              {expandedReviews[review.id] && (
+                <>
+                  <p
+                    className={`${styles.comment} ${styles[`comment_${mode}`]}`}
+                  >
+                    {review.content}
+                  </p>
+
+                  <SliderGroup
+                    values={{
+                      lightBold: review.lightBold,
+                      smoothTannic: review.smoothTannic,
+                      drySweet: review.drySweet,
+                      softAcidic: review.softAcidic,
+                    }}
+                    disabled
+                  />
+                </>
+              )}
+
+              <div className={styles.arrowContainer}>
+                <Image
+                  className={styles.arrowIcon}
+                  src={
+                    expandedReviews[review.id]
+                      ? '/icons/arrowUp.svg'
+                      : '/icons/arrowDown.svg'
+                  }
+                  alt={expandedReviews[review.id] ? '접기' : '열기'}
+                  width={16}
+                  height={16}
+                  onClick={() => toggleExpanded(review.id)}
+                />
               </div>
             </div>
-            <div className={`${styles.iconBox} ${styles[`iconBox_${mode}`]}`}>
-              <img
-                className={`${styles.likeIcon} ${styles[`likeIcon_${mode}`]}`}
-                src={
-                  likedReviews[review.id]
-                    ? '/icons/like.svg'
-                    : '/icons/empty-like.svg'
-                }
-                alt="like"
-                onClick={() => toggleLike(review.id)}
-              />
-              <img
-                className={`${styles.drop_btn} ${styles[`drop_btn_${mode}`]}`}
-                src="/icons/dropDown.svg"
-                alt="dropDown-btn"
-                onClick={() => setShowModal(true)}
-              />
-            </div>
-          </div>
-
-          <div className={styles.infoBox}>
-            <div className={`${styles.tagBox} ${styles[`tagBox_${mode}`]}`}>
-              {review.aroma?.map((aroma: string) => (
-                <span
-                  key={aroma}
-                  className={`${styles.tag} ${styles[`tag_${mode}`]}`}
-                >
-                  {aromaMapping[aroma] || ''}{' '}
-                  {/* 매핑된 향이 없으면 빈 문자열 */}
-                </span>
-              ))}
-            </div>
-
-            <div
-              className={`${styles.reviewRating} ${styles[`reviewRating_${mode}`]}`}
-            >
-              <img
-                className={`${styles.ratingStars} ${styles[`ratingStars_${mode}`]}`}
-                src="/icons/starColor.svg"
-                alt="점수"
-              />
-              <span
-                className={`${styles.ratingNum} ${styles[`ratingNum_${mode}`]}`}
-              >
-                {review.rating.toFixed(1)} {/* 소수점 1자리까지 표시 */}
-              </span>
-            </div>
-          </div>
-
-          {expandedReviews[review.id] && (
-            <>
-              <p className={`${styles.comment} ${styles[`comment_${mode}`]}`}>
-                {review.content || '내용 없음'}
-              </p>
-
-              <SliderGroup
-                values={{
-                  lightBold: 50,
-                  smoothTannic: 70,
-                  drySweet: 30,
-                  softAcidic: 20,
-                }}
-                disabled
-              />
-            </>
-          )}
-
-          <div className={styles.arrowContainer}>
-            <img
-              className={styles.arrowIcon}
-              src={
-                expandedReviews[review.id]
-                  ? '/icons/arrowUp.svg'
-                  : '/icons/arrowDown.svg'
-              }
-              alt={expandedReviews[review.id] ? '접기' : '열기'}
-              onClick={() => toggleExpanded(review.id)}
-            />
-          </div>
-        </div>
-      ))}
+          ))}
+        </InfiniteScroll>
+      )}
 
       <Modal showModal={showModal} closeModal={() => setShowModal(false)}>
         <div className={styles.option} onClick={() => alert('수정하기 테스트')}>

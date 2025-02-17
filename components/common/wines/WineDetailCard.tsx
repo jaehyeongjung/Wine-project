@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './wineDetailCard.module.css';
 import useDevice from '../../../hooks/useDevice';
 import Button from '../Button';
-import router from 'next/router';
+import { useRouter } from 'next/router';
+import { getWineDetail } from '../../../pages/api/wines/wineReviewApi';
 
 const DetailPage: React.FC = () => {
   const { mode } = useDevice();
+  const router = useRouter();
+  const { id } = router.query as { id?: string };
+  const [wineData, setWineData] = useState<{
+    name: string;
+    region: string;
+    price: number;
+    image: string;
+  } | null>(null);
 
-  const wineData = {
-    name: 'Ciel du Cheval Vineyard Collaboration Series II 2012',
-    region: 'Western Cape, South Africa',
-    price: 64990,
-    image:
-      'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/686/1738855781446/type=image2.png',
-  };
+  useEffect(() => {
+    if (!router.isReady || !id) return;
+    getWineDetail(id, router).then((data) => {
+      if (data) {
+        const { name, region, image, price } = data;
+        setWineData({ name, region, image, price });
+      }
+    });
+  }, [id, router.isReady]);
+
+  if (!wineData) return <p>로딩 중...</p>;
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>

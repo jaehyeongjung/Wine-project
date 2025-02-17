@@ -7,6 +7,7 @@
   display: flex;
   margin-top: 60px;
   gap: 60px;
+  max-width: 1140px;
 }
 
 .reviewTitle {
@@ -15,6 +16,11 @@
   font-weight: var(--font-bold);
   line-height: var(--line-height-xl);
   color: var(--gray800);
+}
+
+.reviewBox {
+  max-width: 1140px;
+  width: 100%;
 }
 
 /* 태블릿 */

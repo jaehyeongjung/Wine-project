@@ -158,6 +158,24 @@
   font-weight: var(--font-bold);
 }
 
+.width137 {
+  width: 137px;
+  height: 47px;
+  border-radius: 12px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  font-weight: var(--font-semibold);
+}
+
+.width169 {
+  width: 169px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  font-weight: var(--font-semibold);
+}
+
 /* 배경색 */
 .purple {
   background-color: var(--purple100);

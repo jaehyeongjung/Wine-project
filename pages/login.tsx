@@ -77,8 +77,10 @@ const Login: NextPage = () => {
 
       try {
         const result = await postSignIn(formData);
+        console.log('result 결과값 !!', result);
         localStorage.setItem('accessToken', result.accessToken);
         localStorage.setItem('refreshToken', result.refreshToken);
+        localStorage.setItem('userImage', result.user.image);
         router.push('/');
       } catch (error: any) {
         console.error('API 에러:', error.response.data);
@@ -89,15 +91,11 @@ const Login: NextPage = () => {
 
   const handleOAuthLogin = async (provider: string) => {
     try {
-      await signIn(provider, {
-        callbackUrl: '/callback/kakao',
-        redirect: true,
-      });
+      await signIn(provider);
     } catch (error) {
       console.error('로그인 중 에러발생:', error);
     }
   };
-
   return (
     <div className={styles.login_background}>
       <main
