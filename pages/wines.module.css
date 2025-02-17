@@ -623,7 +623,8 @@
 }
 
 .winesFilterBtn_mobile {
-  display: none;
+  position: fixed;
+  top: 90% /* 하단에서 20px 떨어지게 */
 }
 
 .scrollButtonLeft {

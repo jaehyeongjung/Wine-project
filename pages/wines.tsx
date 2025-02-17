@@ -13,7 +13,7 @@ const Wines: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const wineList = [
     {
-      id: 2,
+      id: 4,
       name: 'Sentinel Cabernet Sauvignon 2016',
       origin: 'Western Cape, South Africa',
       type: 'Red',
