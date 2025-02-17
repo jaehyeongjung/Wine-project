@@ -11,10 +11,28 @@ import Link from 'next/link';
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
+  const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value); // 검색어 상태 업데이트
+  };
   const wineList = [
     {
       id: 4,
       name: 'Sentinel Cabernet Sauvignon 2016',
+      origin: 'Western Cape, South Africa',
+      type: 'Red',
+      rating: 4.8,
+      reviewCount: 47,
+      price: 64990,
+      image: '/images/testWine.svg',
+      review:
+        'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
+    },
+
+    {
+      id: 4,
+      name: '김치',
       origin: 'Western Cape, South Africa',
       type: 'Red',
       rating: 4.8,
@@ -130,7 +148,12 @@ const Wines: React.FC = () => {
     const matchesPrice =
       wine.price >= priceRange[0] && wine.price <= priceRange[1];
 
-    return matchesType && matchesRating && matchesPrice;
+    // 검색어로 필터링
+    const matchesSearchQuery = wine.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    return matchesType && matchesRating && matchesPrice && matchesSearchQuery;
   });
 
   const handleFilterButtonClick = () => {
@@ -226,6 +249,8 @@ const Wines: React.FC = () => {
             icon="search"
             placeholder="와인을 검색해 보세요"
             size="search"
+            value={searchQuery}
+            onChange={handleSearchChange} // 검색어 변경 시 호출
           />
         </div>
         <div className={`${styles.wines_list} ${styles[`wines_list_${mode}`]}`}>
