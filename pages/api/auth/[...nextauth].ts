@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
-import { postOAuthLogin } from '../wineApi';
+import { postOauthApps, postOAuthLogin, Provider } from '../wineApi';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,17 +18,23 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
 
-  // const getOauthDateUrl='https://kapi.kakao.com/v2/user/me';
-
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account?.provider === 'kakao') {
-        console.log('account 정보:', account);
-        if (account?.provider === 'kakao') {
-          // URL에서 코드 가져오기
-          const currentUrl = new URL(window.location.href);
-          const code = currentUrl.searchParams.get('code');
-          console.log('카카오 인증 코드:', code);
+        // KAKAO oauth 앱 등록 시작
+        try {
+          const userdata = {
+            appSecret: process.env.NEXTAUTH_SECRET as string,
+            appKey: process.env.KAKAO_CLIENT_ID as string,
+            provider: 'KAKAO' as Provider,
+          };
+          const response = await postOauthApps(userdata);
+          console.log('OAuth App 응답 : ', response);
+
+          return true;
+        } catch (error) {
+          console.error('OAuth App 에러', error);
+          return false;
         }
       }
       return true;
@@ -46,49 +52,11 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log('현재 전체 URL:', url);
-      console.log('Includes kakao:', url.includes('kakao'));
-      console.log('Includes code=:', url.includes('code='));
-
-      const urlObj = new URL(url, baseUrl);
-      const code = urlObj.searchParams.get('code');
-      console.log('현재 코드값:', code);
-
-      // kakao가 포함된 모든 URL에서 code를 확인
-      if (url.includes('/api/auth/callback/kakao')) {
-        const urlObj = new URL(url, baseUrl);
-        const code = urlObj.searchParams.get('code');
-        console.log('코드는 여기 !@@', code);
-
-        if (code) {
-          try {
-            const result = await postOAuthLogin('KAKAO', {
-              state: 'login',
-              redirectUri: 'http://localhost:3000/api/auth/callback/kakao',
-              token: code,
-            });
-
-            if (result?.ok) {
-              return '/';
-            }
-          } catch (error) {
-            console.error('Backend error:', error);
-            return '/auth/error';
-          }
-        }
-      }
-
-      // URL이 조건에 맞지 않으면 기본 URL로 리다이렉트
-      if (url.includes('/api/auth/error')) {
-        return '/auth/error';
-      }
+      // 명시적으로 홈 경로로 리다이렉트
       return baseUrl;
     },
   },
-  pages: {
-    signIn: '/login', // 로그인 페이지 경로
-    error: '/auth/error', // 에러 페이지 경로
-  },
+
   debug: process.env.NODE_ENV === 'development', // 개발 환경에서 디버그 활성화
 };
 export default NextAuth(authOptions);

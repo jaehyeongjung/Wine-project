@@ -4,7 +4,7 @@ import Button from '@/components/common/Button';
 import Link from 'next/link';
 import useDevice from '@/hooks/useDevice';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { postSignUp } from '@/pages/api/wineApi';
@@ -160,6 +160,12 @@ const Signup: NextPage = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      router.push('/');
+    }
+  }, [router]);
 
   return (
     <div className={styles.signup_background}>
