@@ -1,5 +1,5 @@
 .reviewBox {
-  outline: 1px solid var(--gray200);
+  border: 1px solid var(--gray200);
   border-radius: 16px;
   width: 800px;
   min-height: 100%;
@@ -95,8 +95,10 @@
 }
 
 .ratingStars {
-  width: 14px;
-  height: 14px;
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  height: 20px;
 }
 
 .ratingNum {
@@ -120,6 +122,24 @@
   font-size: var(--text-lg);
   font-weight: var(--font-medium);
   line-height: var(--line-height-lg);
+}
+
+.noReviewBox {
+  max-width: 1140px;
+  width: 100%;
+  min-height: 442px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nocoment {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  color: var(--gray500);
+  font-size: var(--text-2lg);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-2lg);
 }
 
 /* 태블릿 */
@@ -189,6 +209,8 @@
 }
 
 .tagBox_mobile {
+  display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
@@ -197,4 +219,16 @@
   font-size: var(--text-md);
   font-weight: var(--font-medium);
   line-height: var(--line-height-md);
+}
+
+.noReviewBox_mobile {
+  width: 375px;
+  min-height: 405px;
+}
+
+.nocoment_mobile {
+  margin-top: 32px;
+  margin-bottom: 40px;
+  color: var(--gray500);
+  font-size: var(--text-lg);
 }

@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../components/layout/Header/Header';
-import styles from './detail.module.css';
+import HeaderWithProfile from '../../components/layout/Header/HeaderWithProfile';
+import styles from '../../components/common/wines/detail.module.css';
 import useDevice from '../../hooks/useDevice';
-import WineReview from './WineReview';
-import WineRating from './WineRating';
-import WineDetailCard from './WineDetailCard';
+import WineReview from '../../components/common/wines/WineReview';
+import WineRating from '../../components/common/wines/WineRating';
+import WineDetailCard from '../../components/common/wines/WineDetailCard';
 
 const DetailPage: React.FC = () => {
   const router = useRouter();
-  const { wineid } = router.query;
   const { mode } = useDevice();
+  const [userImage, setUserImage] = useState('/images/wineProfile.svg');
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isRedirected, setIsRedirected] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (!token && !isRedirected) {
+      setIsRedirected(true);
+      alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+      router.push('/login');
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [router, isRedirected]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className={`${styles.container} ${styles[`container_${mode}`]}`}>
-      <Header />
+      <HeaderWithProfile />
       <div className={`${styles.content} ${styles[`content_${mode}`]}`}>
         <WineDetailCard />
       </div>
@@ -24,14 +41,12 @@ const DetailPage: React.FC = () => {
       >
         {(mode === 'tablet' || mode === 'mobile') && <WineRating />}
 
-        <div>
+        <div className={styles.reviewBox}>
           <p
             className={`${styles.reviewTitle} ${styles[`reviewTitle_${mode}`]}`}
           >
             리뷰 목록
           </p>
-          <WineReview />
-          <WineReview />
           <WineReview />
         </div>
 

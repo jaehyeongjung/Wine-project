@@ -46,6 +46,10 @@
   padding-left: 50px;
 }
 
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
 .input:focus {
   border: 1px solid var(--purple100);
   outline: none;
