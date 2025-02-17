@@ -27,7 +27,7 @@ const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
-  const [wineList, setWineList] = useState([]); // 와인 리스트 상태 추가
+  const [wineList, setWineList] = useState<Wine[]>([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value); // 검색어 상태 업데이트
