@@ -62,6 +62,7 @@ const RegisterModalLayout = ({ closeModal, isScreen, type, wineId }: Props) => {
       if (response.url) {
         setImageFile(response.url);
         setPreviewUrl(URL.createObjectURL(file));
+        console.log('response url:', response.url);
       } else {
         console.error('업로드된 URL이 없습니다:', response);
       }

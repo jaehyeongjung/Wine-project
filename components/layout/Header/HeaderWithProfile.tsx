@@ -4,17 +4,28 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { fetchUserInfo } from '@/pages/api/wineApi';
+import { UserInfo } from '@/pages/myprofile/ProfileSection/ProfileSection';
 
-interface HeaderProps {
-  imageUrl: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ imageUrl }) => {
+const Header: React.FC = () => {
   const { mode } = useDevice();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const data = await fetchUserInfo();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('유저 정보 로드 실패:', error);
+      }
+    };
+
+    getUserInfo();
+  }, []);
 
   const handleClickOutside = useCallback((e: MouseEvent) => {
     if (
@@ -46,9 +57,8 @@ const Header: React.FC<HeaderProps> = ({ imageUrl }) => {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('userImage');
 
-    setIsLogin(false);
     setIsOpen(false);
-    router.reload();
+    router.push('/');
   };
 
   if (!mode) return null;
@@ -75,15 +85,24 @@ const Header: React.FC<HeaderProps> = ({ imageUrl }) => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <Image
-              src={imageUrl === 'null' ? '/images/wineProfile.svg' : imageUrl}
+              src={userInfo?.image || '/images/wineProfile.svg'}
               alt="사용자 프로필 이미지"
               fill
+              unoptimized
               style={{ objectFit: 'cover' }}
+              onError={(e) => {
+                // 이미지 로드 실패시 기본 이미지로 대체
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/wineProfile.svg';
+              }}
             />
           </div>
           {isOpen && (
             <ul className={styles.dropdown_menu}>
-              <Link href="myprofile/1" className={styles.mypage}>
+              <Link
+                href={`/myprofile/${userInfo?.id || ''}`}
+                className={styles.mypage}
+              >
                 <li className={styles.dropdown_item}>마이페이지</li>
               </Link>
               <li className={styles.dropdown_item} onClick={handleLogoutClick}>
