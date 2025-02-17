@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://winereview-api.vercel.app';
+export const BASE_URL = 'https://winereview-api.vercel.app/12-7';
 
 export type OAuthProvider = 'GOOGLE' | 'KAKAO' | 'NAVER';
 
@@ -22,11 +22,17 @@ interface KakaoSignInRequest {
   token: string;
 }
 
-type Provider = 'google' | 'kakao';
+export interface OauthAppRequest {
+  appSecret: string;
+  appKey: string;
+  provider: Provider;
+}
+
+export type Provider = 'google' | 'kakao';
 
 export const postSignUp = async (userdata: SignUpRequest) => {
   try {
-    const response = await axios.post(`${BASE_URL}/12-7/auth/signup`, userdata);
+    const response = await axios.post(`${BASE_URL}/auth/signup`, userdata);
     return response.data;
   } catch (error) {
     throw error;
@@ -35,7 +41,16 @@ export const postSignUp = async (userdata: SignUpRequest) => {
 
 export const postSignIn = async (userdata: SignInRequest) => {
   try {
-    const response = await axios.post(`${BASE_URL}/12-7/auth/signIn`, userdata);
+    const response = await axios.post(`${BASE_URL}/auth/signIn`, userdata);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const postOauthApps = async (userdata: OauthAppRequest) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/oauthApps`, userdata);
     return response.data;
   } catch (error) {
     throw error;
@@ -48,11 +63,11 @@ export const postOAuthLogin = async (
 ) => {
   try {
     console.log('Provider:', provider);
-    console.log('Request URL:', `${BASE_URL}/12-7/auth/signin/${provider}`);
+    console.log('Request URL:', `${BASE_URL}/auth/signin/${provider}`);
     console.log('Request body:', JSON.stringify(userdata, null, 2));
 
     const response = await axios.post(
-      `${BASE_URL}/12-7/auth/signin/${provider}`,
+      `${BASE_URL}/auth/signin/${provider}`,
       userdata,
       {
         headers: {
