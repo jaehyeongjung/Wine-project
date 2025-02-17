@@ -382,6 +382,8 @@
 .ContentTitle {
   height: 84px;
   width: 300px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .ContentTitle_mobile {
@@ -582,6 +584,8 @@
   height: 54px;
   color: var(--gray500);
   word-wrap: break-word;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .RecommendContentRatingText_mobile {

@@ -46,7 +46,7 @@ const MyUploadSection: React.FC = () => {
           <p
             className={`${styles.myUploadBarTotalText} ${styles[`myUploadBarTotalText_${mode}`]}`}
           >
-            총 12개
+            총 11개
           </p>
         </div>
       </div>
