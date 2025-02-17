@@ -13,6 +13,23 @@ import Modal from '@/components/common/Modal';
 import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
 import { getWines } from '@/pages/api/winesApi';
 
+interface ReviewUser {
+  id: number;
+  nickname: string;
+  image: string;
+}
+
+// 리뷰 타입
+interface Review {
+  user: ReviewUser;
+  updatedAt: string;
+  createdAt: string;
+  content: string;
+  aroma: number;
+  rating: number;
+  id: number;
+}
+
 export interface Wine {
   id: string;
   name: string;
@@ -21,13 +38,16 @@ export interface Wine {
   type: 'RED' | 'WHITE' | 'SPARKLING' | null;
   price: number;
   ratingCount: number;
+  region: string;
+  reviewCount: number;
+  recentReview: Review | null;
 }
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
-  const [wineList, setWineList] = useState([]); // 와인 리스트 상태 추가
+  const [wineList, setWineList] = useState<Wine[]>([]); // 와인 리스트 상태 추가
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value); // 검색어 상태 업데이트
@@ -187,7 +207,11 @@ const Wines: React.FC = () => {
       if (ratingFilter[key]) {
         if (key === 'all') return true;
         const [min, max] = key.split('-').map(Number);
-        return wine.avgRating >= min && wine.avgRating < max;
+        return (
+          wine.avgRating !== null &&
+          wine.avgRating >= min &&
+          wine.avgRating < max
+        );
       }
       return false;
     });
@@ -269,7 +293,7 @@ const Wines: React.FC = () => {
                   <div
                     className={`${styles.winesRecommendSlideImg} ${styles[`winesRecommendSlideImg_${mode}`]}`}
                   >
-                    <img src={wine.image} alt={wine.img} />
+                    <img src={wine.image} alt="와인이미지" />
                   </div>
                   <div
                     className={`${styles.winesRecommendSlideData} ${styles[`winesRecommendSlideData_${mode}`]}`}
@@ -286,7 +310,7 @@ const Wines: React.FC = () => {
                         className={`${styles.starRatingContainer} ${styles[`starRatingContainer_${mode}`]}`}
                       >
                         <StarRating
-                          rating={wine.avgRating}
+                          rating={wine.avgRating ?? 0}
                           size={getStarRatingSize()}
                         />
                       </div>
@@ -363,7 +387,7 @@ const Wines: React.FC = () => {
                             {wine.avgRating}
                           </p>
                           <StarRating
-                            rating={wine.avgRating}
+                            rating={wine.avgRating ?? 0}
                             size={getStarRatingSize2()}
                           />
                           <p
@@ -410,7 +434,8 @@ const Wines: React.FC = () => {
                     <p
                       className={`${styles.wines_listMapReviewContent} ${styles[`wines_listMapReviewContent_${mode}`]} text-lg-regular`}
                     >
-                      {wine.review}
+                      {wine.recentReview?.content ||
+                        '아직 작성된 리뷰가 없습니다.'}
                     </p>
                   </div>
                 </div>
