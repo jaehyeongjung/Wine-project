@@ -5,7 +5,7 @@ import Input from '@/components/common/Input';
 import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
-import PriceSlide from '@/components/PriceSilde/PriceSlide';
+import PriceSlide from '@/components/PriceSilde/PriceSlide';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
