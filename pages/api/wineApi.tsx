@@ -89,3 +89,49 @@ export const postOAuthLogin = async (
     throw error;
   }
 };
+
+export const fetchUserInfo = async () => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error('유저 정보 조회 중 오류 발생:', error);
+    throw error;
+  }
+};
+
+export const updateUserProfile = async (image: string, nickname: string) => {
+  const decodedImage = decodeURIComponent(image);
+
+  const requestData = {
+    image: decodedImage,
+    nickname,
+  };
+
+  console.log('서버로 보내는 데이터:', requestData); // 추가
+
+  try {
+    const { data } = await axios.patch(
+      `${BASE_URL}/users/me`,
+      {
+        image,
+        nickname,
+      },
+      {
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    console.error('프로필 업데이트 중 오류 발생:', error);
+    throw error;
+  }
+};

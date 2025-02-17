@@ -9,6 +9,7 @@ import useDevice from '../hooks/useDevice';
 import { useRouter } from 'next/router';
 import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
 import { useEffect, useState } from 'react';
+import { fetchUserInfo } from './api/wineApi';
 
 const Home: NextPage = () => {
   const { mode } = useDevice();
@@ -37,6 +38,28 @@ const Home: NextPage = () => {
     }
   }, []); // 컴포넌트 마운트 시 한 번만 실행
 
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        setIsLogin(false);
+        return;
+      }
+
+      try {
+        const userData = await fetchUserInfo(); // API 호출
+        setUserImage(userData.image || '/images/wineProfile.svg');
+        setIsLogin(true);
+      } catch (error) {
+        console.error('사용자 정보 불러오기 실패:', error);
+        setIsLogin(false);
+        setUserImage('/images/wineProfile.svg');
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
   return (
     <div className={indexStyles.container}>
       <Head>
@@ -45,11 +68,7 @@ const Home: NextPage = () => {
       </Head>
 
       {/* 로그인된 상태면 HeaderWithProfile을, 아니면 Header를 렌더링 */}
-      {isLogin === true ? (
-        <HeaderWithProfile imageUrl={userImage} />
-      ) : (
-        <Header />
-      )}
+      {isLogin === true ? <HeaderWithProfile /> : <Header />}
 
       <main
         className={`${indexStyles.main_section} ${indexStyles[`main_section_${mode}`]}`}
