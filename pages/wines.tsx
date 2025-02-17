@@ -11,45 +11,32 @@ import BottomSheet from '@/components/common/BottomSheet';
 import Link from 'next/link';
 import Modal from '@/components/common/Modal';
 import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
+import { getWines } from '@/pages/api/winesApi';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
   const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
+  const [wineList, setWineList] = useState([]); // 와인 리스트 상태 추가
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value); // 검색어 상태 업데이트
   };
 
+  useEffect(() => {
+    const fetchWines = async () => {
+      try {
+        const data = await getWines(); // params를 따로 넘기지 않고 기본값을 사용
+        setWineList(data.list);
+      } catch (error) {
+        console.error('와인 목록 불러오기 실패:', error);
+      }
+    };
+
+    fetchWines();
+  }, []);
+
   const [userImage, setUserImage] = useState('/images/wineProfile.svg');
-
-  const wineList = [
-    {
-      id: 4,
-      name: 'Sentinel Cabernet Sauvignon 2016',
-      origin: 'Western Cape, South Africa',
-      type: 'Red',
-      rating: 4.8,
-      reviewCount: 47,
-      price: 64990,
-      image: '/images/testWine.svg',
-      review:
-        'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
-    },
-
-    {
-      id: 4,
-      name: '김치',
-      origin: 'Western Cape, South Africa',
-      type: 'Red',
-      rating: 4.8,
-      reviewCount: 47,
-      price: 64990,
-      image: '/images/testWine.svg',
-      review:
-        'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
-    },
-  ];
 
   //페이지가 Client-Side에 마운트 될 때까지 기다렸다가 localStorage에 접근하기
   useEffect(() => {
@@ -190,7 +177,7 @@ const Wines: React.FC = () => {
       if (ratingFilter[key]) {
         if (key === 'all') return true;
         const [min, max] = key.split('-').map(Number);
-        return wine.rating >= min && wine.rating < max;
+        return wine.avgRating >= min && wine.avgRating < max;
       }
       return false;
     });
@@ -276,7 +263,7 @@ const Wines: React.FC = () => {
                   <div
                     className={`${styles.winesRecommendSlideImg} ${styles[`winesRecommendSlideImg_${mode}`]}`}
                   >
-                    <img src={wine.image} alt={wine.name} />
+                    <img src={wine.image} alt={wine.img} />
                   </div>
                   <div
                     className={`${styles.winesRecommendSlideData} ${styles[`winesRecommendSlideData_${mode}`]}`}
@@ -287,13 +274,13 @@ const Wines: React.FC = () => {
                       <p
                         className={`${styles.RecommendContentRatingNumber} ${styles[`RecommendContentRatingNumber_${mode}`]}`}
                       >
-                        {wine.rating}
+                        {wine.avgRating}
                       </p>
                       <div
                         className={`${styles.starRatingContainer} ${styles[`starRatingContainer_${mode}`]}`}
                       >
                         <StarRating
-                          rating={wine.rating}
+                          rating={wine.avgRating}
                           size={getStarRatingSize()}
                         />
                       </div>
@@ -358,7 +345,7 @@ const Wines: React.FC = () => {
                           <div
                             className={`${styles.ContentFrom} ${styles[`ContentFrom_${mode}`]} text-lg-regular`}
                           >
-                            {wine.origin}
+                            {wine.region}
                           </div>
                         </div>
                         <div
@@ -367,10 +354,10 @@ const Wines: React.FC = () => {
                           <p
                             className={`${styles.ContentRatingNumber} ${styles[`ContentRatingNumber_${mode}`]}`}
                           >
-                            {wine.rating}
+                            {wine.avgRating}
                           </p>
                           <StarRating
-                            rating={wine.rating}
+                            rating={wine.avgRating}
                             size={getStarRatingSize2()}
                           />
                           <p
@@ -444,20 +431,20 @@ const Wines: React.FC = () => {
                 className={`${styles.winesFilterInnerTypeContainer} ${styles[`winesFilterInnerTypeContainer_${mode}`]}`}
               >
                 <button
-                  onClick={() => handleTypeFilter('Red')}
-                  className={`${styles.filterButtonRed} ${selectedType === 'Red' ? styles.selected : ''}`}
+                  onClick={() => handleTypeFilter('RED')}
+                  className={`${styles.filterButtonRed} ${selectedType === 'RED' ? styles.selected : ''}`}
                 >
                   Red
                 </button>
                 <button
-                  onClick={() => handleTypeFilter('White')}
-                  className={`${styles.filterButtonWhite} ${selectedType === 'White' ? styles.selected : ''}`}
+                  onClick={() => handleTypeFilter('WHITE')}
+                  className={`${styles.filterButtonWhite} ${selectedType === 'WHITE' ? styles.selected : ''}`}
                 >
                   White
                 </button>
                 <button
-                  onClick={() => handleTypeFilter('Sparkling')}
-                  className={`${styles.filterButtonSparkling} ${selectedType === 'Sparkling' ? styles.selected : ''}`}
+                  onClick={() => handleTypeFilter('SPARKLING')}
+                  className={`${styles.filterButtonSparkling} ${selectedType === 'SPARKLING' ? styles.selected : ''}`}
                 >
                   Sparkling
                 </button>
