@@ -13,6 +13,16 @@ import Modal from '@/components/common/Modal';
 import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
 import { getWines } from '@/pages/api/winesApi';
 
+export interface Wine {
+  id: string;
+  name: string;
+  image: string;
+  avgRating: number | null;
+  type: 'RED' | 'WHITE' | 'SPARKLING' | null;
+  price: number;
+  ratingCount: number;
+}
+
 const Wines: React.FC = () => {
   const { mode } = useDevice();
   const scrollRef = useRef<HTMLDivElement>(null); // 스크롤 컨테이너 참조
@@ -252,7 +262,7 @@ const Wines: React.FC = () => {
             ref={scrollRef}
             className={`${styles.winesRecommendSlide} ${styles[`winesRecommendSlide_${mode}`]}`}
           >
-            {wineList.map((wine) => (
+            {wineList.map((wine: Wine) => (
               <div
                 key={wine.id}
                 className={`${styles.winesRecommendSlideMap} ${styles[`winesRecommendSlideMap_${mode}`]}`}
