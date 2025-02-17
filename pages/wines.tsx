@@ -7,8 +7,10 @@ import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
 import PriceSlide from '@/components/PriceSilde/PriceSlide';
 import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
-
+import BottomSheet from '@/components/common/BottomSheet';
 import Link from 'next/link';
+import Modal from '@/components/common/Modal';
+import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
 
 const Wines: React.FC = () => {
   const { mode } = useDevice();
@@ -69,6 +71,25 @@ const Wines: React.FC = () => {
       }
     }
   }, []); // 컴포넌트 마운트 시 한 번만 실행
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return; // 서버에서 실행되지 않도록 방어 코드 추가
+    const checkScreenSize = () => {
+      setIsScreen(window.innerWidth <= 768);
+    };
+    checkScreenSize(); // 초기 실행
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+  // 버튼 클릭 시 모달 또는 바텀시트 열기
+  const handleOpen = () => {
+    if (isScreen) {
+      setIsBottomScreen(true);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
   const [isLogin, setIsLogin] = useState(false);
 
   const getStarRatingSize = () => {
@@ -104,8 +125,10 @@ const Wines: React.FC = () => {
     '3.0-3.5': false, // 3.0 ~ 3.5
   });
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
-
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isScreen, setIsScreen] = useState(false);
+  const [isBottomScreen, setIsBottomScreen] = useState(false);
 
   // 와인 타입 버튼 클릭 시 필터링
   const handleTypeFilter = (type: string) => {
@@ -185,12 +208,25 @@ const Wines: React.FC = () => {
 
   const handleFilterButtonClick = () => {
     if (mode === 'mobile' || mode === 'tablet') {
-      setIsModalOpen(true); // 모바일 또는 태블릿에서만 모달 열기
+      setIsModalOpen2(true); // 모바일 또는 태블릿에서만 모달 열기
+    }
+  };
+
+  const OpenModal = () => {
+    if (isScreen === true) {
+      setIsBottomScreen(true);
+    } else {
+      setIsModalOpen(true);
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false); // 모달 닫기
+    setIsBottomScreen(false);
+  };
+
+  const closeModal2 = () => {
+    setIsModalOpen2(false); // 모달 닫기
   };
 
   return (
@@ -540,11 +576,32 @@ const Wines: React.FC = () => {
             text="와인 등록하기"
             color="purple"
             textColor="white"
+            onClick={OpenModal}
           ></Button>
+          {isScreen ? (
+            <BottomSheet isBottomSheet={isBottomScreen}>
+              <RegisterModalLayout
+                isScreen
+                closeModal={closeModal}
+                type="post"
+              />
+            </BottomSheet>
+          ) : (
+            <Modal
+              className={`${styles.registerModalBox} ${styles[`registerModalBox_${mode}`]}`}
+              showModal={isModalOpen}
+              closeModal={closeModal}
+            >
+              <RegisterModalLayout
+                closeModal={closeModal}
+                type="post"
+              ></RegisterModalLayout>
+            </Modal>
+          )}
         </div>
       </div>
       {/* 여기에 조건부 렌더링을 추가하여 모달을 보여줍니다 */}
-      {isModalOpen && (
+      {isModalOpen2 && (
         <>
           <div className={styles.modalOverlayContainer}></div>
           <div className={`${styles.modal} ${styles[`modal_${mode}`]}`}>
@@ -557,7 +614,7 @@ const Wines: React.FC = () => {
                 <p className={styles.modalFilterText}>필터</p>
                 <button
                   className={styles.modalFilterClose}
-                  onClick={closeModal}
+                  onClick={closeModal2}
                 ></button>
               </div>
               <div
