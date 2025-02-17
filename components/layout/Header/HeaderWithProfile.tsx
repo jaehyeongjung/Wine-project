@@ -7,7 +7,11 @@ import Link from 'next/link';
 import { fetchUserInfo } from '@/pages/api/wineApi';
 import { UserInfo } from '@/pages/myprofile/ProfileSection/ProfileSection';
 
-const Header: React.FC = () => {
+interface ImageComponentProps {
+  imageUrl: string;
+}
+
+const Header: React.FC<ImageComponentProps> = ({ imageUrl }) => {
   const { mode } = useDevice();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
