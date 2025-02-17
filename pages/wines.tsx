@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styles from './wines.module.css';
 import Header from '@/components/layout/Header/Header';
 import Input from '@/components/common/Input';
@@ -6,6 +6,8 @@ import StarRating from '@/components/common/StarRating';
 import useDevice from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
 import PriceSlide from '@/components/PriceSilde/PriceSlide';
+import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
+
 import Link from 'next/link';
 
 const Wines: React.FC = () => {
@@ -16,6 +18,9 @@ const Wines: React.FC = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value); // 검색어 상태 업데이트
   };
+
+  const [userImage, setUserImage] = useState('/images/wineProfile.svg');
+
   const wineList = [
     {
       id: 4,
@@ -43,6 +48,28 @@ const Wines: React.FC = () => {
         'Cherry, cocoa, vanilla and clove - beautiful red fruit driven Amarone. Low acidity and medium tannins. Nice long velvety finish.',
     },
   ];
+
+  //페이지가 Client-Side에 마운트 될 때까지 기다렸다가 localStorage에 접근하기
+  useEffect(() => {
+    // 클라이언트 사이드에서만 실행
+    if (typeof window !== 'undefined') {
+      // 로그인 상태 체크
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        setIsLogin(true);
+
+        // 유저 이미지 설정
+        const storedImage = localStorage.getItem('userImage');
+        if (storedImage) {
+          setUserImage(storedImage);
+        }
+      } else {
+        setIsLogin(false);
+        setUserImage('/images/wineProfile.svg');
+      }
+    }
+  }, []); // 컴포넌트 마운트 시 한 번만 실행
+  const [isLogin, setIsLogin] = useState(false);
 
   const getStarRatingSize = () => {
     if (mode === 'mobile') {
@@ -168,7 +195,12 @@ const Wines: React.FC = () => {
 
   return (
     <>
-      <Header />
+      {/* 로그인된 상태면 HeaderWithProfile을, 아니면 Header를 렌더링 */}
+      {isLogin === true ? (
+        <HeaderWithProfile imageUrl={userImage} />
+      ) : (
+        <Header />
+      )}
       <div
         className={`${styles.winesContainer} ${styles[`winesContainer_${mode}`]}`}
       >

@@ -608,6 +608,10 @@
   top: -375px;
 }
 
+.custom_input_wrapper input::-webkit-search-cancel-button {
+  display: none; 
+}
+
 .winesFilterBtn_tablet {
   width: 220px;
   height: 48px;
