@@ -30,7 +30,7 @@ const Wines: React.FC = () => {
   const [wineList, setWineList] = useState<Wine[]>([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value); // 검색어 상태 업데이트
+    setSearchQuery(e.target.value); //
   };
 
   useEffect(() => {
