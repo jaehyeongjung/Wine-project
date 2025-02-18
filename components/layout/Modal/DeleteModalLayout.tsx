@@ -25,6 +25,7 @@ const DeleteModalLayout = ({ closeModal, wineId, reviewId }: Props) => {
         console.log('리뷰 삭제 시작:', reviewId);
         await ReviewDelete(reviewId);
         console.log('리뷰 삭제 성공');
+        window.location.reload();
       }
 
       console.log('모달 닫기 전에 호출');

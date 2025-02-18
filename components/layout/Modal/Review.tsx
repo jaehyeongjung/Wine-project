@@ -9,6 +9,7 @@ import styles from './Review.module.css';
 
 interface ReviewData {
   wineName: string;
+  id: number;
   wineId?: number;
   reviewId?: number;
   rating?: number;
@@ -123,14 +124,11 @@ const Review = ({ closeModal, reviewData, type }: Props) => {
       ...(type === 'post' && { wineId: reviewData.wineId }),
     };
 
-    if (type === 'patch') {
-      console.log('수정할 리뷰 ID:', reviewData.id); // 확인용 로그
-    }
-
     try {
       if (type === 'post') await ReviewPost(data);
       if (type === 'patch') await ReviewPatch(reviewData.id, data);
       closeModal();
+      window.location.reload(); // 리뷰 수정 완료 후 새로고침
     } catch (error: any) {
       console.error('리뷰 등록 오류:', error.response?.data || error.message);
     }
