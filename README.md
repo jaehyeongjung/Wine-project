@@ -14,6 +14,8 @@
 
 이를 통해 사용자 피드백 기반 서비스를 구축하는 경험을 쌓을 수 있습니다.
 
+카카오톡 소셜 로그인을 지원 합니다.
+
 <br />
 
 ### 화면 구성
@@ -21,11 +23,6 @@
 <div style="overflow-x: auto;">
   <table style="white-space: nowrap;">
     <tr>
-      <td align="center">
-        <strong>랜딩 페이지</strong><br/>
-        <img src="https://github.com/rak517/Rolling/blob/dev/src/assets/images/mainPage.gif" width="450"/>
-        <p>랜딩 페이지</p>
-      </td>
     </tr> 
   </table>
 </div>
@@ -54,17 +51,10 @@
 ### Front-end
 
 <div>
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/JavaScript.png?raw=true" width="80">
+<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/TypeScript.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/React.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/HTMLCSS.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/StyledComponents.png?raw=true" width="80">
 
-</div>
-
-### Infra
-
-<div>
-<img src="./src/assets//icons/vercel.png" width="80">
 </div>
 
 ### Tools
@@ -115,11 +105,14 @@
 
 ## 💁‍♂️ 프로젝트 팀원
 
-| 팀장 | 팀원 | 팀원 | 팀원  
-| :————————————————————————————————————————————: | :————————————————————————————————————————————: | :————————————————————————————————————————————————: | :————————————————————————————————————————————————: |
+|                                            팀장                                             |                                            팀원                                             |                                                팀원                                                | 팀원          
+| :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
 | <img src="https://github.com/jaehyeongjung.png" alt="팀원0" style="width: 120px; height: 120px;"/> | <img src="https://github.com/woodfriday.png" alt="팀원1" style="width: 120px; height: 120px;"/> | <img src="https://github.com/sori4606.png" alt="팀원2" style="width: 120px; height: 120px;"/> | <img src="https://github.com/kimsoyoung96.png" alt="팀원3" style="width: 120px; height: 120px;"/> |
-| [정재형](https://github.com/jaehyeongjung) | [우영제](https://github.com/ko777y) | [송형진](https://github.com/sori4606) | [김소영](https://github.com/kimsoyoung96) |
+|                             [정재형](https://github.com/jaehyeongjung)                             |                             [우영제](https://github.com/ko777y)                             |                             [송형진](https://github.com/sori4606)                             | [김소영](https://github.com/kimsoyoung96)                             |
 
 <br />
 
 ## 🔗 배포링크
+
+https://wine-project.vercel.app/
+
