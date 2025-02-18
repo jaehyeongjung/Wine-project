@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import SliderGroup from '../SliderGroup';
-import Modal from '../Modal';
+import Modal from '@/components/common/Modal';
+import Review from '@/components/layout/Modal/Review';
+import DeleteModalLayout from '@/components/layout/Modal/DeleteModalLayout';
 import styles from './WineReview.module.css';
 import useDevice from '../../../hooks/useDevice';
 import {
@@ -13,6 +15,17 @@ import {
 import Image from 'next/image';
 import Button from '../Button';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ReviewDelete } from '@/pages/api/review';
+
+interface Props {
+  review: {
+    id: number;
+    content: string;
+    rating: number;
+    // 필요한 다른 필드들
+  };
+  closeModal: () => void;
+}
 
 const WineReview: React.FC = () => {
   const [reviewData, setReviewData] = useState<any>(null);
@@ -20,11 +33,24 @@ const WineReview: React.FC = () => {
   const [expandedReviews, setExpandedReviews] = useState<
     Record<string, boolean>
   >({});
-  const [showModal, setShowModal] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false); // 수정 모달 상태
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false); // 삭제 모달 상태
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+  }>({ top: 0, left: 0 }); // 모달 위치 상태
+  const [dropdownPosition, setDropdownPosition] = useState<{
+    top: number;
+    left: number;
+  }>({ top: 0, left: 0 }); // 드롭다운 위치 상태
   const router = useRouter();
   const { id } = router.query as { id?: string };
   const { mode } = useDevice();
-
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
+  const [selectedReview, setSelectedReview] = useState<any>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null); // 드롭다운 참조 추가
   const aromaMapping: Record<string, string> = {
     CHERRY: '체리',
     BERRY: '베리',
@@ -39,8 +65,8 @@ const WineReview: React.FC = () => {
     TROPICAL: '트로피컬',
     MINERAL: '미네랄',
     FLOWER: '꽃',
-    TABACCO: '담뱃잎',
-    SOIL: '흙',
+    TOBACCO: '담뱃잎',
+    EARTH: '흙',
     CHOCOLATE: '초콜릿',
     SPICE: '스파이스',
     CARAMEL: '카라멜',
@@ -58,9 +84,6 @@ const WineReview: React.FC = () => {
       [reviewId]: !prev[reviewId],
     }));
   };
-
-  const [offset, setOffset] = useState(0);
-  const limit = 5;
 
   const fetchReviewData = async () => {
     if (!id) return;
@@ -96,7 +119,7 @@ const WineReview: React.FC = () => {
     }
   };
 
-  //좋와요
+  // 좋아요 클릭 핸들러
   const toggleLike = async (reviewId: string, isLiked: boolean) => {
     try {
       setReviewData((prevData: any) => {
@@ -114,6 +137,74 @@ const WineReview: React.FC = () => {
       console.log('좋아요 요청 실패:', error);
     }
   };
+
+  // 이미지 클릭 시 모달 위치 설정
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    const { top, left, height } = e.currentTarget.getBoundingClientRect();
+    setDropdownPosition({
+      top: top + height + window.scrollY, // 드롭다운 위치 설정
+      left: left,
+    });
+
+    // 드롭다운 메뉴가 열린 상태로 표시
+    setIsEditOpen(false); // 수정 모달 닫기
+    setIsDeleteOpen(false); // 삭제 모달 닫기
+    setDropdownVisible(true); // 드롭다운 메뉴 보이게 설정
+  };
+
+  const handleEditClick = () => {
+    setIsEditOpen(true); // 수정 모달 열기
+    setIsDeleteOpen(false); // 삭제 모달 닫기
+    setDropdownVisible(false); // 드롭다운 메뉴 닫기
+  };
+
+  const handleDeleteClick = (review: any) => {
+    console.log('삭제할 리뷰:', review); // 리뷰 객체 확인
+    setSelectedReview(review); // 선택된 리뷰 설정
+    setIsDeleteOpen(true); // 삭제 모달 열기
+    setIsEditOpen(false); // 편집 모달 닫기
+    setDropdownVisible(false); // 드롭다운 메뉴 닫기
+  };
+
+  const closeModals = () => {
+    setIsEditOpen(false); // 수정 모달 닫기
+    setIsDeleteOpen(false); // 삭제 모달 닫기
+    setDropdownVisible(false); // 드롭다운 메뉴 닫기
+  };
+
+  // 외부 클릭 처리
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setIsEditOpen(false);
+        setIsDeleteOpen(false);
+        setDropdownVisible(false); // 드롭다운 메뉴도 닫기
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // 수정된 부분: Modal 위치가 초기화되지 않도록 `useEffect`에서 모달 위치를 처리
+  useEffect(() => {
+    // 페이지가 처음 로드될 때 모달 위치를 업데이트하지 않도록 조건 추가
+    if (isEditOpen) {
+      const modalElement = document.querySelector(`.${styles.test}`);
+      if (modalElement) {
+        const { top, left, height } = modalElement.getBoundingClientRect();
+        setModalPosition({
+          top: top + height + window.scrollY + 300, // 버튼 아래로 조정
+          left: left + 150,
+        });
+      }
+    }
+  }, [isEditOpen]);
 
   return (
     <div>
@@ -203,7 +294,7 @@ const WineReview: React.FC = () => {
                     alt="dropDown-btn"
                     width={24}
                     height={24}
-                    onClick={() => setShowModal(true)}
+                    onClick={handleDropdownClick} // 드롭다운 클릭 시 위치 설정
                   />
                 </div>
               </div>
@@ -276,15 +367,49 @@ const WineReview: React.FC = () => {
           ))}
         </InfiniteScroll>
       )}
+      <Modal
+        className={`${styles.patchModal} ${styles[`patchModal_${mode}`]}`}
+        showModal={isEditOpen}
+        closeModal={closeModals}
+        closeBtn={true}
+      >
+        <Review closeModal={closeModals} reviewData={reviewData} type="patch" />
+      </Modal>
 
-      {/* <Modal showModal={showModal} closeModal={() => setShowModal(false)}>
-        <div className={styles.option} onClick={() => alert('수정하기 테스트')}>
-          수정하기
-        </div>
-        <div className={styles.option} onClick={() => alert('삭제하기 테스트')}>
-          삭제하기
-        </div>
-      </Modal> */}
+      <Modal
+        className={`${styles.deleteModal} ${styles[`deleteModal_${mode}`]}`}
+        showModal={isDeleteOpen}
+        closeModal={closeModals}
+      >
+        {selectedReview && (
+          <DeleteModalLayout
+            reviewId={selectedReview.id}
+            closeModal={closeModals}
+          />
+        )}
+      </Modal>
+
+      {/* 드롭다운 메뉴 */}
+      {dropdownVisible && (
+        <ul
+          className={`${styles.modal} ${styles[`modal_${mode}`]}`}
+          style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
+          ref={dropdownRef}
+        >
+          <li
+            className={`${styles.fnSelect} ${styles[`fnSelect_${mode}`]}`}
+            onClick={handleEditClick} // 수정하기 클릭 시 수정 모달 열기
+          >
+            수정하기
+          </li>
+          <li
+            className={`${styles.fnSelect} ${styles[`fnSelect_${mode}`]}`}
+            onClick={handleDeleteClick} // 삭제하기 클릭 시 삭제 모달 열기
+          >
+            삭제하기
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
