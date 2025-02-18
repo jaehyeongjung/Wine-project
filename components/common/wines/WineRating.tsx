@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom'; // 포탈 사용
+import ReactDOM from 'react-dom';
 import { useRouter } from 'next/router';
 import styles from './wineRating.module.css';
 import useDevice from '../../../hooks/useDevice';
 import { getWineDetail } from '../../../pages/api/wines/wineReviewApi';
 import Button from '../Button';
 import Review from '../../layout/Modal/Review';
+import Modal from '@/components/common/Modal';
+import BottomSheet from '@/components/common/BottomSheet';
 
 const WineRating: React.FC = () => {
-  const { mode } = useDevice();
+  const { mode } = useDevice(); // `mode`만 반환되므로 이 값을 활용
+  const [wineData, setWineData] = useState<any>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const router = useRouter();
   const { id } = router.query;
   const wineId = Array.isArray(id) ? id[0] : id;
-  const [wineData, setWineData] = useState<any>(null);
-  const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
     if (typeof wineId === 'string') {
@@ -24,6 +26,8 @@ const WineRating: React.FC = () => {
       });
     }
   }, [wineId, router]);
+
+  const isMobile = mode === 'mobile';
 
   if (
     !wineData ||
@@ -143,27 +147,54 @@ const WineRating: React.FC = () => {
     </div>
   );
 
-  // const modal = showReviewModal
-  //   ? ReactDOM.createPortal(
-  //       <div className={styles.modalOverlay}>
-  //         <div className={styles.modalContent}>
-  //           <Review
-  //             closeModal={() => setShowReviewModal(false)}
-  //             reviewData={{ wineName: wineData.name, wineId: wineId }}
-  //             type="post"
-  //           />
-  //         </div>
-  //       </div>,
-  //       document.body,
-  //     )
-  //   : null;
+  const modal = showReviewModal
+    ? ReactDOM.createPortal(
+        <div>
+          <div>
+            {isMobile ? (
+              <BottomSheet
+                closeBtn
+                handleClose={() => setShowReviewModal(false)}
+                isBottomSheet={true}
+              >
+                <Review
+                  closeModal={() => setShowReviewModal(false)}
+                  reviewData={{
+                    wineName: wineData.name,
+                    wineId: Number(wineId),
+                  }}
+                  type="post"
+                />
+              </BottomSheet>
+            ) : (
+              <Modal
+                className={`${styles.reviewModalBox} ${styles[`reviewModalBox_${mode}`]}`}
+                showModal={showReviewModal}
+                closeModal={() => setShowReviewModal(false)}
+                closeBtn={true}
+              >
+                <Review
+                  closeModal={() => setShowReviewModal(false)}
+                  reviewData={{
+                    wineName: wineData.name,
+                    wineId: Number(wineId),
+                  }}
+                  type="post"
+                />
+              </Modal>
+            )}
+          </div>
+        </div>,
+        document.body,
+      )
+    : null;
 
   return (
     <div className={`${styles.ratingBox} ${styles[`ratingBox_${mode}`]}`}>
       {mode === 'desktop' && <DesktopLayout />}
       {mode === 'tablet' && <TabletLayout />}
       {mode === 'mobile' && <MobileLayout />}
-      {/* {modal} */}
+      {modal}
     </div>
   );
 };

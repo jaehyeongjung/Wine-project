@@ -12,8 +12,8 @@ interface Props {
 const DeleteModalLayout = ({ closeModal, wineId, reviewId }: Props) => {
   const handleRequest = async () => {
     try {
-      if (wineId) await ProductDelete(wineId);
-      if (reviewId) await ReviewDelete(reviewId);
+      if (wineId) await ProductDelete(wineId); // 와인 삭제
+      if (reviewId) await ReviewDelete(reviewId); // 리뷰 삭제
       closeModal();
     } catch (error: any) {
       console.error('삭제 오류:', error.response?.data || error.message);

@@ -7,6 +7,7 @@ import Button from '../components/common/Button';
 import Review from '../components/layout/Modal/Review';
 import styles from './test.module.css';
 import BottomSheet from '@/components/common/BottomSheet';
+import DropDown from '@/components/common/DropDown';
 
 export default function test() {
   const [showModal, setShowModal] = useState(false);
