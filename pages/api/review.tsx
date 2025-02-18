@@ -65,6 +65,8 @@ export const ReviewPost = async (data: ReviewType) => {
 // 리뷰 수정
 export const ReviewPatch = async (id: number | undefined, data: ReviewType) => {
   try {
+    console.log('id', id);
+    console.log('글구', data);
     if (id === undefined) {
       return null;
     }

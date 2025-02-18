@@ -76,6 +76,10 @@ const WineReview: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('selectedReview updated:', selectedReview);
+  }, [selectedReview]);
+
+  useEffect(() => {
     if (!router.isReady || !id) return;
     fetchReviewData();
   }, [id, router.isReady]);
@@ -143,7 +147,7 @@ const WineReview: React.FC = () => {
   };
 
   // 이미지 클릭 시 모달 위치 설정
-  const handleDropdownClick = (e: React.MouseEvent) => {
+  const handleDropdownClick = (review: any, e: React.MouseEvent) => {
     const { top, left, height } = e.currentTarget.getBoundingClientRect();
     setDropdownPosition({
       top: top + height + window.scrollY, // 드롭다운 위치 설정
@@ -154,10 +158,22 @@ const WineReview: React.FC = () => {
     setIsEditOpen(false); // 수정 모달 닫기
     setIsDeleteOpen(false); // 삭제 모달 닫기
     setDropdownVisible(true); // 드롭다운 메뉴 보이게 설정
+
+    // reviewData.reviews 배열에서 id가 review.id와 일치하는 리뷰를 찾기
+    const selectedReview = reviewData.reviews.find(
+      (item: any) => item.id === review.id,
+    );
+
+    // 선택된 리뷰를 상태에 저장
+    setSelectedReview(selectedReview || null);
+
+    setReviewId(review.id); // 선택된 리뷰 ID 저장
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (selectedReview: any) => {
+    console.log('수정할 리뷰:', selectedReview); // 리뷰 객체 확인
     setIsEditOpen(true); // 수정 모달 열기
+    setSelectedReview(selectedReview); // 선택된 리뷰 설정
     setIsDeleteOpen(false); // 삭제 모달 닫기
     setDropdownVisible(false); // 드롭다운 메뉴 닫기
   };
@@ -298,7 +314,7 @@ const WineReview: React.FC = () => {
                     alt="dropDown-btn"
                     width={24}
                     height={24}
-                    onClick={handleDropdownClick} // 드롭다운 클릭 시 위치 설정
+                    onClick={(e) => handleDropdownClick(review, e)} // 드롭다운 클릭 시 위치 설정
                   />
                 </div>
               </div>
@@ -377,7 +393,11 @@ const WineReview: React.FC = () => {
         closeModal={closeModals}
         closeBtn={true}
       >
-        <Review closeModal={closeModals} reviewData={reviewData} type="patch" />
+        <Review
+          closeModal={closeModals}
+          reviewData={selectedReview}
+          type="patch"
+        />
       </Modal>
 
       <Modal
@@ -387,7 +407,7 @@ const WineReview: React.FC = () => {
       >
         {selectedReview && (
           <DeleteModalLayout
-            reviewId={selectedReview.id}
+            reviewId={selectedReview}
             closeModal={closeModals}
           />
         )}
@@ -402,13 +422,13 @@ const WineReview: React.FC = () => {
         >
           <li
             className={`${styles.fnSelect} ${styles[`fnSelect_${mode}`]}`}
-            onClick={handleEditClick} // 수정하기 클릭 시 수정 모달 열기
+            onClick={() => handleEditClick(selectedReview)} // 수정하기 클릭 시 수정 모달 열기
           >
             수정하기
           </li>
           <li
             className={`${styles.fnSelect} ${styles[`fnSelect_${mode}`]}`}
-            onClick={handleDeleteClick} // 삭제하기 클릭 시 삭제 모달 열기
+            onClick={() => handleDeleteClick(reviewId)}
           >
             삭제하기
           </li>
