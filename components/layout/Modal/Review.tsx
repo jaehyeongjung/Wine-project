@@ -29,6 +29,7 @@ interface Props {
 }
 
 const Review = ({ closeModal, reviewData, type }: Props) => {
+  console.log('제대로 나와야하는디 ', reviewData);
   const { mode } = useDevice();
 
   // 별점 값 저장소
@@ -122,9 +123,13 @@ const Review = ({ closeModal, reviewData, type }: Props) => {
       ...(type === 'post' && { wineId: reviewData.wineId }),
     };
 
+    if (type === 'patch') {
+      console.log('수정할 리뷰 ID:', reviewData.id); // 확인용 로그
+    }
+
     try {
       if (type === 'post') await ReviewPost(data);
-      if (type === 'patch') await ReviewPatch(reviewData.reviewId, data);
+      if (type === 'patch') await ReviewPatch(reviewData.id, data);
       closeModal();
     } catch (error: any) {
       console.error('리뷰 등록 오류:', error.response?.data || error.message);
