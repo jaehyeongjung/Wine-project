@@ -394,9 +394,9 @@ const WineReview: React.FC = () => {
       {/* 리뷰 없을 때 등록하기 모달 또는 바텀시트 */}
       {isMobile ? (
         <BottomSheet
-          closeBtn={true}
+          closeBtn
           handleClose={() => setShowReviewModal(false)}
-          isBottomSheet={true}
+          isBottomSheet={false}
         >
           <Review
             closeModal={() => setShowReviewModal(false)}
