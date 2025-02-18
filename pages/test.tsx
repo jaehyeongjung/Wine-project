@@ -95,8 +95,8 @@ export default function test() {
             <RegisterModalLayout
               isScreen
               closeModal={handleClose}
-              wineId={804}
-              type="patch"
+              // wineId={804}
+              type="post"
             />
           </BottomSheet>
         ) : (
@@ -107,8 +107,8 @@ export default function test() {
           >
             <RegisterModalLayout
               closeModal={handleClose}
-              wineId={804}
-              type="patch"
+              // wineId={804}
+              type="post"
             />
           </Modal>
         )} */}

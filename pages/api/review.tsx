@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// 필요한 메서드 : 리뷰등록/삭제/수정
+// 필요한 메서드 : 리뷰 가져오기 / 등록 / 삭제 / 수정
 
 // 리뷰 등록 및 수정
 interface ReviewType {
@@ -27,6 +27,27 @@ const getAuthHeaders = () => {
   };
 };
 
+// 내가 등록한 와인 리뷰
+export const MyReviews = async (limit: number) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/me/reviews`, {
+      params: { limit },
+      ...getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      '내가 작성한 리뷰 목록 불러오기 오류:',
+      error.response?.data || error.message,
+    );
+
+    throw new Error(
+      error.response?.data?.message || '데이터 요청 중 오류 발생',
+    );
+  }
+};
+
+// 신규 리뷰 등록
 export const ReviewPost = async (data: ReviewType) => {
   try {
     const response = await axios.post(
@@ -41,6 +62,7 @@ export const ReviewPost = async (data: ReviewType) => {
   }
 };
 
+// 리뷰 수정
 export const ReviewPatch = async (id: number | undefined, data: ReviewType) => {
   try {
     if (id === undefined) {
@@ -58,6 +80,7 @@ export const ReviewPatch = async (id: number | undefined, data: ReviewType) => {
   }
 };
 
+// 리뷰 삭제
 export const ReviewDelete = async (id: number) => {
   try {
     const response = await axios.delete(
