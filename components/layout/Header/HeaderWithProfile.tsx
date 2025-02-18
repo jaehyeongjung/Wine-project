@@ -12,7 +12,7 @@ interface ImageComponentProps {
   imageUrl: string;
 }
 
-const Header: React.FC<ImageComponentProps> = ({ imageUrl }) => {
+const Header: React.FC = () => {
   const { mode } = useDevice();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);

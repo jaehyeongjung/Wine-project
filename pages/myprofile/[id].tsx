@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../api/wineApi';
 import { MyWineData } from '../api/product';
 import { MyReviews } from '../api/review';
-
 import ProfileSection from './ProfileSection/ProfileSection';
 import useDevice from '@/hooks/useDevice';
 import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
