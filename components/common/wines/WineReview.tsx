@@ -36,6 +36,8 @@ const WineReview: React.FC = () => {
   const [isEditOpen, setIsEditOpen] = useState(false); // 수정 모달 상태
   const [isDeleteOpen, setIsDeleteOpen] = useState(false); // 삭제 모달 상태
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [reviewId, setReviewId] = useState<number | null>(null); // 상태 정의
+
   const [modalPosition, setModalPosition] = useState<{
     top: number;
     left: number;
@@ -108,6 +110,8 @@ const WineReview: React.FC = () => {
         if (newReviews.length < limit) {
           setHasMore(false);
         }
+
+        setReviewId(data.reviews[0]?.id);
 
         return { ...prevData, reviews: [...prevData.reviews, ...newReviews] };
       });
