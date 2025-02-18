@@ -122,11 +122,23 @@ export const ReviewCard = ({
     aroma: aroma,
   };
 
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 전파를 막아서 goToWineDetail이 실행되지 않도록 합니다.
+    setIsDropDown(!isDropDown);
+  };
+
+  const handleWineDetailClick = (e: React.MouseEvent) => {
+    // 드롭다운을 클릭하지 않았을 때만 라우트가 실행되도록 처리
+    if (!isDropDown) {
+      goToWineDetail();
+    }
+  };
+
   return (
     <div
       ref={dropDownRef}
       className={`${styles.myComment} ${styles[`myComment_${mode}`]}`}
-      onClick={goToWineDetail}
+      onClick={handleWineDetailClick}
     >
       <div
         className={`${styles.myCommentMap} ${styles[`myCommentMap_${mode}`]}`}
@@ -162,7 +174,7 @@ export const ReviewCard = ({
             </div>
             <div className={styles.dropDownBox}>
               <div
-                onClick={() => setIsDropDown(!isDropDown)}
+                onClick={handleDropdownClick}
                 className={styles.myCommentInnerDropdown}
               >
                 <Image

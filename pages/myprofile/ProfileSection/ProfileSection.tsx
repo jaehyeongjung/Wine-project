@@ -47,30 +47,20 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ name, photoUrl }) => {
       // 이미지 url 받아오고
       const response = await ImagePost(formData);
       // 현재 유저 정보 먼저 가져오기
-      const currentUserData = await fetchUserInfo();
 
       if (response.url) {
         console.log('이미지 URL:', response.url); // URL 확인
-        console.log('현재 유저 닉네임 : ', currentUserData.nickname);
-        setImageFile(response.url);
-        // 1. 새 이미지 URL로 userInfo 업데이트
-        if (userInfo) {
-          const updatedUserInfo = {
-            ...userInfo,
-            image: response.url,
-          };
-          setUserInfo(updatedUserInfo);
-        }
+        console.log('현재 유저 닉네임 : ', userInfo?.nickname);
 
         // 프로필 업데이트 API 호출
-        await updateUserProfile(response.url, currentUserData.nickname);
+        await updateUserProfile(response.url, userInfo?.nickname || '');
 
         // 최신 정보로 다시 불러오기
-        const userData = await fetchUserInfo();
-        setUserInfo(userData);
+        const updatedData = await fetchUserInfo();
+        setUserInfo(updatedData);
 
-        setPreviewUrl(URL.createObjectURL(file));
         alert('프로필이 업데이트 되었습니다');
+        router.reload();
       } else {
         console.error('업로드된 URL이 없습니다:', response);
       }
@@ -138,7 +128,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ name, photoUrl }) => {
             style={{ cursor: 'pointer' }}
           >
             <img
-              src={previewUrl || userInfo?.image || defaultImage}
+              src={userInfo?.image || defaultImage}
               alt="프로필 이미지"
               onError={(e) => {
                 e.currentTarget.src = defaultImage;
