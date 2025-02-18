@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../api/wineApi';
 import { MyWineData } from '../api/product';
 import { MyReviews } from '../api/review';
-
 import ProfileSection from './ProfileSection/ProfileSection';
-import Header from '@/components/layout/Header/HeaderWithProfile';
 import useDevice from '@/hooks/useDevice';
+import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
 import styles from './[id].module.css';
 import { WineCard } from './DataCard/WineCard';
 import { ReviewCard } from './DataCard/ReviewCard';
@@ -61,6 +60,12 @@ const MyProfile: React.FC = () => {
 
   // users정보 가져오기
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      router.push('/login');
+      return;
+    }
+
     const getUserInfo = async () => {
       try {
         const data = await fetchUserInfo();
@@ -125,7 +130,7 @@ const MyProfile: React.FC = () => {
 
   return (
     <>
-      <Header imageUrl={userInfo.profileImage} />
+      <HeaderWithProfile />
       <div
         className={`${styles.profileContainer} ${styles[`profileContainer_${mode}`]}`}
       >
