@@ -1,0 +1,236 @@
+.Registerwine {
+  height: 270px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.Registerwine_tablet {
+  width: 704px;
+}
+
+.Registerwine_mobile {
+  width: 343px;
+  height: 164px;
+}
+
+.RegisterwineMap {
+  width: 100%;
+  height: 228px;
+  border-radius: 16px;
+  border: 1px solid #cfdbea;
+  display: flex;
+  align-items: center;
+}
+
+.RegisterwineMap_mobile {
+  width: 100%;
+  height: 164px;
+  border-radius: 12px;
+}
+
+.RegisterwineImg {
+  width: 76px;
+  height: 270px;
+  margin-left: 60px;
+  margin-top: -43px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.RegisterwineImg_mobile {
+  width: 53px;
+  height: 185px;
+  margin-left: 20px;
+  margin-top: -23px;
+}
+
+.RegisterwineImg_mobile img {
+  width: 105%;
+}
+
+.RegisterwineImg img {
+  width: 105%;
+}
+
+.RegisterwineData {
+  width: 584px;
+  height: 158px;
+  margin-left: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.RegisterwineData_tablet {
+  width: 490px;
+}
+
+.RegisterwineData_mobile {
+  width: 230px;
+  height: 127.5px;
+  margin-left: 20px;
+}
+
+.RegisterwineDataText {
+  height: 111px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.RegisterwineDataText_mobile {
+  height: 91.5px;
+  width: 100%;
+}
+
+.RegisterwineDataPrice {
+  width: 114px;
+  height: 37px;
+  background-color: var(--purple10);
+  color: var(--purple100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.RegisterwineDataPrice_mobile {
+  width: 86px;
+  height: 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24gpx;
+}
+
+.RegisterwineDataTextDetail {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RegisterwineDataTextDetail_mobile {
+  width: 187px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RegisterwineDataTextDropdown {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.RegisterwineDataTextDropdown_mobile {
+  width: 24px;
+  height: 24px;
+}
+
+.RegisterwineDataTextDetailTitle {
+  width: 100%;
+  height: 72px;
+  color: var(--gray800);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 35.8px;
+}
+
+.RegisterwineDataTextDetailTitle_mobile {
+  width: 100%;
+  height: 48px;
+  font-size: 20px;
+  line-height: 23.87px;
+}
+
+.RegisterwineDataTextDetailFrom {
+  width: 198px;
+  height: 26px;
+  color: var(--gray500);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.RegisterwineDataTextDetailFrom_mobile {
+  width: 187px;
+  height: 24px;
+  color: var(--gray500);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.RegisterwineContainer {
+  width: 800px;
+  min-height: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.RegisterwineContainer_tablet {
+  width: 704px;
+  min-height: 640px;
+}
+
+.RegisterwineContainer_mobile {
+  width: 343px;
+  min-height: 500px;
+}
+
+.dropDownBox {
+  position: relative;
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 34px;
+  right: 0px;
+  width: 126px;
+  height: 104px;
+  border: 1px solid var(--gray200);
+  border-radius: 16px;
+  z-index: 3;
+  background-color: white;
+}
+
+.dropdown_item {
+  width: 126px;
+  height: 52px;
+  padding: 16px 28px;
+  border-radius: 16px;
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.dropdown_item:hover {
+  background-color: var(--purple10);
+}
+
+.deleteModalBox {
+  max-height: 182px;
+  padding: 32px 16px 24px;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.04);
+}
+
+.registerModalBox {
+  padding: 24px;
+  width: 460px;
+}
+
+.registerModalBox_mobile {
+  width: 375px;
+}

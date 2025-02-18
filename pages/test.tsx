@@ -62,7 +62,7 @@ export default function test() {
     <div>
       <h1>삭제하기 버튼 모달 테스트</h1>
       <div>
-        {/* <Button
+        <Button
           onClick={handleOpen}
           type="default"
           size="width96x42"
@@ -76,12 +76,12 @@ export default function test() {
           closeModal={handleClose}
         >
           <DeleteModalLayout wineId={801} closeModal={handleClose} />
-        </Modal> */}
+        </Modal>
       </div>
       <br />
       <div>
         <h1>와인 등록 모달 테스트</h1>
-        <Button
+        {/* <Button
           onClick={handleOpen}
           type="default"
           size="width96x42"
@@ -94,8 +94,8 @@ export default function test() {
             <RegisterModalLayout
               isScreen
               closeModal={handleClose}
-              wineId={804}
-              type="patch"
+              // wineId={804}
+              type="post"
             />
           </BottomSheet>
         ) : (
@@ -106,11 +106,11 @@ export default function test() {
           >
             <RegisterModalLayout
               closeModal={handleClose}
-              wineId={804}
-              type="patch"
+              // wineId={804}
+              type="post"
             />
           </Modal>
-        )}
+        )} */}
       </div>
       <br />
       <div>
