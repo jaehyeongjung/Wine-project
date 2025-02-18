@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import styles from './[id].module.css';
 import ProfileSection from './ProfileSection/ProfileSection';
 import MyUploadSection from './MyUploadSection/MyUploadSection';
-import Header from '@/components/layout/Header/HeaderWithProfile';
 import useDevice from '@/hooks/useDevice';
 import { fetchUserInfo } from '../api/wineApi';
 import { useEffect, useState } from 'react';
+import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
 
 // const dummyProfiles: Record<
 //   string,
@@ -39,6 +39,12 @@ const MyProfile: React.FC = () => {
 
   // users정보 가져오기
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      router.push('/login');
+      return;
+    }
+
     const getUserInfo = async () => {
       try {
         const data = await fetchUserInfo();
@@ -60,7 +66,7 @@ const MyProfile: React.FC = () => {
 
   return (
     <>
-      <Header imageUrl={userInfo.profileImage} />
+      <HeaderWithProfile />
       <div
         className={`${styles.profileContainer} ${styles[`profileContainer_${mode}`]}`}
       >

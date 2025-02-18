@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { fetchUserInfo } from '@/pages/api/wineApi';
 import { UserInfo } from '@/pages/myprofile/ProfileSection/ProfileSection';
+import Cookies from 'js-cookie';
 
 const Header: React.FC = () => {
   const { mode } = useDevice();
@@ -15,6 +16,11 @@ const Header: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      return; // 토큰이 없으면 API 호출하지 않음
+    }
+
     const getUserInfo = async () => {
       try {
         const data = await fetchUserInfo();
@@ -56,9 +62,12 @@ const Header: React.FC = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('userImage');
+    Cookies.remove('accessToken', { path: '/' });
 
     setIsOpen(false);
-    router.push('/');
+    router.push('/').then(() => {
+      window.location.reload();
+    });
   };
 
   if (!mode) return null;

@@ -19,46 +19,42 @@ const Home: NextPage = () => {
 
   //페이지가 Client-Side에 마운트 될 때까지 기다렸다가 localStorage에 접근하기
   useEffect(() => {
-    // 클라이언트 사이드에서만 실행
-    if (typeof window !== 'undefined') {
-      // 로그인 상태 체크
-      const accessToken = localStorage.getItem('accessToken');
-      if (accessToken) {
-        setIsLogin(true);
+    const checkLoginStatus = async () => {
+      // 클라이언트 사이드 체크
+      if (typeof window === 'undefined') return;
 
-        // 유저 이미지 설정
-        const storedImage = localStorage.getItem('userImage');
-        if (storedImage) {
-          setUserImage(storedImage);
-        }
-      } else {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
         setIsLogin(false);
         setUserImage('/images/wineProfile.svg');
-      }
-    }
-  }, []); // 컴포넌트 마운트 시 한 번만 실행
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      const token = localStorage.getItem('accessToken');
-      if (!token) {
-        setIsLogin(false);
         return;
       }
 
       try {
-        const userData = await fetchUserInfo(); // API 호출
-        setUserImage(userData.image || '/images/wineProfile.svg');
+        // 초기 상태 설정 (로컬스토리지 기반)
         setIsLogin(true);
+        const storedImage = localStorage.getItem('userImage');
+        if (storedImage) {
+          setUserImage(storedImage);
+        }
+
+        // API를 통한 최신 데이터 확인
+        const userData = await fetchUserInfo();
+        if (userData.image) {
+          setUserImage(userData.image);
+          localStorage.setItem('userImage', userData.image); // 최신 이미지로 업데이트
+        }
       } catch (error) {
         console.error('사용자 정보 불러오기 실패:', error);
         setIsLogin(false);
         setUserImage('/images/wineProfile.svg');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userImage');
       }
     };
 
     checkLoginStatus();
-  }, []);
+  }, []); // 컴포넌트 마운트 시 한 번만 실행
 
   return (
     <div className={indexStyles.container}>
@@ -68,7 +64,7 @@ const Home: NextPage = () => {
       </Head>
 
       {/* 로그인된 상태면 HeaderWithProfile을, 아니면 Header를 렌더링 */}
-      {isLogin === true ? <HeaderWithProfile /> : <Header />}
+      {isLogin ? <HeaderWithProfile /> : <Header />}
 
       <main
         className={`${indexStyles.main_section} ${indexStyles[`main_section_${mode}`]}`}
