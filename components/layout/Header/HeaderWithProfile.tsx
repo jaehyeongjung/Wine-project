@@ -8,7 +8,11 @@ import { fetchUserInfo } from '@/pages/api/wineApi';
 import { UserInfo } from '@/pages/myprofile/ProfileSection/ProfileSection';
 import Cookies from 'js-cookie';
 
-const Header: React.FC = () => {
+interface ImageComponentProps {
+  imageUrl: string;
+}
+
+const Header: React.FC<ImageComponentProps> = ({ imageUrl }) => {
   const { mode } = useDevice();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);

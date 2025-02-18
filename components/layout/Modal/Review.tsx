@@ -9,7 +9,7 @@ import styles from './Review.module.css';
 
 interface ReviewData {
   wineName: string;
-  wineId: number;
+  wineId?: number;
   reviewId?: number;
   rating?: number;
   taste?: {
@@ -61,8 +61,8 @@ const Review = ({ closeModal, reviewData, type }: Props) => {
     { name: '트로피컬', selected: false, value: 'TROPICAL' },
     { name: '미네랄', selected: false, value: 'MINERAL' },
     { name: '꽃', selected: false, value: 'FLOWER' },
-    { name: '담뱃잎', selected: false, value: 'TABACCO' },
-    { name: '흙', selected: false, value: 'SOIL' },
+    { name: '담뱃잎', selected: false, value: 'TOBACCO' }, //스웨거 Schema 상으로 TOBACCO
+    { name: '흙', selected: false, value: 'EARTH' }, //스웨거 Schema 상으로 EARTH
     { name: '초콜릿', selected: false, value: 'CHOCOLATE' },
     { name: '스파이스', selected: false, value: 'SPICE' },
     { name: '카라멜', selected: false, value: 'CARAMEL' },
