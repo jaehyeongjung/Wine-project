@@ -9,7 +9,7 @@ import styles from './Review.module.css';
 
 interface ReviewData {
   wineName: string;
-  id: number;
+  id?: number;
   wineId?: number;
   reviewId?: number;
   rating?: number;
