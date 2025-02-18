@@ -6,7 +6,7 @@ import SliderGroup from '../SliderGroup';
 import Modal from '@/components/common/Modal';
 import Review from '@/components/layout/Modal/Review';
 import DeleteModalLayout from '@/components/layout/Modal/DeleteModalLayout';
-import styles from './WineReview.module.css';
+import styles from './wineReview.module.css';
 import useDevice from '../../../hooks/useDevice';
 import {
   getWineDetail,
