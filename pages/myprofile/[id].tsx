@@ -7,8 +7,8 @@ import ProfileSection from './ProfileSection/ProfileSection';
 import useDevice from '@/hooks/useDevice';
 import HeaderWithProfile from '@/components/layout/Header/HeaderWithProfile';
 import styles from './[id].module.css';
-import { WineCard } from './DataCard/WineCard';
-import { ReviewCard } from './DataCard/ReviewCard';
+import { WineCard } from '../../components/common/DataCard/WineCard';
+import { ReviewCard } from '../../components/common/DataCard/ReviewCard';
 import Image from 'next/image';
 
 interface Wine {
@@ -32,6 +32,10 @@ interface Reviews {
   content: string;
   wineId: Number;
   createdAt: string;
+  wine: {
+    id: number;
+    name: string;
+  };
 }
 
 interface UserInfo {
