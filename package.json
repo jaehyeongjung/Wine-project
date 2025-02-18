@@ -14,8 +14,8 @@
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.4.2",
+    "js-cookie": "^3.0.5",
     "next": "15.1.6",
-    "next-auth": "^4.24.11",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-infinite-scroll-component": "^6.1.0",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "22.13.1",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",

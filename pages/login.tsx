@@ -7,8 +7,9 @@ import Image from 'next/image';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { postOAuthLogin, postSignIn } from '@/pages/api/wineApi';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { BASE_URL, postOAuthLogin, postSignIn } from '@/pages/api/wineApi';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Login: NextPage = () => {
   const { mode } = useDevice();
@@ -17,7 +18,81 @@ const Login: NextPage = () => {
   const [pwd, setPwd] = useState('');
   const [pwdError, setPwdError] = useState('');
   const router = useRouter();
-  const { data: session } = useSession();
+
+  const handleKakaoLogin = () => {
+    //카카오 로그인 처리
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code&state=KAKAO`;
+
+    console.log('Constructed Kakao Auth URL:', kakaoAuthUrl);
+
+    window.location.href = kakaoAuthUrl; // 카카오 동의하기 화면 보여주기, 인증 후 인증코드를 받아오기 위해 redirect_uri설정.
+  };
+
+  const exchangeCodeForToken = async (
+    provider: 'KAKAO',
+    code: { redirectUri: string; token: string },
+  ) => {
+    console.log('Using BASE_URL:', BASE_URL);
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/auth/signIn/${provider}`,
+        code,
+      );
+      console.log('내가 받은 response는 :', response);
+      return response;
+    } catch (error) {
+      console.warn(`${provider} 로그인 실패:`, error);
+    }
+  }; //카카오 로그인 후 인증 코드를 서버에 보내서 엑세스 토큰과 리프레시 토큰을 받아온다.
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const kakaoCode = params.get('code');
+    const state = params.get('state');
+    //카카오 로그인 후 리다이렉트 url에서 code와 state를 추출하여 인증 진행
+
+    console.log('Current URL:', window.location.href);
+    console.log('Search params:', window.location.search);
+    console.log('State:', state);
+    console.log('Code:', kakaoCode);
+
+    if (state === 'KAKAO' && kakaoCode) {
+      console.log('인가 코드 확인:', kakaoCode); // 디버깅 코드
+
+      const KAKAO_REDIRECT_URL =
+        process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL || 'default_redirect_url';
+
+      exchangeCodeForToken('KAKAO', {
+        redirectUri: KAKAO_REDIRECT_URL,
+        token: kakaoCode,
+      })
+        .then((response) => {
+          console.log('Full response:', response); // 전체 응답 로깅
+          if (response && response.data) {
+            //서버에서 응답하면 토큰 불러오기
+            const accessToken = response.data.accessToken;
+            const refreshToken = response.data.refreshToken;
+
+            if (accessToken && refreshToken) {
+              localStorage.setItem('accessToken', accessToken);
+              localStorage.setItem('refreshToken', refreshToken);
+              localStorage.setItem('userImage', response.data.user.image);
+              Cookies.set('accessToken', accessToken, {
+                expires: 0.1,
+                path: '/',
+              });
+
+              console.log('토큰 저장 완료', { accessToken, refreshToken }); // 토큰 저장확인
+              router.push('/');
+            }
+          }
+        })
+        .catch((error) => {
+          console.error('카카오 로그인 오류:', error);
+        });
+    }
+  }, [router]);
 
   const emailSchema = z.object({
     email: z
@@ -81,7 +156,10 @@ const Login: NextPage = () => {
         localStorage.setItem('accessToken', result.accessToken);
         localStorage.setItem('refreshToken', result.refreshToken);
         localStorage.setItem('userImage', result.user.image);
-        document.cookie = `accessToken=${result.accessToken}; path=/`; // 쿠키에도 적용
+        Cookies.set('accessToken', result.accessToken, {
+          expires: 0.1,
+          path: '/',
+        });
         router.push('/');
       } catch (error: any) {
         alert(`
@@ -90,13 +168,6 @@ const Login: NextPage = () => {
     }
   };
 
-  const handleOAuthLogin = async (provider: string) => {
-    try {
-      await signIn(provider);
-    } catch (error) {
-      console.error('로그인 중 에러발생:', error);
-    }
-  };
   return (
     <div className={styles.login_background}>
       <main
@@ -189,7 +260,7 @@ const Login: NextPage = () => {
               color="white"
               text="Google로 시작하기"
               textColor="black"
-              onClick={() => handleOAuthLogin('google')}
+              onClick={handleKakaoLogin}
             />
 
             <Button
@@ -199,7 +270,7 @@ const Login: NextPage = () => {
               color="white"
               text="kakao로 시작하기"
               textColor="black"
-              onClick={() => handleOAuthLogin('kakao')}
+              onClick={handleKakaoLogin}
             />
           </div>
         </form>

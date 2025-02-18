@@ -84,6 +84,11 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ name, photoUrl }) => {
 
   //처음 렌더링되었을 때 유저정보 가져오기.
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      return; // 토큰이 없으면 API 호출하지 않음
+    }
+
     const getUserInfo = async () => {
       try {
         const data = await fetchUserInfo();
