@@ -1,5 +1,4 @@
 import useDevice from '@/hooks/useDevice';
-
 import styles from './ReviewCard.module.css';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -8,9 +7,11 @@ import DeleteModalLayout from '@/components/layout/Modal/DeleteModalLayout';
 import BottomSheet from '@/components/common/BottomSheet';
 import RegisterModalLayout from '@/components/layout/Modal/RegisterModalLayout';
 import Review from '@/components/layout/Modal/Review';
+import { useRouter } from 'next/router';
 
 interface Reviews {
   reviewId: number;
+  wineId: number;
   wineName: string;
   content: string;
   created: string;
@@ -24,6 +25,7 @@ interface Reviews {
 
 export const ReviewCard = ({
   reviewId,
+  wineId,
   wineName,
   content,
   created,
@@ -34,6 +36,8 @@ export const ReviewCard = ({
   softAcidic,
   aroma,
 }: Reviews) => {
+  console.log('wineId:', wineId);
+  const router = useRouter();
   const [isDropDown, setIsDropDown] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPatchModal, setShowPatchModal] = useState(false);
@@ -41,6 +45,10 @@ export const ReviewCard = ({
   const [isScreen, setIsScreen] = useState(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
   const { mode } = useDevice();
+
+  const goToWineDetail = () => {
+    router.push(`/wines/${wineId}`);
+  };
 
   const handleClickOutside = useCallback((e: MouseEvent) => {
     if (
@@ -101,6 +109,7 @@ export const ReviewCard = ({
 
   const ReviewPatchData = {
     reviewId: reviewId,
+    wineId: wineId,
     wineName: wineName,
     rating: rating,
     content: content,
@@ -117,6 +126,7 @@ export const ReviewCard = ({
     <div
       ref={dropDownRef}
       className={`${styles.myComment} ${styles[`myComment_${mode}`]}`}
+      onClick={goToWineDetail}
     >
       <div
         className={`${styles.myCommentMap} ${styles[`myCommentMap_${mode}`]}`}

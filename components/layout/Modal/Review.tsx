@@ -9,6 +9,7 @@ import styles from './Review.module.css';
 
 interface ReviewData {
   wineName: string;
+  id: number;
   wineId?: number;
   reviewId?: number;
   rating?: number;
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const Review = ({ closeModal, reviewData, type }: Props) => {
+  console.log('제대로 나와야하는디 ', reviewData);
   const { mode } = useDevice();
 
   // 별점 값 저장소
@@ -124,8 +126,9 @@ const Review = ({ closeModal, reviewData, type }: Props) => {
 
     try {
       if (type === 'post') await ReviewPost(data);
-      if (type === 'patch') await ReviewPatch(reviewData.reviewId, data);
+      if (type === 'patch') await ReviewPatch(reviewData.id, data);
       closeModal();
+      window.location.reload(); // 리뷰 수정 완료 후 새로고침
     } catch (error: any) {
       console.error('리뷰 등록 오류:', error.response?.data || error.message);
     }
