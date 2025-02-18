@@ -16,6 +16,7 @@ import Image from 'next/image';
 import Button from '../Button';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ReviewDelete } from '@/pages/api/review';
+import BottomSheet from '@/components/common/BottomSheet';
 
 interface Props {
   review: {
@@ -33,22 +34,25 @@ const WineReview: React.FC = () => {
   const [expandedReviews, setExpandedReviews] = useState<
     Record<string, boolean>
   >({});
-  const [isEditOpen, setIsEditOpen] = useState(false); // 수정 모달 상태
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false); // 삭제 모달 상태
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [reviewId, setReviewId] = useState<number | null>(null); // 상태 정의
-
+  const [reviewId, setReviewId] = useState<number | null>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [wineData, setWineData] = useState<any>(null);
   const [modalPosition, setModalPosition] = useState<{
     top: number;
     left: number;
-  }>({ top: 0, left: 0 }); // 모달 위치 상태
+  }>({ top: 0, left: 0 });
   const [dropdownPosition, setDropdownPosition] = useState<{
     top: number;
     left: number;
-  }>({ top: 0, left: 0 }); // 드롭다운 위치 상태
+  }>({ top: 0, left: 0 });
   const router = useRouter();
   const { id } = router.query as { id?: string };
+  const wineId = Array.isArray(id) ? id[0] : id;
   const { mode } = useDevice();
+  const isMobile = mode === 'mobile';
   const [offset, setOffset] = useState(0);
   const limit = 5;
   const [selectedReview, setSelectedReview] = useState<any>(null);
@@ -83,6 +87,10 @@ const WineReview: React.FC = () => {
     if (!router.isReady || !id) return;
     fetchReviewData();
   }, [id, router.isReady]);
+
+  const handleReviewButtonClick = () => {
+    setShowReviewModal(true); // 버튼 클릭 시 모달 열기
+  };
 
   const toggleExpanded = (reviewId: string) => {
     setExpandedReviews((prev) => ({
@@ -247,6 +255,7 @@ const WineReview: React.FC = () => {
             color="purple"
             textColor="white"
             text="리뷰 남기기"
+            onClick={handleReviewButtonClick} // 버튼 클릭 시 바텀시트 열기
           />
         </div>
       ) : (
@@ -387,6 +396,42 @@ const WineReview: React.FC = () => {
           ))}
         </InfiniteScroll>
       )}
+
+      {/* 리뷰 없을 때 등록하기 모달 또는 바텀시트 */}
+      {isMobile ? (
+        <BottomSheet
+          closeBtn
+          handleClose={() => setShowReviewModal(false)}
+          isBottomSheet={false}
+        >
+          <Review
+            closeModal={() => setShowReviewModal(false)}
+            reviewData={{
+              wineName: wineData?.name || '알 수 없음',
+              wineId: Number(wineId),
+            }}
+            type="post"
+          />
+        </BottomSheet>
+      ) : (
+        <Modal
+          className={`${styles.reviewModalBox} ${styles[`reviewModalBox_${mode}`]}`}
+          showModal={showReviewModal}
+          closeModal={() => setShowReviewModal(false)}
+          closeBtn={true}
+        >
+          <Review
+            closeModal={() => setShowReviewModal(false)}
+            reviewData={{
+              wineName: wineData?.name || '알 수 없음',
+              wineId: Number(wineId),
+            }}
+            type="post"
+          />
+        </Modal>
+      )}
+
+      {/* 리뷰 수정하기, 바텀시트 미적용 */}
       <Modal
         className={`${styles.patchModal} ${styles[`patchModal_${mode}`]}`}
         showModal={isEditOpen}
@@ -400,6 +445,7 @@ const WineReview: React.FC = () => {
         />
       </Modal>
 
+      {/* 리뷰 삭제하기 */}
       <Modal
         className={`${styles.deleteModal} ${styles[`deleteModal_${mode}`]}`}
         showModal={isDeleteOpen}

@@ -43,7 +43,7 @@ interface UserInfo {
 const MyProfile: React.FC = () => {
   const [wineData, setWineData] = useState<Wine[]>([]);
   const [reviewData, setReviewData] = useState<Reviews[]>([]);
-  const [reviewWineName, setReviewWineName] = useState('');
+  // const [reviewWineName, setReviewWineName] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [wineTotalCount, setWineTotalCount] = useState<number>(0);
@@ -85,7 +85,7 @@ const MyProfile: React.FC = () => {
     const fetchData = async () => {
       try {
         switch (selectedTab) {
-          case 'wine':
+          case 'wine': {
             const responseWine = await MyWineData(limit);
             setWineData(
               responseWine.list.sort(
@@ -96,19 +96,20 @@ const MyProfile: React.FC = () => {
             );
             setWineTotalCount(responseWine.totalCount);
             break;
+          }
 
-          case 'comment':
+          case 'comment': {
             const responseReviews = await MyReviews(limit);
-            setReviewData(
-              responseReviews.list.sort(
-                (a: Reviews, b: Reviews) =>
-                  new Date(b.createdAt).getTime() -
-                  new Date(a.createdAt).getTime(),
-              ),
+            const sortedReviews = responseReviews.list.sort(
+              (a: Reviews, b: Reviews) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime(),
             );
-            setReviewWineName(responseReviews.list[0]?.wine?.name);
+
+            setReviewData(sortedReviews);
             setReviewTotalCount(responseReviews.totalCount);
             break;
+          }
         }
       } catch (err: any) {
         setError(err.message || '데이터를 불러오는 중 오류 발생');
@@ -118,7 +119,11 @@ const MyProfile: React.FC = () => {
     };
 
     fetchData();
-  }, [limit, id, selectedTab, wineData.length]);
+  }, [limit, selectedTab]); // ✅ 불필요한 의존성 제거
+
+  useEffect(() => {
+    console.warn('현재 reviewData:', reviewData);
+  }, [reviewData]);
 
   // id가 없거나 임시 데이터에 없는 id가 들어오면 기본 메시지 표시
   if (!id || !userInfo) {
@@ -176,7 +181,8 @@ const MyProfile: React.FC = () => {
                     <ReviewCard
                       key={review.id}
                       reviewId={review.id}
-                      wineName={reviewWineName}
+                      wineId={review.wine?.id}
+                      wineName={review.wine?.name}
                       content={review.content}
                       rating={review.rating}
                       lightBold={review.lightBold}
